@@ -1,0 +1,382 @@
+---
+---
+
+<section class="hero" id="hero">
+  <!-- Background noise texture -->
+  <div class="hero__noise"></div>
+
+  <!-- Geometric decoration -->
+  <div class="hero__geometry" aria-hidden="true">
+    <svg class="geo-main" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer ring -->
+      <circle cx="300" cy="300" r="260" stroke="#6bab90" stroke-width="0.5" opacity="0.2" class="geo-ring-outer" />
+      <!-- Middle ring -->
+      <circle cx="300" cy="300" r="190" stroke="#aa4465" stroke-width="0.5" opacity="0.2" class="geo-ring-mid" />
+      <!-- Inner ring -->
+      <circle cx="300" cy="300" r="120" stroke="#6bab90" stroke-width="1" opacity="0.3" class="geo-ring-inner" />
+      <!-- Cross lines -->
+      <line x1="300" y1="40" x2="300" y2="560" stroke="#6bab90" stroke-width="0.3" opacity="0.15" />
+      <line x1="40" y1="300" x2="560" y2="300" stroke="#6bab90" stroke-width="0.3" opacity="0.15" />
+      <line x1="116" y1="116" x2="484" y2="484" stroke="#aa4465" stroke-width="0.3" opacity="0.15" />
+      <line x1="484" y1="116" x2="116" y2="484" stroke="#aa4465" stroke-width="0.3" opacity="0.15" />
+      <!-- Dot grid -->
+      <g opacity="0.25">
+        <circle cx="300" cy="300" r="3" fill="#6bab90" />
+        <circle cx="300" cy="180" r="2" fill="#6bab90" />
+        <circle cx="300" cy="420" r="2" fill="#6bab90" />
+        <circle cx="180" cy="300" r="2" fill="#6bab90" />
+        <circle cx="420" cy="300" r="2" fill="#6bab90" />
+        <circle cx="215" cy="215" r="2" fill="#aa4465" />
+        <circle cx="385" cy="215" r="2" fill="#aa4465" />
+        <circle cx="215" cy="385" r="2" fill="#aa4465" />
+        <circle cx="385" cy="385" r="2" fill="#aa4465" />
+      </g>
+      <!-- Arcs -->
+      <path d="M 430 130 A 200 200 0 0 1 470 300" stroke="#aa4465" stroke-width="1.5" opacity="0.2" fill="none" stroke-linecap="round" />
+      <path d="M 170 470 A 200 200 0 0 1 130 300" stroke="#6bab90" stroke-width="1" opacity="0.25" fill="none" stroke-linecap="round" />
+    </svg>
+
+    <!-- Floating small shapes -->
+    <div class="geo-float geo-float--1"></div>
+    <div class="geo-float geo-float--2"></div>
+    <div class="geo-float geo-float--3"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="hero__content">
+<h1 class="hero__title">
+      <span class="hero__line">Construimos</span>
+      <span class="hero__line">el software <em>que</em></span>
+      <span class="hero__line">tu negocio <span class="hero__accent">necesita</span></span>
+    </h1>
+    <p class="hero__subtitle">
+      Desarrollo, diseño y consultoría tecnológica para empresas que piensan diferente.
+    </p>
+    <a href="#servicios" class="btn-primary hero__cta">
+      Conoce nuestros servicios
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="hero__scroll-text">Scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    background-color: var(--dark-teal);
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+  /* Noise texture overlay */
+  .hero__noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Gradient overlay bottom */
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to top, var(--dark-teal), transparent);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Geometric decoration */
+  .hero__geometry {
+    position: absolute;
+    top: 50%;
+    right: -5%;
+    transform: translateY(-50%);
+    width: clamp(400px, 50vw, 700px);
+    height: clamp(400px, 50vw, 700px);
+    z-index: 1;
+  }
+
+  .geo-main {
+    width: 100%;
+    height: 100%;
+  }
+
+  .geo-ring-outer {
+    animation: slow-rotate 90s linear infinite;
+    transform-origin: 300px 300px;
+  }
+
+  .geo-ring-mid {
+    animation: slow-counter-rotate 70s linear infinite;
+    transform-origin: 300px 300px;
+  }
+
+  .geo-ring-inner {
+    animation: slow-rotate 50s linear infinite;
+    transform-origin: 300px 300px;
+  }
+
+  /* Floating shapes */
+  .geo-float {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .geo-float--1 {
+    width: 8px;
+    height: 8px;
+    background: var(--muted-teal);
+    top: 15%;
+    left: 20%;
+    animation: float 6s ease-in-out infinite;
+    opacity: 0.4;
+  }
+
+  .geo-float--2 {
+    width: 4px;
+    height: 4px;
+    background: var(--muted-teal);
+    top: 70%;
+    left: 35%;
+    animation: float 8s ease-in-out infinite 2s;
+    opacity: 0.4;
+  }
+
+  .geo-float--3 {
+    width: 6px;
+    height: 6px;
+    background: var(--berry-crush);
+    top: 30%;
+    left: 75%;
+    animation: float 7s ease-in-out infinite 1s;
+    opacity: 0.35;
+  }
+
+  .geo-float--1,
+  .geo-float--2,
+  .geo-float--3 {
+    box-shadow: 0 0 8px currentColor;
+  }
+
+  /* Content */
+  .hero__content {
+    position: relative;
+    z-index: 3;
+    padding-left: var(--container-padding);
+    max-width: 65%;
+  }
+
+  .hero__label {
+    display: block;
+    margin-bottom: clamp(0.75rem, 2vw, 1.5rem);
+    opacity: 0;
+    font-size: clamp(0.6rem, 1vw, 0.75rem);
+  }
+
+  .hero__title {
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+    font-size: clamp(2rem, 4.5vw + 0.5rem, 5rem);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    overflow-wrap: normal;
+  }
+
+  .hero__line {
+    display: block;
+    opacity: 0;
+    clip-path: inset(100% 0 0 0);
+    padding-block: 0.05em;
+  }
+
+  .hero__title em {
+    font-style: italic;
+    color: var(--muted-teal);
+    font-weight: 700;
+  }
+
+  .hero__accent {
+    position: relative;
+    background: linear-gradient(
+      90deg,
+      var(--canary-yellow) 0%,
+      #f5f872 40%,
+      var(--canary-yellow) 60%,
+      #f5f872 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s ease-in-out infinite;
+  }
+
+  .hero__subtitle {
+    font-size: clamp(0.9rem, 1.2vw + 0.3rem, 1.25rem);
+    max-width: clamp(280px, 45vw, 520px);
+    margin-bottom: clamp(1.5rem, 4vw, 3rem);
+    line-height: 1.6;
+    opacity: 0;
+  }
+
+  .hero__cta {
+    opacity: 0;
+  }
+
+  /* Scroll indicator */
+  .hero__scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    opacity: 0;
+  }
+
+  .hero__scroll-text {
+    font-family: 'JetBrains Mono Variable', monospace;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted-teal);
+  }
+
+  .hero__scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--muted-teal), transparent);
+    animation: scroll-bounce 2s ease-in-out infinite;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero__content {
+      max-width: 80%;
+    }
+
+    .hero__title {
+      font-size: clamp(2rem, 5.5vw + 0.5rem, 5rem);
+    }
+
+    .hero__geometry {
+      right: -15%;
+      opacity: 0.5;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding-top: 6rem;
+      align-items: center;
+      padding-bottom: 3rem;
+      min-height: auto;
+      min-height: 85svh;
+    }
+
+    .hero__content {
+      max-width: 100%;
+      padding-right: var(--container-padding);
+    }
+
+    .hero__title {
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      line-height: 1.08;
+    }
+
+    .hero__subtitle {
+      max-width: 100%;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    }
+
+    .hero__geometry {
+      top: auto;
+      bottom: -10%;
+      right: -20%;
+      transform: none;
+      width: 300px;
+      height: 300px;
+      opacity: 0.2;
+    }
+
+    .hero__scroll {
+      bottom: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding-top: 5rem;
+      padding-bottom: 3rem;
+      min-height: auto;
+      min-height: 85svh;
+      align-items: center;
+    }
+
+    .hero__content {
+      padding-left: var(--container-padding);
+      padding-right: var(--container-padding);
+    }
+
+    .hero__title {
+      font-size: clamp(1.75rem, 8.5vw, 2.75rem);
+      line-height: 1.1;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .hero__subtitle {
+      font-size: 0.9rem;
+      margin-bottom: var(--space-md);
+      line-height: 1.5;
+    }
+
+    .hero__geometry {
+      width: 200px;
+      height: 200px;
+      right: -30%;
+      bottom: -5%;
+      opacity: 0.15;
+    }
+
+    .hero__scroll {
+      display: none;
+    }
+
+    .hero__label {
+      font-size: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .hero__title {
+      font-size: clamp(1.5rem, 8.5vw, 2.25rem);
+    }
+
+    .hero__subtitle {
+      font-size: 0.85rem;
+    }
+
+    .hero__cta {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

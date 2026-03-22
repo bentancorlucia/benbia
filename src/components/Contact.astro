@@ -1,0 +1,86 @@
+---
+---
+
+<section class="contact section" id="contacto">
+  <div class="container">
+    <div class="contact__grid">
+      <div class="contact__content reveal">
+        <span class="label">Contacto</span>
+        <h2>¿Tienes un proyecto<br />en mente?</h2>
+        <p>
+          Cuéntanos tu idea y diseñamos juntos la solución perfecta. Sin compromiso, sin jerga innecesaria.
+        </p>
+        <a href="mailto:hola@benbia.dev" class="btn-primary contact__cta">
+          Contactate
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background-color: var(--berry-crush);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Decorative gradient overlay */
+  .contact::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(3, 42, 54, 0.3), transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact__grid {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact__content {
+    text-align: center;
+    max-width: 560px;
+  }
+
+  .contact__content h2 {
+    margin-bottom: var(--space-md);
+    color: var(--heading-light);
+  }
+
+  .contact__content .label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    color: rgba(232, 244, 240, 0.5);
+  }
+
+  .contact__content p {
+    color: rgba(232, 244, 240, 0.7);
+    margin-bottom: var(--space-lg);
+  }
+
+  .contact__cta {
+    display: inline-flex;
+    text-decoration: none;
+  }
+
+  @media (max-width: 480px) {
+    .contact__cta {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .contact::before {
+      width: 300px;
+      height: 300px;
+    }
+  }
+</style>

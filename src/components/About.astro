@@ -1,0 +1,61 @@
+---
+---
+
+<section class="about section" id="nosotros">
+  <div class="container">
+    <div class="about__content reveal">
+      <span class="label">Quiénes somos</span>
+      <h2>Tecnología con propósito</h2>
+      <p>
+        Somos un equipo de desarrolladores, diseñadores y estrategas que
+        creen que el software debe resolver problemas reales. No seguimos
+        tendencias — construimos herramientas que generan impacto.
+      </p>
+      <p>
+        Cada proyecto es una colaboración cercana. Trabajamos como una
+        extensión de tu equipo, con transparencia total y compromiso con
+        la calidad.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background-color: var(--dark-teal);
+    position: relative;
+  }
+
+  .about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--muted-teal-20),
+      transparent
+    );
+  }
+
+  .about__content .label {
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .about__content h2 {
+    margin-bottom: var(--space-md);
+  }
+
+  .about__content p {
+    margin-bottom: var(--space-sm);
+    max-width: 620px;
+  }
+
+  .about__content p:last-child {
+    margin-bottom: 0;
+  }
+</style>

@@ -1,0 +1,222 @@
+---
+const steps = [
+  {
+    num: '01',
+    title: 'Descubrimiento',
+    desc: 'Entendemos tu negocio, tus usuarios y tus objetivos. Definimos el alcance y la estrategia.',
+  },
+  {
+    num: '02',
+    title: 'Diseño',
+    desc: 'Prototipamos soluciones centradas en el usuario con interfaces intuitivas y arquitectura sólida.',
+  },
+  {
+    num: '03',
+    title: 'Desarrollo',
+    desc: 'Construimos con tecnología moderna, código limpio y entregas iterativas que puedes ver en tiempo real.',
+  },
+  {
+    num: '04',
+    title: 'Lanzamiento',
+    desc: 'Desplegamos, monitoreamos y optimizamos. Tu proyecto vive y evoluciona con tu negocio.',
+  },
+];
+---
+
+<section class="process section" id="proceso">
+  <div class="container">
+    <div class="process__header reveal">
+      <span class="label">Cómo trabajamos</span>
+      <h2>Nuestro proceso</h2>
+    </div>
+
+    <div class="process__timeline">
+      <!-- SVG connecting line -->
+      <svg class="process__line" aria-hidden="true" preserveAspectRatio="none">
+        <line
+          x1="50%"
+          y1="0"
+          x2="50%"
+          y2="100%"
+          stroke="#6bab90"
+          stroke-width="1"
+          stroke-dasharray="6 6"
+          id="process-line"
+        />
+      </svg>
+
+      {
+        steps.map((step, i) => (
+          <div class={`process__step reveal`} style={`--delay: ${i * 0.15}s`}>
+            <div class="process__step-dot" aria-hidden="true">
+              <span class="process__step-dot-inner" />
+            </div>
+            <div class="process__step-content">
+              <span class="process__step-num mono">{step.num}</span>
+              <h3>{step.title}</h3>
+              <p>{step.desc}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .process {
+    background-color: var(--dark-teal);
+    position: relative;
+  }
+
+  .process__header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .process__header .label {
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .process__timeline {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .process__line {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .process__step {
+    display: flex;
+    gap: 2.5rem;
+    padding-bottom: 3.5rem;
+    position: relative;
+  }
+
+  .process__step:last-child {
+    padding-bottom: 0;
+  }
+
+  .process__step-dot {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--muted-teal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark-teal);
+    position: relative;
+    z-index: 1;
+    transition:
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
+  }
+
+  .process__step:hover .process__step-dot {
+    border-color: var(--canary-yellow);
+    box-shadow: 0 0 20px rgba(237, 240, 96, 0.15);
+  }
+
+  .process__step-dot-inner {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--canary-yellow);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .process__step:hover .process__step-dot-inner {
+    transform: scale(1.4);
+  }
+
+  .process__step-num {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--muted-teal);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+
+  .process__step-content {
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .process__step:hover .process__step-content {
+    transform: translateX(6px);
+  }
+
+  .process__step-content h3 {
+    margin-bottom: 0.5rem;
+    transition: color 0.4s ease;
+  }
+
+  .process__step:hover .process__step-content h3 {
+    color: var(--canary-yellow);
+  }
+
+  .process__step-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--muted-teal);
+  }
+
+  @media (max-width: 768px) {
+    .process__step {
+      gap: 1.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .process__step-dot {
+      width: 36px;
+      height: 36px;
+    }
+
+    .process__line {
+      left: 17px;
+    }
+
+    .process__step-content p {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .process__timeline {
+      max-width: 100%;
+    }
+
+    .process__step {
+      gap: 1rem;
+      padding-bottom: 2rem;
+    }
+
+    .process__step-dot {
+      width: 30px;
+      height: 30px;
+    }
+
+    .process__step-dot-inner {
+      width: 8px;
+      height: 8px;
+    }
+
+    .process__line {
+      left: 14px;
+    }
+
+    .process__step-content p {
+      font-size: 0.9rem;
+    }
+  }
+</style>

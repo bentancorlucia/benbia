@@ -1,0 +1,198 @@
+---
+const services = [
+  {
+    num: '01',
+    title: 'Desarrollo Web',
+    desc: 'Plataformas web robustas, rápidas y escalables. Desde aplicaciones SaaS hasta sitios corporativos con arquitectura moderna.',
+  },
+  {
+    num: '02',
+    title: 'Aplicaciones Móviles',
+    desc: 'Apps nativas y multiplataforma que ofrecen experiencias fluidas y conectan con tus usuarios donde están.',
+  },
+  {
+    num: '03',
+    title: 'Consultoría Tecnológica',
+    desc: 'Asesoría estratégica para elegir la tecnología correcta, optimizar procesos y escalar tu infraestructura.',
+  },
+  {
+    num: '04',
+    title: 'Inteligencia de Datos',
+    desc: 'Transformamos tus datos en decisiones. Dashboards, análisis predictivo y automatización inteligente.',
+  },
+];
+---
+
+<section class="services section" id="servicios">
+  <div class="container">
+    <div class="services__header reveal">
+      <span class="label">Lo que hacemos</span>
+      <h2>Soluciones a medida</h2>
+    </div>
+
+    <div class="services__grid">
+      {
+        services.map((service, i) => (
+          <article class={`services__card card-hover reveal`} style={`--delay: ${i * 0.1}s`}>
+            <div class="services__card-accent" aria-hidden="true" />
+            <span class="services__num mono">{service.num}</span>
+            <h3>{service.title}</h3>
+            <p>{service.desc}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background-color: var(--dark-teal);
+    position: relative;
+  }
+
+  .services__header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .services__header .label {
+    display: block;
+    margin-bottom: var(--space-sm);
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .services__card {
+    position: relative;
+    padding: 2.5rem;
+    border: 1px solid var(--muted-teal-20);
+    border-radius: 8px;
+    background: linear-gradient(
+      135deg,
+      rgba(8, 76, 97, 0.5),
+      rgba(170, 68, 101, 0.05)
+    );
+    overflow: hidden;
+    transition:
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s ease;
+  }
+
+  .services__card:hover {
+    border-color: var(--muted-teal);
+  }
+
+  .services__card:nth-child(2) {
+    margin-top: 3rem;
+  }
+
+  .services__card:nth-child(3) {
+    margin-top: -1.5rem;
+  }
+
+  .services__card-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--canary-yellow), var(--berry-crush), transparent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .services__card:hover .services__card-accent {
+    transform: scaleY(1);
+  }
+
+  .services__num {
+    display: block;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--canary-yellow);
+    opacity: 0.2;
+    line-height: 1;
+    margin-bottom: 1.25rem;
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .services__card:hover .services__num {
+    opacity: 0.4;
+    transform: translateX(4px);
+  }
+
+  .services__card h3 {
+    margin-bottom: 0.75rem;
+    transition: color 0.4s ease;
+  }
+
+  .services__card:hover h3 {
+    color: var(--canary-yellow);
+  }
+
+  .services__card p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--muted-teal);
+  }
+
+  @media (max-width: 1024px) {
+    .services__grid {
+      gap: 1.5rem;
+    }
+
+    .services__card {
+      padding: 2rem;
+    }
+
+    .services__card:nth-child(2) {
+      margin-top: 1.5rem;
+    }
+
+    .services__card:nth-child(3) {
+      margin-top: -0.75rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .services__grid {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .services__card:nth-child(2),
+    .services__card:nth-child(3) {
+      margin-top: 0;
+    }
+
+    .services__card {
+      padding: 1.75rem;
+    }
+
+    .services__num {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .services__card {
+      padding: 1.5rem;
+    }
+
+    .services__num {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .services__card p {
+      font-size: 0.9rem;
+    }
+  }
+</style>

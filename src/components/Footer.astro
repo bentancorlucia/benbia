@@ -1,0 +1,152 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="#" class="footer__logo" aria-label="Benbia - Inicio">BENB<span class="logo-highlight">IA</span></a>
+      <p class="footer__tagline">Hecho con precisión.</p>
+    </div>
+
+    <div class="footer__links">
+      <a href="#servicios" class="nav-link">Servicios</a>
+      <a href="#proceso" class="nav-link">Proceso</a>
+      <a href="#nosotros" class="nav-link">Nosotros</a>
+      <a href="#contacto" class="nav-link">Contacto</a>
+    </div>
+
+    <div class="footer__bottom">
+      <span class="footer__copy mono">© {year} Benbia. Todos los derechos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--dark-teal-deep);
+    padding-block: var(--space-lg) var(--space-md);
+    position: relative;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(107, 171, 144, 0.2),
+      transparent
+    );
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .footer__brand {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+
+  .footer__logo {
+    font-family: 'Syne Variable', sans-serif;
+    font-weight: 800;
+    font-size: 1.25rem;
+    color: var(--heading-light);
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease, letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .footer__logo :global(.logo-highlight) {
+    color: var(--canary-yellow);
+    transition: color 0.3s ease;
+    margin-left: -0.03em;
+  }
+
+  .footer__logo:hover {
+    color: var(--canary-yellow);
+    letter-spacing: 0.1em;
+  }
+
+  .footer__logo:hover :global(.logo-highlight) {
+    color: var(--heading-light);
+  }
+
+  .footer__tagline {
+    font-size: 0.9rem;
+    color: var(--muted-teal);
+    opacity: 0.6;
+  }
+
+  .footer__links {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .footer__links .nav-link {
+    font-size: 0.85rem;
+    color: var(--muted-teal);
+    opacity: 0.7;
+    transition:
+      opacity 0.4s ease,
+      color 0.4s ease,
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .footer__links .nav-link:hover {
+    opacity: 1;
+    color: var(--canary-yellow);
+    transform: translateX(3px);
+  }
+
+  .footer__bottom {
+    padding-top: var(--space-md);
+    border-top: 1px solid rgba(107, 171, 144, 0.1);
+  }
+
+  .footer__copy {
+    font-size: 0.7rem;
+    color: var(--muted-teal);
+    opacity: 0.4;
+  }
+
+  @media (max-width: 768px) {
+    .footer__brand {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer__links {
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer {
+      padding-block: var(--space-md) var(--space-sm);
+    }
+
+    .footer__links {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer__links .nav-link {
+      font-size: 0.9rem;
+      padding: 0.25rem 0;
+    }
+
+    .footer__copy {
+      font-size: 0.65rem;
+    }
+  }
+</style>
