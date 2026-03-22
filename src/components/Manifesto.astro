@@ -18,7 +18,7 @@ const words = 'No construimos software genérico. Diseñamos soluciones que tran
 <style>
   .manifesto {
     position: relative;
-    padding-block: var(--space-2xl);
+    height: 100vh;
     background-color: var(--dark-teal-deep);
     overflow: hidden;
   }
@@ -37,7 +37,7 @@ const words = 'No construimos software genérico. Diseñamos soluciones que tran
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 40vh;
+    height: 100%;
   }
 
   .manifesto__text {
@@ -61,27 +61,12 @@ const words = 'No construimos software genérico. Diseñamos soluciones que tran
   }
 
   @media (max-width: 768px) {
-    .manifesto {
-      padding-block: var(--space-xl);
-    }
-
-    .manifesto__inner {
-      min-height: 30vh;
-    }
-
     .manifesto__text {
       max-width: 100%;
     }
   }
 
   @media (max-width: 480px) {
-    .manifesto {
-      padding-block: var(--space-lg);
-    }
-
-    .manifesto__inner {
-      min-height: 25vh;
-    }
 
     .manifesto__text {
       font-size: clamp(1.5rem, 6vw, 2rem);

@@ -257,8 +257,8 @@ if (!prefersReduced) {
       ease: 'none',
       scrollTrigger: {
         trigger: '#manifiesto',
-        start: 'top bottom',
-        end: 'bottom top',
+        start: 'top top',
+        end: '+=200%',
         scrub: 0.5,
       },
     });

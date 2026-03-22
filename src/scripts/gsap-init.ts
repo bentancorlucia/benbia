@@ -91,25 +91,52 @@ if (!prefersReduced) {
   const manifestoWords = document.querySelectorAll('.manifesto__word');
 
   if (manifestoWords.length > 0) {
+    const manifestoSection = document.getElementById('manifiesto');
+    const manifestoInner = document.querySelector('.manifesto__inner') as HTMLElement;
+
     // Smoother word-by-word reveal with eased transitions
     gsap.set(manifestoWords, { opacity: 0.12, filter: 'blur(1px)' });
+    // Start section slightly transparent for smooth entrance
+    if (manifestoInner) gsap.set(manifestoInner, { opacity: 0.3, scale: 0.97 });
 
     ScrollTrigger.create({
       trigger: '#manifiesto',
-      start: 'top 75%',
-      end: 'bottom 25%',
+      start: 'top top',
+      end: '+=200%',
+      pin: true,
+      pinSpacing: true,
       onUpdate: (self) => {
-        const progress = self.progress;
+        const raw = self.progress;
+
+        // Phase 1: Entrance (0–10%) — section fades/scales in
+        // Phase 2: Word reveal (10–75%)
+        // Phase 3: Hold fully visible (75–85%)
+        // Phase 4: Exit (85–100%) — section fades out
+
+        // Entrance
+        if (manifestoInner) {
+          const enterT = Math.min(raw / 0.1, 1);
+          const exitT = raw > 0.85 ? (raw - 0.85) / 0.15 : 0;
+          const sectionOpacity = enterT * (1 - exitT * 0.7);
+          const sectionScale = 0.97 + 0.03 * enterT - 0.02 * exitT;
+          gsap.set(manifestoInner, {
+            opacity: sectionOpacity,
+            scale: sectionScale,
+          });
+        }
+
+        // Word reveal — mapped to 10%–75% of scroll
+        const wordProgress = Math.max(0, Math.min((raw - 0.1) / 0.65, 1));
         manifestoWords.forEach((word, i) => {
           const wordStart = i / manifestoWords.length;
           const wordEnd = (i + 1) / manifestoWords.length;
           let t: number;
-          if (progress >= wordEnd) {
+          if (wordProgress >= wordEnd) {
             t = 1;
-          } else if (progress <= wordStart) {
+          } else if (wordProgress <= wordStart) {
             t = 0;
           } else {
-            t = (progress - wordStart) / (wordEnd - wordStart);
+            t = (wordProgress - wordStart) / (wordEnd - wordStart);
             t = t * t; // Quadratic ease
           }
           const wordOpacity = 0.12 + 0.88 * t;
