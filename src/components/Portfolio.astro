@@ -24,6 +24,14 @@ const projects = [
     desktopImg: '/portfolio/proyecto3-desktop.png',
     mobileImg: '/portfolio/proyecto3-mobile.png',
   },
+  {
+    name: 'Admin-Edificios',
+    url: 'App de Escritorio',
+    description: 'Aplicación de escritorio multiplataforma para administradores de edificios. Centraliza apartamentos, propietarios, inquilinos, gastos comunes, cuentas bancarias y reportes PDF — con almacenamiento local sin dependencia de la nube.',
+    tags: ['Desktop App', 'Administración', 'Finanzas', 'Reportes'],
+    desktopImg: '/portfolio/admin-edificios-desktop.png',
+    icon: '/portfolio/admin-edificios-icon.png',
+  },
 ];
 ---
 
@@ -51,12 +59,19 @@ const projects = [
                     <img src={project.desktopImg} alt={`${project.name} desktop`} loading="lazy" />
                   </div>
                 </div>
-                <div class="mockup-mobile">
-                  <div class="mockup-mobile__notch"></div>
-                  <div class="mockup-mobile__screen">
-                    <img src={project.mobileImg} alt={`${project.name} mobile`} loading="lazy" />
+                {project.mobileImg && (
+                  <div class="mockup-mobile">
+                    <div class="mockup-mobile__notch"></div>
+                    <div class="mockup-mobile__screen">
+                      <img src={project.mobileImg} alt={`${project.name} mobile`} loading="lazy" />
+                    </div>
                   </div>
-                </div>
+                )}
+                {project.icon && (
+                  <div class="mockup-icon">
+                    <img src={project.icon} alt={`${project.name} icon`} loading="lazy" />
+                  </div>
+                )}
               </div>
               <div class="slide__info">
                 <h3>{project.name}</h3>
@@ -285,6 +300,31 @@ const projects = [
     object-position: top;
   }
 
+  /* ── App Icon ── */
+  .mockup-icon {
+    position: absolute;
+    right: -20px;
+    bottom: -24px;
+    width: 22%;
+    min-width: 90px;
+    max-width: 120px;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(107, 171, 144, 0.1);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+  }
+
+  .mockup-icon img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .slide__mockups:hover .mockup-icon {
+    transform: translateY(-6px) translateX(-2px);
+  }
+
   /* ── Info ── */
   .slide__info h3 {
     font-size: clamp(1.4rem, 2.5vw, 2rem);
@@ -406,6 +446,11 @@ const projects = [
       width: 24%;
     }
 
+    .mockup-icon {
+      right: -10px;
+      bottom: -16px;
+    }
+
     .slide__info p {
       max-width: 100%;
     }
@@ -437,6 +482,13 @@ const projects = [
       padding: 3px;
       right: -6px;
       bottom: -12px;
+    }
+
+    .mockup-icon {
+      right: -6px;
+      bottom: -12px;
+      min-width: 70px;
+      border-radius: 16px;
     }
 
     .mockup-mobile__screen {
