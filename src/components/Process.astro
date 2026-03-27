@@ -92,20 +92,21 @@ const accentColors = [
     display: flex;
     flex-direction: column;
     height: 100vh;
-    padding-top: clamp(2rem, 4vw, 3rem);
+    padding-top: clamp(5rem, 8vw, 6.5rem);
+    overflow: visible;
   }
 
   /* Header — stays at top when pinned */
   .process__header {
     flex-shrink: 0;
-    margin-bottom: 0;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    position: relative;
+    z-index: 10;
   }
 
   .process__label {
     display: block;
     margin-bottom: var(--space-sm);
-    opacity: 0;
-    transform: translateY(12px);
   }
 
   .process__title {
@@ -116,8 +117,6 @@ const accentColors = [
 
   .process__title-line {
     display: block;
-    opacity: 0;
-    clip-path: inset(100% 0 0 0);
   }
 
   .process__title em {
