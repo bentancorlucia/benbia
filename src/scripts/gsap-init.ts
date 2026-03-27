@@ -260,8 +260,8 @@ if (!prefersReduced) {
     const EXIT = 0.08;   // 8% of timeline for fade-out
     const CARDS = 1 - ENTER - EXIT; // middle portion for card transitions
 
-    const scrollMultiplier = isMobile ? 100 : 150;
-    const scrollOffset = isMobile ? 40 : 60;
+    const scrollMultiplier = isMobile ? 80 : 110;
+    const scrollOffset = isMobile ? 35 : 50;
 
     const deckTl = gsap.timeline({
       scrollTrigger: {
