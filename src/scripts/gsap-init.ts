@@ -267,19 +267,13 @@ if (!prefersReduced) {
       },
     });
 
-    // === ENTER: smooth fade-in of header then deck ===
-    deckTl.to(processHeader, {
+    // === ENTER: header + deck fade in together ===
+    deckTl.to([processHeader, processDeck], {
       opacity: 1,
       y: 0,
-      duration: ENTER * 0.6,
+      duration: ENTER,
       ease: 'power2.out',
     }, 0);
-    deckTl.to(processDeck, {
-      opacity: 1,
-      y: 0,
-      duration: ENTER * 0.8,
-      ease: 'power2.out',
-    }, ENTER * 0.2);
 
     // === CARD TRANSITIONS ===
     for (let step = 0; step < transitions; step++) {
