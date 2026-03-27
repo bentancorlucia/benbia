@@ -149,6 +149,209 @@ if (!prefersReduced) {
       },
     });
   }
+
+  // === Services section animations ===
+  const servicesSection = document.querySelector('#servicios');
+
+  if (servicesSection) {
+    const servicesTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#servicios',
+        start: 'top 75%',
+        end: 'top 30%',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    servicesTl
+      .to('.services__label', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+      })
+      .to('.services__title-line', {
+        opacity: 1,
+        clipPath: 'inset(0% 0 0% 0)',
+        duration: 1,
+        stagger: 0.12,
+        ease: 'power4.inOut',
+      }, 0.2);
+
+    const serviceItems = document.querySelectorAll('.services__item');
+
+    serviceItems.forEach((item) => {
+      const line = item.querySelector('.services__item-line');
+      const inner = item.querySelector('.services__item-inner');
+      const lastLine = item.querySelector('.services__item-line--last');
+
+      const itemTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      });
+
+      if (line) {
+        itemTl.to(line, {
+          scaleX: 1,
+          duration: 0.8,
+          ease: 'power2.inOut',
+        }, 0);
+      }
+
+      if (inner) {
+        itemTl.to(inner, {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: 'power3.out',
+        }, 0.15);
+      }
+
+      if (lastLine) {
+        itemTl.to(lastLine, {
+          scaleX: 1,
+          duration: 0.8,
+          ease: 'power2.inOut',
+        }, 0.3);
+      }
+    });
+  }
+
+  // === Process section — stacked deck on scroll ===
+  const processCards = document.querySelectorAll('.process__card') as NodeListOf<HTMLElement>;
+  const processPinned = document.querySelector('.process__pinned') as HTMLElement;
+
+  if (processPinned && processCards.length > 0) {
+    const totalCards = processCards.length;
+    const STACK_OFFSET = 8;
+    const STACK_SCALE = 0.03;
+
+    const processTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#proceso',
+        start: 'top 75%',
+        end: 'top 30%',
+        toggleActions: 'play none none none',
+      },
+    });
+
+    processTl
+      .to('.process__label', {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+      })
+      .to('.process__title-line', {
+        opacity: 1,
+        clipPath: 'inset(0% 0 0% 0)',
+        duration: 1,
+        stagger: 0.12,
+        ease: 'power4.inOut',
+      }, 0.2);
+
+    const stackY = (depth: number) => depth * STACK_OFFSET;
+    const stackScale = (depth: number) => 1 - depth * STACK_SCALE;
+    const stackBright = (depth: number) => 1 - depth * 0.10;
+
+    processCards.forEach((card, i) => {
+      gsap.set(card, {
+        y: stackY(i),
+        scale: stackScale(i),
+        zIndex: totalCards - i,
+        opacity: 1,
+        filter: `brightness(${stackBright(i)})`,
+        rotation: 0,
+        xPercent: 0,
+      });
+    });
+
+    const transitions = totalCards - 1;
+
+    const deckTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: processPinned,
+        start: 'top top',
+        end: `+=${transitions * 90}%`,
+        pin: true,
+        pinSpacing: true,
+        scrub: 0.8,
+      },
+    });
+
+    for (let step = 0; step < transitions; step++) {
+      const frontCard = processCards[step % totalCards];
+      const backDepth = totalCards - 1;
+
+      const holdDuration = 0.12 / transitions;
+      const animDuration = (1 / transitions) - holdDuration;
+      const animStart = (step / transitions) + holdDuration;
+
+      // Front card → snaps to back
+      deckTl.to(frontCard, {
+        y: stackY(backDepth),
+        scale: stackScale(backDepth),
+        xPercent: 0,
+        rotation: 0,
+        filter: `brightness(${stackBright(backDepth)})`,
+        zIndex: 0,
+        duration: animDuration,
+        ease: 'power3.inOut',
+        keyframes: [
+          {
+            y: -55,
+            xPercent: 6,
+            rotation: -3,
+            scale: 1.01,
+            filter: 'brightness(1)',
+            zIndex: totalCards + 1,
+            duration: animDuration * 0.35,
+            ease: 'power2.out',
+          },
+          {
+            y: -20,
+            xPercent: 2,
+            rotation: -1,
+            scale: 1,
+            filter: `brightness(${stackBright(backDepth)})`,
+            zIndex: totalCards + 1,
+            duration: animDuration * 0.25,
+            ease: 'none',
+          },
+          {
+            y: stackY(backDepth),
+            xPercent: 0,
+            rotation: 0,
+            scale: stackScale(backDepth),
+            filter: `brightness(${stackBright(backDepth)})`,
+            zIndex: 0,
+            duration: animDuration * 0.4,
+            ease: 'power2.in',
+          },
+        ],
+      }, animStart);
+
+      // Remaining cards shuffle forward
+      for (let offset = 1; offset < totalCards; offset++) {
+        const cardIdx = (step + offset) % totalCards;
+        const card = processCards[cardIdx];
+        const depthAfter = offset - 1;
+        const isFront = depthAfter === 0;
+
+        deckTl.to(card, {
+          y: stackY(depthAfter),
+          scale: isFront ? 1 : stackScale(depthAfter),
+          filter: `brightness(${isFront ? 1 : stackBright(depthAfter)})`,
+          zIndex: totalCards - depthAfter,
+          duration: animDuration * 0.7,
+          ease: 'power2.out',
+        }, animStart + animDuration * 0.3);
+      }
+    }
+  }
 }
 
 // Export for potential reuse

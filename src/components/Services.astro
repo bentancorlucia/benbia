@@ -4,40 +4,61 @@ const services = [
     num: '01',
     title: 'Desarrollo Web',
     desc: 'Plataformas web robustas, rápidas y escalables. Desde aplicaciones SaaS hasta sitios corporativos con arquitectura moderna.',
+    tags: ['SaaS', 'E-commerce', 'Corporativo'],
   },
   {
     num: '02',
     title: 'Aplicaciones Móviles',
     desc: 'Apps nativas y multiplataforma que ofrecen experiencias fluidas y conectan con tus usuarios donde están.',
+    tags: ['iOS', 'Android', 'Cross-platform'],
   },
   {
     num: '03',
     title: 'Consultoría Tecnológica',
     desc: 'Asesoría estratégica para elegir la tecnología correcta, optimizar procesos y escalar tu infraestructura.',
+    tags: ['Arquitectura', 'DevOps', 'Estrategia'],
   },
   {
     num: '04',
     title: 'Inteligencia de Datos',
     desc: 'Transformamos tus datos en decisiones. Dashboards, análisis predictivo y automatización inteligente.',
+    tags: ['Dashboards', 'IA', 'Automatización'],
   },
 ];
 ---
 
 <section class="services section" id="servicios">
   <div class="container">
-    <div class="services__header reveal">
-      <span class="label">Lo que hacemos</span>
-      <h2>Soluciones a medida</h2>
+    <div class="services__header">
+      <span class="label services__label">Lo que hacemos</span>
+      <h2 class="services__title">
+        <span class="services__title-line">Soluciones</span>
+        <span class="services__title-line">a <em>medida</em></span>
+      </h2>
     </div>
 
-    <div class="services__grid">
+    <div class="services__list">
       {
         services.map((service, i) => (
-          <article class={`services__card card-hover reveal`} style={`--delay: ${i * 0.1}s`}>
-            <div class="services__card-accent" aria-hidden="true" />
-            <span class="services__num mono">{service.num}</span>
-            <h3>{service.title}</h3>
-            <p>{service.desc}</p>
+          <article class="services__item" data-service-index={i}>
+            <div class="services__item-line" />
+            <div class="services__item-inner">
+              <div class="services__item-left">
+                <span class="services__num mono">{service.num}</span>
+              </div>
+              <div class="services__item-center">
+                <h3 class="services__item-title">{service.title}</h3>
+                <p class="services__item-desc">{service.desc}</p>
+              </div>
+              <div class="services__item-right">
+                <div class="services__tags">
+                  {service.tags.map((tag) => (
+                    <span class="services__tag mono">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {i === services.length - 1 && <div class="services__item-line services__item-line--last" />}
           </article>
         ))
       }
@@ -47,152 +68,233 @@ const services = [
 
 <style>
   .services {
-    background-color: var(--dark-teal);
     position: relative;
+    padding-block: var(--space-2xl);
+    overflow: hidden;
   }
 
+  /* Header */
   .services__header {
-    margin-bottom: var(--space-xl);
+    margin-bottom: clamp(3rem, 8vw, 6rem);
   }
 
-  .services__header .label {
+  .services__label {
     display: block;
     margin-bottom: var(--space-sm);
+    opacity: 0;
+    transform: translateY(12px);
   }
 
-  .services__grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
+  .services__title {
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
   }
 
-  .services__card {
+  .services__title-line {
+    display: block;
+    opacity: 0;
+    clip-path: inset(100% 0 0 0);
+  }
+
+  .services__title em {
+    font-style: italic;
+    color: var(--canary-yellow);
+    font-weight: 700;
+  }
+
+  /* List layout */
+  .services__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Each service item */
+  .services__item {
     position: relative;
-    padding: 2.5rem;
+  }
+
+  .services__item-line {
+    height: 1px;
+    background: linear-gradient(to right, var(--muted-teal-20), var(--glass-border), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .services__item-line--last {
+    margin-top: 0;
+  }
+
+  .services__item-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding-block: clamp(2rem, 4vw, 3.5rem);
+    padding-left: 1.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  /* Number */
+  .services__num {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--heading-light);
+    opacity: 0.08;
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    min-width: clamp(3rem, 6vw, 5rem);
+  }
+
+  .services__item:hover .services__num {
+    opacity: 0.3;
+    color: var(--canary-yellow);
+  }
+
+  /* Center content */
+  .services__item-center {
+    padding-top: 0.25em;
+  }
+
+  .services__item-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    transition: color 0.4s ease;
+    letter-spacing: -0.01em;
+  }
+
+  .services__item:hover .services__item-title {
+    color: var(--canary-yellow);
+  }
+
+  .services__item-desc {
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+    line-height: 1.7;
+    color: var(--muted-teal);
+    max-width: 520px;
+    font-weight: 350;
+  }
+
+  /* Tags */
+  .services__item-right {
+    padding-top: 0.5em;
+  }
+
+  .services__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+  }
+
+  .services__tag {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.35rem 0.75rem;
     border: 1px solid var(--muted-teal-20);
-    border-radius: 8px;
-    background: linear-gradient(
-      135deg,
-      rgba(8, 76, 97, 0.5),
-      rgba(170, 68, 101, 0.05)
-    );
-    overflow: hidden;
-    transition:
-      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-      border-color 0.4s ease;
+    border-radius: 100px;
+    color: var(--muted-teal);
+    opacity: 0.6;
+    transition: opacity 0.4s ease,
+                border-color 0.4s ease,
+                color 0.4s ease;
+    white-space: nowrap;
   }
 
-  .services__card:hover {
-    border-color: var(--muted-teal);
+  .services__item:hover .services__tag {
+    opacity: 1;
+    border-color: var(--canary-yellow-50);
+    color: var(--canary-yellow);
   }
 
-  .services__card:nth-child(2) {
-    margin-top: 3rem;
-  }
-
-  .services__card:nth-child(3) {
-    margin-top: -1.5rem;
-  }
-
-  .services__card-accent {
+  /* Hover accent bar that slides in from left */
+  .services__item-inner::before {
+    content: '';
     position: absolute;
-    top: 0;
     left: 0;
-    width: 2px;
+    top: 0;
+    width: 3px;
     height: 100%;
-    background: linear-gradient(to bottom, var(--canary-yellow), var(--berry-crush), transparent);
+    background: linear-gradient(to bottom, var(--canary-yellow), var(--berry-crush));
     transform: scaleY(0);
     transform-origin: top;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 2px;
   }
 
-  .services__card:hover .services__card-accent {
+  .services__item:hover .services__item-inner::before {
     transform: scaleY(1);
   }
 
-  .services__num {
-    display: block;
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--canary-yellow);
-    opacity: 0.2;
-    line-height: 1;
-    margin-bottom: 1.25rem;
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .services__card:hover .services__num {
-    opacity: 0.4;
-    transform: translateX(4px);
-  }
-
-  .services__card h3 {
-    margin-bottom: 0.75rem;
-    transition: color 0.4s ease;
-  }
-
-  .services__card:hover h3 {
-    color: var(--canary-yellow);
-  }
-
-  .services__card p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--muted-teal);
-  }
-
+  /* Tablet */
   @media (max-width: 1024px) {
-    .services__grid {
+    .services__item-inner {
+      grid-template-columns: auto 1fr;
       gap: 1.5rem;
     }
 
-    .services__card {
-      padding: 2rem;
+    .services__item-right {
+      grid-column: 2;
+      padding-top: 0;
     }
 
-    .services__card:nth-child(2) {
-      margin-top: 1.5rem;
-    }
-
-    .services__card:nth-child(3) {
-      margin-top: -0.75rem;
+    .services__tags {
+      justify-content: flex-start;
     }
   }
 
+  /* Mobile */
   @media (max-width: 768px) {
-    .services__grid {
+    .services__title {
+      font-size: clamp(2rem, 10vw, 3.5rem);
+    }
+
+    .services__item-inner {
       grid-template-columns: 1fr;
-      gap: 1.25rem;
+      gap: 0.75rem;
+      padding-block: clamp(1.5rem, 4vw, 2.5rem);
     }
 
-    .services__card:nth-child(2),
-    .services__card:nth-child(3) {
-      margin-top: 0;
-    }
-
-    .services__card {
-      padding: 1.75rem;
+    .services__item-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
     }
 
     .services__num {
       font-size: 2.5rem;
-      margin-bottom: 1rem;
+      min-width: auto;
+    }
+
+    .services__item-center {
+      padding-top: 0;
+    }
+
+    .services__item-right {
+      grid-column: 1;
     }
   }
 
   @media (max-width: 480px) {
-    .services__card {
-      padding: 1.5rem;
-    }
-
     .services__num {
       font-size: 2rem;
-      margin-bottom: 0.75rem;
     }
 
-    .services__card p {
-      font-size: 0.9rem;
+    .services__item-title {
+      font-size: 1.25rem;
+    }
+
+    .services__item-desc {
+      font-size: 0.875rem;
+    }
+
+    .services__tag {
+      font-size: 0.6rem;
+      padding: 0.25rem 0.6rem;
     }
   }
 </style>

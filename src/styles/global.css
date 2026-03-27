@@ -15,12 +15,18 @@ html {
 
 body {
   font-family: 'Outfit Variable', sans-serif;
-  font-weight: 400;
+  font-weight: 350;
   font-size: clamp(1rem, 1.5vw, 1.125rem);
   line-height: 1.7;
   color: var(--muted-teal);
   background-color: var(--dark-teal);
   overflow-x: hidden;
+}
+
+@media (hover: hover) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
 }
 
 img,
@@ -62,6 +68,11 @@ ol {
   --canary-yellow-10: rgba(237, 240, 96, 0.1);
   --canary-yellow-50: rgba(237, 240, 96, 0.5);
 
+  /* Glass tokens */
+  --glass-white: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-white-10: rgba(255, 255, 255, 0.1);
+
   /* Spacing — fluid */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
@@ -83,7 +94,7 @@ h4 {
   font-family: 'Syne Variable', sans-serif;
   color: var(--heading-light);
   line-height: 1.1;
-  font-weight: 800;
+  font-weight: 700;
 }
 
 h1 {
@@ -93,12 +104,12 @@ h1 {
 
 h2 {
   font-size: clamp(1.75rem, 4vw, 3.5rem);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 h3 {
   font-size: clamp(1.2rem, 2vw, 1.5rem);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .label {
@@ -122,12 +133,22 @@ h3 {
 
 .section {
   padding-block: var(--space-xl);
+  position: relative;
+}
+
+/* Glass panel utility */
+.glass {
+  background: var(--glass-white);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
 }
 
 /* Reveal animation targets — hidden by default */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(24px);
 }
 
 .reveal-line {
@@ -138,28 +159,28 @@ h3 {
 /* Reveal variants for richer scroll animations */
 .reveal-scale {
   opacity: 0;
-  transform: scale(0.92);
+  transform: scale(0.95);
 }
 
 .reveal-blur {
   opacity: 0;
-  filter: blur(12px);
+  filter: blur(8px);
 }
 
 .reveal-left {
   opacity: 0;
-  transform: translateX(-40px);
+  transform: translateX(-24px);
 }
 
 .reveal-right {
   opacity: 0;
-  transform: translateX(40px);
+  transform: translateX(24px);
 }
 
 /* Section dividers animate on scroll */
 .section-divider {
   height: 1px;
-  background: linear-gradient(to right, transparent, var(--muted-teal-20), transparent);
+  background: linear-gradient(to right, transparent, var(--glass-border), transparent);
   transform: scaleX(0);
   transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -176,16 +197,16 @@ h3 {
 
 /* === Scrollbar === */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--dark-teal);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--muted-teal-20);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

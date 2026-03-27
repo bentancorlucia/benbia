@@ -142,47 +142,7 @@ if (!prefersReduced) {
     });
   });
 
-  // === Services card stagger with individual delays ===
-  const serviceCards = document.querySelectorAll('.services__card');
-  serviceCards.forEach((card, i) => {
-    ScrollTrigger.create({
-      trigger: card,
-      start: 'top 85%',
-      once: true,
-      onEnter: () => {
-        gsap.to(card, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          delay: i * 0.15,
-          ease: 'power3.out',
-        });
-      },
-    });
-  });
-
-  // === Service card number counter effect ===
-  const serviceNums = document.querySelectorAll('.services__num');
-  serviceNums.forEach((num) => {
-    const el = num as HTMLElement;
-    const target = el.textContent || '';
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 85%',
-      once: true,
-      onEnter: () => {
-        gsap.fromTo(el, {
-          opacity: 0,
-          y: 10,
-        }, {
-          opacity: 0.2,
-          y: 0,
-          duration: 0.6,
-          ease: 'power2.out',
-        });
-      },
-    });
-  });
+  // Services animations are handled in gsap-init.ts
 
   // === Portfolio mockup entrance ===
   const mockupDesktop = document.querySelector('.mockup-desktop');
@@ -249,19 +209,6 @@ if (!prefersReduced) {
     });
   }
 
-  // === Manifesto dots parallax ===
-  const manifestoDots = document.querySelector('.manifesto__dots');
-  if (manifestoDots) {
-    gsap.to(manifestoDots, {
-      yPercent: -20,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '#manifiesto',
-        start: 'top top',
-        end: '+=200%',
-        scrub: 0.5,
-      },
-    });
-  }
+  // Manifesto blob animations are handled in gsap-init.ts
 
 }

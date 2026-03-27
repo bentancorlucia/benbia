@@ -1,21 +1,5 @@
 ---
 const projects = [
-  // {
-  //   name: 'Atri',
-  //   url: 'atri.com.uy',
-  //   description: 'Plataforma corporativa con diseño moderno y experiencia de usuario optimizada.',
-  //   tags: ['Web Corporativa', 'UI/UX', 'Responsive'],
-  //   desktopImg: '/portfolio/atri-desktop.png',
-  //   mobileImg: '/portfolio/atri-mobile.png',
-  // },
-  // {
-  //   name: 'Club Seminario',
-  //   url: 'clubseminario.com.uy',
-  //   description: 'Rediseño y desarrollo full-stack del sitio web de Club Seminario, con tienda online, gestión de eventos con QR, panel de socios y punto de venta físico.',
-  //   tags: ['Full-Stack', 'E-commerce', 'Eventos QR', 'Multi-rol'],
-  //   desktopImg: '/portfolio/clubseminario-desktop.png',
-  //   mobileImg: '/portfolio/clubseminario-mobile.png',
-  // },
   {
     name: 'Nido',
     url: 'App de Escritorio',
@@ -59,14 +43,6 @@ const projects = [
                     <img src={project.desktopImg} alt={`${project.name} desktop`} loading="lazy" />
                   </div>
                 </div>
-                {project.mobileImg && (
-                  <div class="mockup-mobile">
-                    <div class="mockup-mobile__notch"></div>
-                    <div class="mockup-mobile__screen">
-                      <img src={project.mobileImg} alt={`${project.name} mobile`} loading="lazy" />
-                    </div>
-                  </div>
-                )}
                 {project.icon && (
                   <div class="mockup-icon">
                     <img src={project.icon} alt={`${project.name} icon`} loading="lazy" />
@@ -89,7 +65,7 @@ const projects = [
 
       <div class="carousel__nav">
         <button class="carousel__arrow" data-prev aria-label="Anterior">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div class="carousel__indicators">
           {projects.map((_, i) => (
@@ -97,7 +73,7 @@ const projects = [
           ))}
         </div>
         <button class="carousel__arrow" data-next aria-label="Siguiente">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
     </div>
@@ -143,7 +119,6 @@ const projects = [
 
 <style>
   .portfolio {
-    background-color: var(--dark-teal);
     position: relative;
   }
 
@@ -154,7 +129,7 @@ const projects = [
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(to right, transparent, var(--muted-teal-20), transparent);
+    background: linear-gradient(to right, transparent, var(--glass-border), transparent);
   }
 
   .portfolio__header {
@@ -171,7 +146,7 @@ const projects = [
     margin-bottom: 0;
   }
 
-  /* ── Carousel ── */
+  /* Carousel */
   .carousel__viewport {
     position: relative;
     min-height: 420px;
@@ -184,9 +159,9 @@ const projects = [
     visibility: hidden;
     transform: translateY(12px) scale(0.98);
     transition:
-      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-      visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .carousel__slide.is-active {
@@ -203,26 +178,23 @@ const projects = [
     align-items: center;
   }
 
-  /* ── Device Mockups ── */
+  /* Device Mockups */
   .slide__mockups {
     position: relative;
   }
 
   .mockup-desktop {
-    background: #0b1e26;
-    border-radius: 10px;
+    background: rgba(11, 30, 38, 0.8);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(107, 171, 144, 0.08);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
   }
 
   .slide__mockups:hover .mockup-desktop {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(107, 171, 144, 0.12);
-  }
-
-  .slide__mockups:hover .mockup-mobile {
-    transform: translateY(-6px) translateX(-2px);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
   }
 
   .mockup-desktop__bar {
@@ -230,13 +202,14 @@ const projects = [
     align-items: center;
     gap: 7px;
     padding: 10px 14px;
-    background: #0e2a36;
+    background: rgba(14, 42, 54, 0.6);
   }
 
   .dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
+    opacity: 0.7;
   }
   .dot--red { background: #ff5f57; }
   .dot--yellow { background: #ffbd2e; }
@@ -246,15 +219,15 @@ const projects = [
     margin-left: 8px;
     font-size: 0.6rem;
     color: var(--muted-teal);
-    opacity: 0.5;
-    background: rgba(107,171,144,0.08);
+    opacity: 0.4;
+    background: rgba(107, 171, 144, 0.06);
     padding: 3px 12px;
     border-radius: 4px;
   }
 
   .mockup-desktop__screen {
     aspect-ratio: 16 / 10;
-    background: linear-gradient(135deg, #063040, #041e28);
+    background: rgba(6, 48, 64, 0.5);
     overflow: hidden;
   }
 
@@ -265,42 +238,7 @@ const projects = [
     object-position: top;
   }
 
-  .mockup-mobile {
-    position: absolute;
-    right: -20px;
-    bottom: -24px;
-    width: 22%;
-    min-width: 90px;
-    background: #0b1e26;
-    border-radius: 18px;
-    padding: 5px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.45), 0 0 0 1px rgba(107,171,144,0.1);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
-  }
-
-  .mockup-mobile__notch {
-    width: 34%;
-    height: 4px;
-    background: #0e2a36;
-    border-radius: 8px;
-    margin: 5px auto 3px;
-  }
-
-  .mockup-mobile__screen {
-    aspect-ratio: 9 / 16;
-    border-radius: 13px;
-    overflow: hidden;
-    background: linear-gradient(135deg, #063040, #041e28);
-  }
-
-  .mockup-mobile__screen img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-  }
-
-  /* ── App Icon ── */
+  /* App Icon */
   .mockup-icon {
     position: absolute;
     right: -20px;
@@ -310,8 +248,9 @@ const projects = [
     max-width: 120px;
     border-radius: 22px;
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(107, 171, 144, 0.1);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .mockup-icon img {
@@ -322,20 +261,21 @@ const projects = [
   }
 
   .slide__mockups:hover .mockup-icon {
-    transform: translateY(-6px) translateX(-2px);
+    transform: translateY(-4px);
   }
 
-  /* ── Info ── */
+  /* Info */
   .slide__info h3 {
     font-size: clamp(1.4rem, 2.5vw, 2rem);
     margin-bottom: 0.5rem;
   }
 
   .slide__info p {
-    opacity: 0.85;
-    line-height: 1.6;
+    opacity: 0.75;
+    line-height: 1.7;
     margin-bottom: 1rem;
     max-width: 380px;
+    font-weight: 350;
   }
 
   .slide__tags {
@@ -350,19 +290,19 @@ const projects = [
     letter-spacing: 0.1em;
     padding: 4px 10px;
     border-radius: 100px;
-    border: 1px solid var(--muted-teal-20);
-    color: var(--canary-yellow);
+    border: 1px solid var(--glass-border);
+    color: var(--muted-teal);
     transition:
-      border-color 0.3s ease,
-      background-color 0.3s ease;
+      border-color 0.4s ease,
+      background-color 0.4s ease;
   }
 
   .slide__tag:hover {
-    border-color: var(--canary-yellow-50);
-    background-color: var(--canary-yellow-10);
+    border-color: rgba(255, 255, 255, 0.15);
+    background-color: var(--glass-white);
   }
 
-  /* ── Nav ── */
+  /* Nav */
   .carousel__nav {
     display: flex;
     align-items: center;
@@ -372,27 +312,29 @@ const projects = [
   }
 
   .carousel__arrow {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: 1px solid var(--muted-teal-20);
-    background: transparent;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-white);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     color: var(--muted-teal);
     display: grid;
     place-items: center;
     cursor: pointer;
     transition:
-      border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.4s ease,
       color 0.4s ease,
       transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
       background-color 0.4s ease;
   }
 
   .carousel__arrow:hover {
-    border-color: var(--canary-yellow);
-    color: var(--dark-teal);
-    background-color: var(--canary-yellow);
-    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: var(--heading-light);
+    background: var(--glass-white-10);
+    transform: scale(1.08);
   }
 
   .carousel__arrow:active {
@@ -406,30 +348,29 @@ const projects = [
   }
 
   .carousel__indicator {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    border: 1px solid var(--muted-teal-20);
+    border: 1px solid var(--glass-border);
     background: transparent;
     cursor: pointer;
     padding: 0;
-    transition:
-      all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .carousel__indicator:hover {
-    border-color: var(--canary-yellow-50);
+    border-color: rgba(255, 255, 255, 0.2);
     transform: scale(1.2);
   }
 
   .carousel__indicator.is-active {
-    background: var(--canary-yellow);
-    border-color: var(--canary-yellow);
-    transform: scale(1.4);
-    box-shadow: 0 0 12px rgba(237, 240, 96, 0.3);
+    background: var(--muted-teal);
+    border-color: var(--muted-teal);
+    transform: scale(1.3);
+    box-shadow: 0 0 12px rgba(107, 171, 144, 0.25);
   }
 
-  /* ── Responsive ── */
+  /* Responsive */
   @media (max-width: 768px) {
     .slide__inner {
       grid-template-columns: 1fr;
@@ -438,12 +379,6 @@ const projects = [
 
     .carousel__viewport {
       min-height: auto;
-    }
-
-    .mockup-mobile {
-      right: -10px;
-      bottom: -16px;
-      width: 24%;
     }
 
     .mockup-icon {
@@ -467,21 +402,12 @@ const projects = [
     }
 
     .dot {
-      width: 7px;
-      height: 7px;
+      width: 6px;
+      height: 6px;
     }
 
     .mockup-desktop__url {
       font-size: 0.5rem;
-    }
-
-    .mockup-mobile {
-      width: 26%;
-      min-width: 70px;
-      border-radius: 12px;
-      padding: 3px;
-      right: -6px;
-      bottom: -12px;
     }
 
     .mockup-icon {
@@ -489,10 +415,6 @@ const projects = [
       bottom: -12px;
       min-width: 70px;
       border-radius: 16px;
-    }
-
-    .mockup-mobile__screen {
-      border-radius: 10px;
     }
 
     .carousel__arrow {

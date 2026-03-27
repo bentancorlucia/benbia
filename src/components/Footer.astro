@@ -5,7 +5,7 @@ const year = new Date().getFullYear();
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
-      <a href="#" class="footer__logo" aria-label="Benbia - Inicio">BENB<span class="logo-highlight">IA</span></a>
+      <a href="#" class="footer__logo" aria-label="Benbia - Inicio">BENBIA</a>
       <p class="footer__tagline">Pensado. Creado. Tuyo.</p>
     </div>
 
@@ -17,16 +17,15 @@ const year = new Date().getFullYear();
     </div>
 
     <div class="footer__bottom">
-      <span class="footer__copy mono">© {year} Benbia. Todos los derechos reservados.</span>
+      <span class="footer__copy mono">&copy; {year} Benbia. Todos los derechos reservados.</span>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background-color: var(--dark-teal-deep);
-    padding-block: var(--space-lg) var(--space-md);
     position: relative;
+    padding-block: var(--space-lg) var(--space-md);
   }
 
   .footer::before {
@@ -39,7 +38,7 @@ const year = new Date().getFullYear();
     background: linear-gradient(
       to right,
       transparent,
-      rgba(107, 171, 144, 0.2),
+      var(--glass-border),
       transparent
     );
   }
@@ -58,32 +57,22 @@ const year = new Date().getFullYear();
 
   .footer__logo {
     font-family: 'Syne Variable', sans-serif;
-    font-weight: 800;
-    font-size: 1.25rem;
+    font-weight: 700;
+    font-size: 1.15rem;
     color: var(--heading-light);
-    letter-spacing: 0.05em;
-    transition: color 0.3s ease, letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .footer__logo :global(.logo-highlight) {
-    color: var(--canary-yellow);
-    transition: color 0.3s ease;
-    margin-left: -0.03em;
+    letter-spacing: 0.08em;
+    transition: opacity 0.4s ease;
   }
 
   .footer__logo:hover {
-    color: var(--canary-yellow);
-    letter-spacing: 0.1em;
-  }
-
-  .footer__logo:hover :global(.logo-highlight) {
-    color: var(--heading-light);
+    opacity: 0.7;
   }
 
   .footer__tagline {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--muted-teal);
-    opacity: 0.6;
+    opacity: 0.4;
+    font-weight: 300;
   }
 
   .footer__links {
@@ -95,28 +84,26 @@ const year = new Date().getFullYear();
   .footer__links .nav-link {
     font-size: 0.85rem;
     color: var(--muted-teal);
-    opacity: 0.7;
+    opacity: 0.5;
     transition:
       opacity 0.4s ease,
-      color 0.4s ease,
-      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      color 0.4s ease;
   }
 
   .footer__links .nav-link:hover {
     opacity: 1;
-    color: var(--canary-yellow);
-    transform: translateX(3px);
+    color: var(--heading-light);
   }
 
   .footer__bottom {
     padding-top: var(--space-md);
-    border-top: 1px solid rgba(107, 171, 144, 0.1);
+    border-top: 1px solid var(--glass-border);
   }
 
   .footer__copy {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     color: var(--muted-teal);
-    opacity: 0.4;
+    opacity: 0.3;
   }
 
   @media (max-width: 768px) {
@@ -146,7 +133,7 @@ const year = new Date().getFullYear();
     }
 
     .footer__copy {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
     }
   }
 </style>

@@ -68,15 +68,15 @@
     right: 0;
     z-index: 100;
     padding: 1.25rem 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .navbar--scrolled {
-    background-color: rgba(8, 76, 97, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background-color: rgba(8, 76, 97, 0.4);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     padding: 0.75rem 0;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--glass-border);
   }
 
   .navbar__inner {
@@ -95,7 +95,8 @@
   .navbar__tagline {
     font-size: 0.75rem;
     color: var(--muted-teal);
-    opacity: 0.6;
+    opacity: 0.5;
+    font-weight: 300;
   }
 
   .navbar__logo {
@@ -129,10 +130,10 @@
   }
 
   .navbar__links .nav-link {
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 0.85rem;
+    font-weight: 400;
     color: var(--muted-teal);
-    transition: color 0.3s ease;
+    transition: color 0.4s ease;
   }
 
   .navbar__links .nav-link:hover {
@@ -140,8 +141,8 @@
   }
 
   .navbar__cta {
-    padding: 0.65rem 1.5rem;
-    font-size: 0.85rem;
+    padding: 0.55rem 1.25rem;
+    font-size: 0.8rem;
   }
 
   .navbar__mobile-toggle {
@@ -153,19 +154,19 @@
 
   .navbar__mobile-toggle span {
     display: block;
-    width: 24px;
-    height: 2px;
+    width: 22px;
+    height: 1.5px;
     background-color: var(--heading-light);
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     transform-origin: center;
   }
 
   .navbar__mobile-toggle.is-open span:first-child {
-    transform: translateY(4px) rotate(45deg);
+    transform: translateY(3.75px) rotate(45deg);
   }
 
   .navbar__mobile-toggle.is-open span:last-child {
-    transform: translateY(-4px) rotate(-45deg);
+    transform: translateY(-3.75px) rotate(-45deg);
   }
 
   .navbar__mobile-menu {
@@ -173,8 +174,9 @@
     flex-direction: column;
     padding: 0 var(--container-padding);
     gap: 0;
-    background-color: rgba(8, 76, 97, 0.98);
-    backdrop-filter: blur(16px);
+    background-color: rgba(8, 76, 97, 0.6);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     max-height: 0;
     overflow: hidden;
     transition:
@@ -195,8 +197,8 @@
     opacity: 0;
     transform: translateX(-10px);
     transition:
-      opacity 0.3s ease,
-      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.4s ease,
+      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
       color 0.3s ease;
   }
 
@@ -243,7 +245,7 @@
     }
 
     .navbar__logo {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
     }
 
     .navbar__mobile-menu .nav-link {

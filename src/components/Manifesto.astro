@@ -1,16 +1,21 @@
 ---
-const words = 'No construimos software genérico. Diseñamos soluciones que transforman negocios.'.split(' ');
 ---
 
 <section class="manifesto" id="manifiesto">
-  <!-- Dot matrix background -->
-  <div class="manifesto__dots" aria-hidden="true"></div>
+  <!-- Mesh gradient background -->
+  <div class="manifesto__gradient" aria-hidden="true">
+    <div class="manifesto__blob manifesto__blob--1"></div>
+    <div class="manifesto__blob manifesto__blob--2"></div>
+    <div class="manifesto__blob manifesto__blob--3"></div>
+    <div class="manifesto__blob manifesto__blob--4"></div>
+  </div>
+
+  <!-- Noise texture overlay -->
+  <div class="manifesto__noise" aria-hidden="true"></div>
 
   <div class="container manifesto__inner">
-    <p class="manifesto__text" id="manifesto-text">
-      {words.map((word) => (
-        <span class="manifesto__word">{word}&nbsp;</span>
-      ))}
+    <p class="manifesto__text">
+      <span class="manifesto__word">No construimos software genérico.</span> <span class="manifesto__word">Diseñamos soluciones que</span> <span class="manifesto__word manifesto__word--accent"><em>transforman negocios.</em></span>
     </p>
   </div>
 </section>
@@ -19,16 +24,67 @@ const words = 'No construimos software genérico. Diseñamos soluciones que tran
   .manifesto {
     position: relative;
     height: 100vh;
-    background-color: var(--dark-teal-deep);
     overflow: hidden;
   }
 
-  .manifesto__dots {
+  /* Mesh gradient */
+  .manifesto__gradient {
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle, rgba(237, 240, 96, 0.08) 1px, transparent 1px);
-    background-size: 24px 24px;
+  }
+
+  .manifesto__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    will-change: transform;
+  }
+
+  .manifesto__blob--1 {
+    width: 60%;
+    height: 60%;
+    top: -15%;
+    left: -10%;
+    background: radial-gradient(circle, var(--berry-crush) 0%, transparent 70%);
+    opacity: 0.5;
+  }
+
+  .manifesto__blob--2 {
+    width: 50%;
+    height: 50%;
+    top: 10%;
+    right: -5%;
+    background: radial-gradient(circle, var(--dark-teal) 0%, transparent 70%);
+    opacity: 0.7;
+  }
+
+  .manifesto__blob--3 {
+    width: 60%;
+    height: 60%;
+    bottom: -10%;
+    left: 10%;
+    background: radial-gradient(circle, var(--canary-yellow) 0%, transparent 70%);
+    opacity: 0.3;
+  }
+
+  .manifesto__blob--4 {
+    width: 50%;
+    height: 50%;
+    bottom: 5%;
+    right: -5%;
+    background: radial-gradient(circle, var(--muted-teal) 0%, transparent 70%);
+    opacity: 0.35;
+  }
+
+  /* Noise overlay for texture */
+  .manifesto__noise {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.15'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
     pointer-events: none;
+    opacity: 0.4;
+    mix-blend-mode: overlay;
   }
 
   .manifesto__inner {
@@ -36,44 +92,46 @@ const words = 'No construimos software genérico. Diseñamos soluciones que tran
     z-index: 1;
     display: flex;
     align-items: center;
-    justify-content: center;
     height: 100%;
   }
 
   .manifesto__text {
     font-family: 'Syne Variable', sans-serif;
-    font-weight: 700;
-    font-size: clamp(2rem, 5vw, 4rem);
-    line-height: 1.2;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 3vw, 2.75rem);
+    line-height: 1.4;
     color: var(--heading-light);
-    text-align: center;
-    max-width: 900px;
+    max-width: 100%;
+  }
+
+  .manifesto__text em {
+    font-style: italic;
+    font-weight: 500;
   }
 
   .manifesto__word {
-    display: inline-block;
-    opacity: 0.12;
-    transition:
-      opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-      filter 0.4s ease;
-    filter: blur(1px);
+    display: inline;
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  .manifesto__word--accent {
+    color: var(--canary-yellow);
   }
 
   @media (max-width: 768px) {
     .manifesto__text {
-      max-width: 100%;
+      font-size: clamp(1.25rem, 4vw, 2rem);
+    }
+
+    .manifesto__blob {
+      filter: blur(80px);
     }
   }
 
   @media (max-width: 480px) {
-
     .manifesto__text {
-      font-size: clamp(1.5rem, 6vw, 2rem);
-    }
-
-    .manifesto__dots {
-      background-size: 18px 18px;
+      font-size: clamp(1rem, 5vw, 1.5rem);
     }
   }
 </style>

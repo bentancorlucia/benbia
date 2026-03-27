@@ -4,219 +4,319 @@ const steps = [
     num: '01',
     title: 'Descubrimiento',
     desc: 'Entendemos tu negocio, tus usuarios y tus objetivos. Definimos el alcance y la estrategia.',
+    icon: 'M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z',
   },
   {
     num: '02',
     title: 'Diseño',
     desc: 'Prototipamos soluciones centradas en el usuario con interfaces intuitivas y arquitectura sólida.',
+    icon: 'M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42',
   },
   {
     num: '03',
     title: 'Desarrollo',
     desc: 'Construimos con tecnología moderna, código limpio y entregas iterativas que puedes ver en tiempo real.',
+    icon: 'M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5',
   },
   {
     num: '04',
     title: 'Lanzamiento',
     desc: 'Desplegamos, monitoreamos y optimizamos. Tu proyecto vive y evoluciona con tu negocio.',
+    icon: 'M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z',
   },
+];
+
+const accentColors = [
+  'var(--canary-yellow)',
+  'var(--muted-teal)',
+  'var(--berry-crush)',
+  'var(--canary-yellow)',
 ];
 ---
 
 <section class="process section" id="proceso">
   <div class="container">
-    <div class="process__header reveal">
-      <span class="label">Cómo trabajamos</span>
-      <h2>Nuestro proceso</h2>
-    </div>
+    <!-- This whole pinned area includes header + deck -->
+    <div class="process__pinned">
+      <div class="process__header">
+        <span class="label process__label">Cómo trabajamos</span>
+        <h2 class="process__title">
+          <span class="process__title-line">Nuestro</span>
+          <span class="process__title-line"><em>proceso</em></span>
+        </h2>
+      </div>
 
-    <div class="process__timeline">
-      <!-- SVG connecting line -->
-      <svg class="process__line" aria-hidden="true" preserveAspectRatio="none">
-        <line
-          x1="50%"
-          y1="0"
-          x2="50%"
-          y2="100%"
-          stroke="#6bab90"
-          stroke-width="1"
-          stroke-dasharray="6 6"
-          id="process-line"
-        />
-      </svg>
-
-      {
-        steps.map((step, i) => (
-          <div class={`process__step reveal`} style={`--delay: ${i * 0.15}s`}>
-            <div class="process__step-dot" aria-hidden="true">
-              <span class="process__step-dot-inner" />
-            </div>
-            <div class="process__step-content">
-              <span class="process__step-num mono">{step.num}</span>
-              <h3>{step.title}</h3>
-              <p>{step.desc}</p>
-            </div>
-          </div>
-        ))
-      }
+      <!-- Deck area — cards stacked in same spot -->
+      <div class="process__deck">
+        <div class="process__deck-inner">
+          {
+            steps.map((step, i) => (
+              <div
+                class="process__card"
+                data-card-index={i}
+                style={`--card-accent: ${accentColors[i]}; --card-index: ${i}; --total-cards: ${steps.length};`}
+              >
+                <div class="process__card-inner">
+                  <div class="process__card-top">
+                    <span class="process__card-num mono">{step.num}</span>
+                    <div class="process__card-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" width="28" height="28">
+                        <path stroke-linecap="round" stroke-linejoin="round" d={step.icon} />
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="process__card-body">
+                    <h3 class="process__card-title">{step.title}</h3>
+                    <p class="process__card-desc">{step.desc}</p>
+                  </div>
+                  <div class="process__card-accent-line" aria-hidden="true" />
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   .process {
-    background-color: var(--dark-teal);
     position: relative;
-  }
-
-  .process__header {
-    margin-bottom: var(--space-xl);
-  }
-
-  .process__header .label {
-    display: block;
-    margin-bottom: var(--space-sm);
-  }
-
-  .process__timeline {
-    position: relative;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .process__line {
-    position: absolute;
-    left: 20px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    height: 100%;
-    overflow: visible;
-  }
-
-  .process__step {
-    display: flex;
-    gap: 2.5rem;
-    padding-bottom: 3.5rem;
-    position: relative;
-  }
-
-  .process__step:last-child {
+    padding-top: var(--space-2xl);
     padding-bottom: 0;
   }
 
-  .process__step-dot {
+  /* Pinned wrapper — full viewport, header + deck stacked */
+  .process__pinned {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Header — stays at top when pinned */
+  .process__header {
     flex-shrink: 0;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    border: 1px solid var(--muted-teal);
+    margin-bottom: 0;
+  }
+
+  .process__label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .process__title {
+    font-size: clamp(2.5rem, 7vw, 6rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .process__title-line {
+    display: block;
+    opacity: 0;
+    clip-path: inset(100% 0 0 0);
+  }
+
+  .process__title em {
+    font-style: italic;
+    color: var(--canary-yellow);
+    font-weight: 700;
+  }
+
+  /* Deck — fills remaining space, cards centered within */
+  .process__deck {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .process__deck-inner {
+    position: relative;
+    width: 100%;
+    max-width: 640px;
+    margin-inline: auto;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--dark-teal);
+  }
+
+  /* All cards stacked absolutely in the same position */
+  .process__card {
+    position: absolute;
+    left: 0;
+    right: 0;
+    will-change: transform, opacity;
+    transform-origin: center center;
+  }
+
+  .process__card-inner {
     position: relative;
-    z-index: 1;
+    background: rgb(3, 42, 54);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: clamp(2rem, 4vw, 3rem);
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
     transition:
-      border-color 0.4s ease,
-      box-shadow 0.4s ease;
+      border-color 0.5s ease,
+      box-shadow 0.5s ease;
   }
 
-  .process__step:hover .process__step-dot {
-    border-color: var(--canary-yellow);
-    box-shadow: 0 0 20px rgba(237, 240, 96, 0.15);
+  .process__card:hover .process__card-inner {
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 
-  .process__step-dot-inner {
-    display: block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--canary-yellow);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Top row: number + icon */
+  .process__card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
   }
 
-  .process__step:hover .process__step-dot-inner {
-    transform: scale(1.4);
+  .process__card-num {
+    font-size: clamp(3.5rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--heading-light);
+    opacity: 0.06;
+    transition: opacity 0.6s ease, color 0.6s ease;
   }
 
-  .process__step-num {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--muted-teal);
-    margin-bottom: 0.5rem;
-    letter-spacing: 0.1em;
+  .process__card:hover .process__card-num {
+    opacity: 0.2;
+    color: var(--card-accent);
   }
 
-  .process__step-content {
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  .process__card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--card-accent);
+    opacity: 0.5;
+    transition: opacity 0.5s ease, border-color 0.5s ease, background 0.5s ease;
   }
 
-  .process__step:hover .process__step-content {
-    transform: translateX(6px);
+  .process__card:hover .process__card-icon {
+    opacity: 1;
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
   }
 
-  .process__step-content h3 {
-    margin-bottom: 0.5rem;
+  /* Body */
+  .process__card-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
     transition: color 0.4s ease;
   }
 
-  .process__step:hover .process__step-content h3 {
-    color: var(--canary-yellow);
+  .process__card:hover .process__card-title {
+    color: var(--card-accent);
   }
 
-  .process__step-content p {
-    font-size: 1rem;
+  .process__card-desc {
+    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
     line-height: 1.7;
     color: var(--muted-teal);
+    font-weight: 350;
+    max-width: 480px;
   }
 
+  /* Bottom accent line */
+  .process__card-accent-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--card-accent),
+      transparent
+    );
+    opacity: 0;
+    transform: scaleX(0);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .process__card:hover .process__card-accent-line {
+    opacity: 0.5;
+    transform: scaleX(1);
+  }
+
+  /* Responsive */
   @media (max-width: 768px) {
-    .process__step {
-      gap: 1.5rem;
-      padding-bottom: 2.5rem;
+    .process__title {
+      font-size: clamp(2rem, 10vw, 3.5rem);
     }
 
-    .process__step-dot {
-      width: 36px;
-      height: 36px;
+    .process__deck-inner {
+      max-width: 100%;
     }
 
-    .process__line {
-      left: 17px;
+    .process__card-inner {
+      border-radius: 16px;
+      padding: clamp(1.5rem, 4vw, 2rem);
     }
 
-    .process__step-content p {
-      font-size: 0.95rem;
+    .process__card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+    }
+
+    .process__card-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .process__card-num {
+      font-size: 3rem;
     }
   }
 
   @media (max-width: 480px) {
-    .process__timeline {
-      max-width: 100%;
+    .process__card-inner {
+      padding: 1.25rem;
+      border-radius: 14px;
     }
 
-    .process__step {
-      gap: 1rem;
-      padding-bottom: 2rem;
+    .process__card-num {
+      font-size: 2.5rem;
     }
 
-    .process__step-dot {
-      width: 30px;
-      height: 30px;
+    .process__card-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
     }
 
-    .process__step-dot-inner {
-      width: 8px;
-      height: 8px;
+    .process__card-icon svg {
+      width: 18px;
+      height: 18px;
     }
 
-    .process__line {
-      left: 14px;
+    .process__card-title {
+      font-size: 1.25rem;
     }
 
-    .process__step-content p {
-      font-size: 0.9rem;
+    .process__card-desc {
+      font-size: 0.875rem;
     }
   }
 </style>
