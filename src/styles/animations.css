@@ -285,6 +285,18 @@
   .btn-primary:hover {
     transform: none;
     box-shadow: none;
+    color: var(--canary-yellow);
+    border-color: rgba(237, 240, 96, 0.2);
+  }
+
+  .btn-primary:hover::before {
+    transform: translateX(-101%);
+  }
+
+  .btn-primary:active {
+    background: rgba(237, 240, 96, 0.2);
+    transform: scale(0.97);
+    transition-duration: 0.1s;
   }
 
   .custom-cursor {

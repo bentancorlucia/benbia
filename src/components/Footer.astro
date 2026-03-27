@@ -5,7 +5,7 @@ const year = new Date().getFullYear();
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
-      <a href="#" class="footer__logo" aria-label="Benbia - Inicio">BENBIA</a>
+      <a href="#" class="footer__logo" aria-label="Benbia - Inicio">BENB<span class="logo-highlight">IA</span></a>
       <p class="footer__tagline">Pensado. Creado. Tuyo.</p>
     </div>
 
@@ -57,11 +57,16 @@ const year = new Date().getFullYear();
 
   .footer__logo {
     font-family: 'Syne Variable', sans-serif;
-    font-weight: 700;
+    font-weight: 800;
     font-size: 1.15rem;
     color: var(--heading-light);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
     transition: opacity 0.4s ease;
+  }
+
+  .footer__logo :global(.logo-highlight) {
+    color: var(--canary-yellow);
+    margin-left: -0.03em;
   }
 
   .footer__logo:hover {
@@ -128,8 +133,8 @@ const year = new Date().getFullYear();
     }
 
     .footer__links .nav-link {
-      font-size: 0.9rem;
-      padding: 0.25rem 0;
+      font-size: 1rem;
+      padding: 0.5rem 0;
     }
 
     .footer__copy {

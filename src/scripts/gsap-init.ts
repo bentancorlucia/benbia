@@ -8,6 +8,8 @@ gsap.defaults({ ease: 'power3.out' });
 
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+const isMobile = window.innerWidth <= 768;
+
 if (!prefersReduced) {
   // === Hero entrance timeline ===
   const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
@@ -62,30 +64,32 @@ if (!prefersReduced) {
       ease: 'power2.inOut',
     }, 1.4);
 
-  // === Hero parallax on scroll ===
-  gsap.to('.hero__geometry', {
-    yPercent: -15,
-    rotation: 8,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 0.8,
-    },
-  });
+  // === Hero parallax on scroll (disabled on mobile — causes jank) ===
+  if (!isMobile) {
+    gsap.to('.hero__geometry', {
+      yPercent: -15,
+      rotation: 8,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.8,
+      },
+    });
 
-  gsap.to('.hero__content', {
-    yPercent: 12,
-    opacity: 0.3,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '#hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 0.5,
-    },
-  });
+    gsap.to('.hero__content', {
+      yPercent: 12,
+      opacity: 0.3,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.5,
+      },
+    });
+  }
 
   // === Manifesto word reveal on scroll ===
   const manifestoWords = document.querySelectorAll('.manifesto__word');
@@ -102,7 +106,7 @@ if (!prefersReduced) {
     ScrollTrigger.create({
       trigger: '#manifiesto',
       start: 'top top',
-      end: '+=200%',
+      end: isMobile ? '+=120%' : '+=200%',
       pin: true,
       pinSpacing: true,
       onUpdate: (self) => {
@@ -256,14 +260,17 @@ if (!prefersReduced) {
     const EXIT = 0.08;   // 8% of timeline for fade-out
     const CARDS = 1 - ENTER - EXIT; // middle portion for card transitions
 
+    const scrollMultiplier = isMobile ? 100 : 150;
+    const scrollOffset = isMobile ? 40 : 60;
+
     const deckTl = gsap.timeline({
       scrollTrigger: {
         trigger: processPinned,
         start: 'top top',
-        end: `+=${transitions * 150 + 60}%`,
+        end: `+=${transitions * scrollMultiplier + scrollOffset}%`,
         pin: true,
         pinSpacing: true,
-        scrub: 1.5,
+        scrub: isMobile ? 0.8 : 1.5,
       },
     });
 

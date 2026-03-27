@@ -48,6 +48,7 @@
     const isOpen = menu?.classList.toggle('is-open');
     toggle.classList.toggle('is-open');
     toggle.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
   // Close mobile menu on link click
@@ -56,6 +57,7 @@
       menu.classList.remove('is-open');
       toggle?.classList.remove('is-open');
       toggle?.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
     });
   });
 </script>
@@ -103,24 +105,33 @@
     font-family: 'Syne Variable', sans-serif;
     font-weight: 800;
     font-size: 1.5rem;
-    color: var(--heading-light);
     letter-spacing: 0.05em;
-    transition: color 0.3s ease, letter-spacing 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .navbar__logo :global(.logo-highlight) {
-    color: var(--canary-yellow);
-    transition: color 0.3s ease;
-    margin-left: -0.03em;
+    background: linear-gradient(90deg, var(--canary-yellow) 50%, var(--heading-light) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .navbar__logo:hover {
-    color: var(--canary-yellow);
-    letter-spacing: 0.1em;
+    background-position: 0% 0;
+  }
+
+  .navbar__logo :global(.logo-highlight) {
+    background: linear-gradient(90deg, var(--heading-light) 50%, var(--canary-yellow) 50%);
+    background-size: 200% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: -0.03em;
+    transition: background-position 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .navbar__logo:hover :global(.logo-highlight) {
-    color: var(--heading-light);
+    background-position: 0% 0;
   }
 
   .navbar__links {
@@ -233,6 +244,56 @@
     .navbar__mobile-toggle {
       display: flex;
     }
+
+    .navbar__tagline {
+      display: none;
+    }
+
+    .navbar__mobile-menu {
+      position: fixed;
+      inset: 0;
+      height: 100dvh;
+      max-height: none;
+      background-color: rgba(8, 76, 97, 0.95);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 90;
+    }
+
+    .navbar__mobile-menu.is-open {
+      max-height: none;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      padding: 0;
+      gap: 0.5rem;
+    }
+
+    .navbar__mobile-menu .nav-link {
+      font-size: 1.5rem;
+      padding: 1rem 0;
+      font-weight: 500;
+      color: var(--heading-light);
+    }
+
+    .navbar__mobile-menu .btn-primary {
+      margin-top: 1.5rem;
+      padding: 1rem 2.5rem;
+      font-size: 1rem;
+    }
+
+    .navbar__mobile-toggle {
+      z-index: 101;
+    }
   }
 
   @media (max-width: 480px) {
@@ -249,8 +310,8 @@
     }
 
     .navbar__mobile-menu .nav-link {
-      font-size: 1rem;
-      padding: 0.75rem 0;
+      font-size: 1.3rem;
+      padding: 0.85rem 0;
     }
   }
 </style>

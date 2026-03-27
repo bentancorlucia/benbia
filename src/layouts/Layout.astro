@@ -138,4 +138,26 @@ const {
     33% { transform: translate(-3%, -3%) scale(1.04); }
     66% { transform: translate(4%, 4%) scale(0.96); }
   }
+
+  @media (max-width: 768px) {
+    .gradient-mesh__layer {
+      filter: blur(80px);
+      animation-duration: 40s;
+    }
+    .gradient-mesh__layer--1 { width: 50vw; height: 50vh; }
+    .gradient-mesh__layer--2 { width: 60vw; height: 60vh; }
+    .gradient-mesh__layer--3 { width: 45vw; height: 45vh; }
+    .gradient-mesh__layer--4 { width: 50vw; height: 50vh; }
+  }
+
+  @media (max-width: 480px) {
+    .gradient-mesh__layer {
+      filter: blur(60px);
+      animation: none;
+    }
+    .gradient-mesh__layer--3,
+    .gradient-mesh__layer--4 {
+      display: none;
+    }
+  }
 </style>

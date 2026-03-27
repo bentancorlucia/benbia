@@ -290,9 +290,17 @@ const accentColors = [
   }
 
   @media (max-width: 480px) {
+    .process__pinned {
+      padding-top: clamp(4rem, 6vw, 5rem);
+    }
+
     .process__card-inner {
       padding: 1.25rem;
       border-radius: 14px;
+    }
+
+    .process__card-top {
+      margin-bottom: 1rem;
     }
 
     .process__card-num {
@@ -315,7 +323,18 @@ const accentColors = [
     }
 
     .process__card-desc {
-      font-size: 0.875rem;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .process__card-title {
+      font-size: 1.1rem;
+    }
+
+    .process__card-desc {
+      font-size: 0.8rem;
     }
   }
 </style>

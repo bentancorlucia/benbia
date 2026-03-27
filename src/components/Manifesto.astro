@@ -125,13 +125,35 @@
     }
 
     .manifesto__blob {
-      filter: blur(80px);
+      filter: blur(60px);
+    }
+
+    .manifesto__blob--1,
+    .manifesto__blob--3 {
+      width: 80%;
+      height: 80%;
+    }
+
+    .manifesto__blob--2,
+    .manifesto__blob--4 {
+      width: 70%;
+      height: 70%;
     }
   }
 
   @media (max-width: 480px) {
     .manifesto__text {
-      font-size: clamp(1rem, 5vw, 1.5rem);
+      font-size: clamp(1.1rem, 5.5vw, 1.5rem);
+      line-height: 1.5;
+    }
+
+    .manifesto__blob {
+      filter: blur(40px);
+    }
+
+    .manifesto__blob--3,
+    .manifesto__blob--4 {
+      display: none;
     }
   }
 </style>

@@ -1,6 +1,8 @@
+// Skip cursor, rAF loop, and hero text splitting on touch devices
+const hasHover = window.matchMedia('(hover: hover)').matches;
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-if (!prefersReduced) {
+if (hasHover && !prefersReduced) {
   // === Custom Cursor ===
   const cursor = document.createElement('div');
   cursor.classList.add('custom-cursor');
