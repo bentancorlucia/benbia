@@ -14,7 +14,7 @@
     </p>
     <a href="#servicios" class="btn-ghost hero__cta">
       <span class="btn-ghost__text">Conoce nuestros servicios</span>
-      <span class="btn-ghost__icon">&#8595;</span>
+      <span class="btn-ghost__icon">&#8594;</span>
     </a>
   </div>
 
@@ -99,12 +99,13 @@
   }
 
   .btn-ghost__icon {
+    display: inline-block;
     font-size: 1rem;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .btn-ghost:hover .btn-ghost__icon {
-    transform: translateY(3px);
+    transform: rotate(90deg);
   }
 
   /* Scroll indicator */

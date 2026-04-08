@@ -72,6 +72,7 @@
 
 /* === Primary button — solid white/yellow === */
 .btn-primary {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -83,15 +84,33 @@
   font-size: clamp(0.85rem, 1vw, 1rem);
   border-radius: 100px;
   border: none;
+  overflow: hidden;
+  z-index: 0;
   transition:
     transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 0.3s ease;
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
-.btn-primary:hover {
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: var(--canary-yellow);
+  border-radius: inherit;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.btn-primary:hover::before {
+  transform: translateX(0);
+}
+
+.btn-primary:hover {
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 0 40px rgba(237, 240, 96, 0.2);
 }
@@ -128,13 +147,16 @@
   letter-spacing: 0.12em;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+  z-index: 0;
   transition:
+    color 0.4s ease,
     border-color 0.4s ease,
     box-shadow 0.4s ease;
 }
 
 .btn-ghost:hover {
-  border-color: var(--canary-yellow-50);
+  color: var(--dark-teal-deep);
+  border-color: var(--canary-yellow);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
@@ -142,13 +164,15 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--canary-yellow-10);
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  background: var(--canary-yellow);
+  border-radius: inherit;
+  transform: translateX(-100%);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
 }
 
 .btn-ghost:hover::after {
-  opacity: 1;
+  transform: translateX(0);
 }
 
 .btn-ghost .line {
@@ -241,11 +265,17 @@
   .btn-primary:hover {
     transform: none;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-    background: var(--heading-light);
+  }
+
+  .btn-primary:hover::before {
+    transform: translateX(-100%);
+  }
+
+  .btn-primary:active::before {
+    transform: translateX(0);
   }
 
   .btn-primary:active {
-    background: var(--canary-yellow);
     transform: scale(0.97);
     transition-duration: 0.1s;
   }
