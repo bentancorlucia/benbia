@@ -4,16 +4,17 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="container footer__inner">
-    <div class="footer__brand">
-      <a href="#" class="footer__logo" aria-label="Benbia - Inicio">BENB<span class="logo-highlight">IA</span></a>
-      <p class="footer__tagline">Pensado. Creado. Tuyo.</p>
-    </div>
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="#" class="footer__logo" aria-label="Benbia - Inicio">BENB<span class="logo-highlight">IA</span></a>
+        <p class="footer__tagline mono">Pensado. Creado. Tuyo.</p>
+      </div>
 
-    <div class="footer__links">
-      <a href="#servicios" class="nav-link">Servicios</a>
-      <a href="#proceso" class="nav-link">Proceso</a>
-      <a href="#nosotros" class="nav-link">Nosotros</a>
-      <a href="#contacto" class="nav-link">Contacto</a>
+      <div class="footer__links">
+        <a href="#servicios" class="footer__link">Servicios</a>
+        <a href="#proceso" class="footer__link">Proceso</a>
+        <a href="#trabajos" class="footer__link">Portfolio</a>
+      </div>
     </div>
 
     <div class="footer__bottom">
@@ -25,48 +26,43 @@ const year = new Date().getFullYear();
 <style>
   .footer {
     position: relative;
-    padding-block: var(--space-lg) var(--space-md);
-  }
-
-  .footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      var(--glass-border),
-      transparent
-    );
+    padding-block: var(--space-xl) var(--space-md);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   .footer__inner {
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-lg);
+  }
+
+  .footer__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
   }
 
   .footer__brand {
     display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
   .footer__logo {
     font-family: 'Syne Variable', sans-serif;
     font-weight: 800;
-    font-size: 1.15rem;
+    font-size: clamp(3rem, 6vw, 5rem);
     color: var(--heading-light);
-    letter-spacing: 0.05em;
+    letter-spacing: -0.03em;
     transition: opacity 0.4s ease;
+    line-height: 1;
   }
 
   .footer__logo :global(.logo-highlight) {
     color: var(--canary-yellow);
-    margin-left: -0.03em;
   }
 
   .footer__logo:hover {
@@ -74,10 +70,11 @@ const year = new Date().getFullYear();
   }
 
   .footer__tagline {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--muted-teal);
-    opacity: 0.4;
-    font-weight: 300;
+    opacity: 0.5;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
   }
 
   .footer__links {
@@ -86,17 +83,14 @@ const year = new Date().getFullYear();
     flex-wrap: wrap;
   }
 
-  .footer__links .nav-link {
-    font-size: 0.85rem;
-    color: var(--muted-teal);
-    opacity: 0.5;
+  .footer__link {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.5);
     transition:
-      opacity 0.4s ease,
       color 0.4s ease;
   }
 
-  .footer__links .nav-link:hover {
-    opacity: 1;
+  .footer__link:hover {
     color: var(--heading-light);
   }
 
@@ -106,25 +100,26 @@ const year = new Date().getFullYear();
   }
 
   .footer__copy {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
     color: var(--muted-teal);
     opacity: 0.3;
   }
 
   @media (max-width: 768px) {
-    .footer__brand {
+    .footer__top {
       flex-direction: column;
-      gap: 0.5rem;
+      align-items: flex-start;
+      gap: 2rem;
     }
 
-    .footer__links {
-      gap: 1.5rem;
+    .footer__logo {
+      font-size: clamp(2.5rem, 10vw, 4rem);
     }
   }
 
   @media (max-width: 480px) {
     .footer {
-      padding-block: var(--space-md) var(--space-sm);
+      padding-block: var(--space-lg) var(--space-sm);
     }
 
     .footer__links {
@@ -132,13 +127,13 @@ const year = new Date().getFullYear();
       gap: 0.75rem;
     }
 
-    .footer__links .nav-link {
+    .footer__link {
       font-size: 1rem;
       padding: 0.5rem 0;
     }
 
     .footer__copy {
-      font-size: 0.6rem;
+      font-size: 0.55rem;
     }
   }
 </style>

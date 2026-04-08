@@ -24,7 +24,9 @@ body {
 }
 
 @media (hover: hover) {
-  *, *::before, *::after {
+  *, *::before, *::after,
+  a, button, [role="button"], input, textarea, select,
+  .hero__char {
     cursor: none !important;
   }
 }
@@ -69,7 +71,7 @@ ol {
   --canary-yellow-50: rgba(237, 240, 96, 0.5);
 
   /* Glass tokens */
-  --glass-white: rgba(255, 255, 255, 0.05);
+  --glass-white: rgba(255, 255, 255, 0.04);
   --glass-border: rgba(255, 255, 255, 0.08);
   --glass-white-10: rgba(255, 255, 255, 0.1);
 
@@ -99,7 +101,7 @@ h4 {
 
 h1 {
   font-size: clamp(2.5rem, 7vw + 0.5rem, 7rem);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 h2 {
@@ -124,6 +126,14 @@ h3 {
   font-family: 'JetBrains Mono Variable', monospace;
 }
 
+/* === Text Gradient === */
+.text-gradient {
+  background: linear-gradient(135deg, var(--canary-yellow), var(--muted-teal));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* === Utility === */
 .container {
   max-width: var(--container-max);
@@ -136,6 +146,14 @@ h3 {
   position: relative;
 }
 
+/* Section with vertical rail lines */
+.section--railed {
+  border-left: 1px solid var(--glass-border);
+  border-right: 1px solid var(--glass-border);
+  max-width: var(--container-max);
+  margin-inline: auto;
+}
+
 /* Glass panel utility */
 .glass {
   background: var(--glass-white);
@@ -143,6 +161,13 @@ h3 {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
   border-radius: 16px;
+}
+
+.glass-panel {
+  background: var(--glass-white);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
 }
 
 /* Reveal animation targets — hidden by default */
@@ -156,7 +181,6 @@ h3 {
   clip-path: inset(100% 0 0 0);
 }
 
-/* Reveal variants for richer scroll animations */
 .reveal-scale {
   opacity: 0;
   transform: scale(0.95);
@@ -201,7 +225,7 @@ h3 {
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: var(--dark-teal-deep);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -210,7 +234,7 @@ h3 {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-teal);
+  background: var(--canary-yellow);
 }
 
 /* === Mobile touch-friendly === */

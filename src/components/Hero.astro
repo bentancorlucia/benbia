@@ -5,16 +5,16 @@
   <div class="hero__content">
     <h1 class="hero__title">
       <span class="hero__line">Construimos</span>
-      <span class="hero__line">el software <em>que</em>&nbsp;</span>
-      <span class="hero__line">tu negocio</span>
+      <span class="hero__line">el software</span>
+      <span class="hero__line"><em>que</em> tu negocio</span>
       <span class="hero__line"><span class="hero__accent">necesita</span></span>
     </h1>
     <p class="hero__subtitle">
       Desarrollo, diseño y consultoría tecnológica para empresas que piensan diferente.
     </p>
-    <a href="#servicios" class="btn-primary hero__cta">
-      Conoce nuestros servicios
-      <span class="arrow">&rarr;</span>
+    <a href="#servicios" class="btn-ghost hero__cta">
+      <span class="btn-ghost__text">Conoce nuestros servicios</span>
+      <span class="btn-ghost__icon">&#8595;</span>
     </a>
   </div>
 
@@ -32,6 +32,10 @@
     display: flex;
     align-items: center;
     overflow: visible;
+    border-left: 1px solid var(--glass-border);
+    border-right: 1px solid var(--glass-border);
+    max-width: var(--container-max);
+    margin-inline: auto;
   }
 
   .hero__content {
@@ -39,62 +43,68 @@
     z-index: 3;
     padding-inline: var(--container-padding);
     width: 100%;
-    max-width: 1440px;
+    max-width: 1280px;
     margin-inline: auto;
-    text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     overflow: visible;
   }
 
   .hero__title {
-    margin-bottom: clamp(1rem, 2.5vw, 1.5rem);
-    font-size: clamp(2.2rem, 5vw, 4.5rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
   }
 
   .hero__line {
     display: block;
     opacity: 0;
-    clip-path: inset(100% 0 0 0);
-    padding-block: 0.1em;
+    transform: translateY(20px);
+    padding-block: 0.05em;
   }
 
   .hero__title em {
     font-style: italic;
     color: var(--muted-teal);
-    font-weight: 500;
+    font-weight: 400;
+    font-family: 'Outfit Variable', sans-serif;
   }
 
   .hero__accent {
     background: linear-gradient(
-      90deg,
+      135deg,
       var(--canary-yellow) 0%,
-      #f5f872 40%,
-      var(--canary-yellow) 60%,
-      #f5f872 100%
+      var(--muted-teal) 100%
     );
-    background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shimmer 6s ease-in-out infinite;
   }
 
   .hero__subtitle {
-    font-size: clamp(1rem, 1.2vw + 0.2rem, 1.25rem);
+    font-size: clamp(1rem, 1.3vw + 0.2rem, 1.3rem);
     font-weight: 300;
-    max-width: 550px;
-    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    max-width: 600px;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
     line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
     opacity: 0;
   }
 
   .hero__cta {
     opacity: 0;
+  }
+
+  .btn-ghost__icon {
+    font-size: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .btn-ghost:hover .btn-ghost__icon {
+    transform: translateY(3px);
   }
 
   /* Scroll indicator */
@@ -109,66 +119,127 @@
     align-items: center;
     gap: 0.75rem;
     opacity: 0;
+    animation: float 6s ease-in-out infinite;
+    animation-play-state: paused;
   }
 
   .hero__scroll-text {
     font-family: 'JetBrains Mono Variable', monospace;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
     text-transform: uppercase;
     letter-spacing: 0.25em;
-    color: var(--muted-teal);
+    color: var(--heading-light);
     opacity: 0.5;
   }
 
   .hero__scroll-line {
     width: 1px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--muted-teal-20), transparent);
-    animation: scroll-bounce 2.5s ease-in-out infinite;
+    height: 48px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
   }
 
   /* Responsive */
-  @media (max-width: 768px) {
-    .hero {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
-      min-height: 100svh;
-    }
-
-    .hero__title {
-      font-size: clamp(1.8rem, 6vw, 3rem);
+  @media (max-width: 1024px) {
+    .hero__content {
+      align-items: center;
+      text-align: center;
     }
 
     .hero__subtitle {
-      max-width: 100%;
-    }
-
-    .hero__scroll {
-      bottom: 1.5rem;
+      max-width: 520px;
     }
   }
 
-  @media (max-width: 480px) {
+  /* ── Tablet / Large mobile ── */
+  @media (max-width: 768px) {
     .hero {
-      padding-top: 4rem;
-      padding-bottom: 4rem;
       min-height: 100svh;
+      /* Optical center: push content slightly above true center
+         to account for navbar (~80px) and bottom scroll indicator */
+      padding-top: calc(env(safe-area-inset-top, 0px) + 5.5rem);
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 4rem);
+      border: none;
+      /* Subtle radial glow behind content on mobile */
+      background: radial-gradient(
+        ellipse 80% 50% at 50% 45%,
+        rgba(107, 171, 144, 0.06) 0%,
+        transparent 70%
+      );
+    }
+
+    .hero__content {
+      align-items: flex-start;
+      text-align: left;
+      padding-inline: 1.5rem;
     }
 
     .hero__title {
-      font-size: clamp(2rem, 9vw, 2.8rem);
+      font-size: clamp(2.2rem, 8.5vw, 3.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      margin-bottom: clamp(1.25rem, 4vw, 2rem);
+    }
+
+    .hero__line {
+      padding-block: 0.08em;
     }
 
     .hero__subtitle {
-      font-size: 0.9rem;
-      margin-bottom: 2rem;
-      line-height: 1.5;
+      max-width: 85%;
+      font-size: clamp(0.95rem, 3.8vw, 1.15rem);
+      line-height: 1.65;
+      margin-bottom: clamp(1.75rem, 5vw, 2.5rem);
+      color: rgba(255, 255, 255, 0.6);
     }
 
     .hero__cta {
-      width: auto;
-      padding: 0.7rem 1.5rem;
-      font-size: 0.875rem;
+      min-height: 56px;
+      padding: 1rem 2rem;
+      font-size: 0.72rem;
+    }
+
+    .hero__cta:active {
+      transform: scale(0.97);
+      transition-duration: 0.1s;
+    }
+
+    .hero__scroll {
+      bottom: 1.25rem;
+    }
+
+    .hero__scroll-line {
+      height: 32px;
+    }
+  }
+
+  /* ── Small mobile (iPhone SE → iPhone 14) ── */
+  @media (max-width: 480px) {
+    .hero {
+      padding-top: calc(env(safe-area-inset-top, 0px) + 5rem);
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 3.5rem);
+    }
+
+    .hero__content {
+      padding-inline: 1.25rem;
+    }
+
+    .hero__title {
+      font-size: clamp(2rem, 8vw, 2.8rem);
+      line-height: 0.95;
+    }
+
+    .hero__subtitle {
+      max-width: 92%;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero__cta {
+      min-height: 52px;
+      padding: 0.9rem 1.75rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
     }
 
     .hero__scroll {
@@ -176,13 +247,21 @@
     }
   }
 
+  /* ── Tiny screens (iPhone SE, Galaxy S8) ── */
   @media (max-width: 360px) {
     .hero__title {
-      font-size: 1.8rem;
+      font-size: 1.75rem;
+      letter-spacing: -0.035em;
     }
 
     .hero__subtitle {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
+      max-width: 100%;
+    }
+
+    .hero__cta {
+      min-height: 48px;
+      padding: 0.75rem 1.5rem;
     }
   }
 </style>

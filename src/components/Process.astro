@@ -3,78 +3,75 @@ const steps = [
   {
     num: '01',
     title: 'Descubrimiento',
-    desc: 'Entendemos tu negocio, tus usuarios y tus objetivos. Definimos el alcance y la estrategia.',
-    icon: 'M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z',
+    desc: 'Entendemos tu negocio a nivel estructural, perfilamos a tus usuarios y definimos objetivos claros.',
+    accent: 'var(--canary-yellow)',
   },
   {
     num: '02',
     title: 'Diseño',
-    desc: 'Prototipamos soluciones centradas en el usuario con interfaces intuitivas y arquitectura sólida.',
-    icon: 'M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42',
+    desc: 'Prototipamos soluciones de alta fidelidad, con foco absoluto en la experiencia y estética visual.',
+    accent: 'var(--berry-crush)',
   },
   {
     num: '03',
     title: 'Desarrollo',
-    desc: 'Construimos con tecnología moderna, código limpio y entregas iterativas que puedes ver en tiempo real.',
-    icon: 'M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5',
+    desc: 'Construimos la arquitectura con tecnología moderna, código limpio y entregas iterativas ágiles.',
+    accent: 'var(--muted-teal)',
   },
   {
     num: '04',
     title: 'Lanzamiento',
-    desc: 'Desplegamos, monitoreamos y optimizamos. Tu proyecto vive y evoluciona con tu negocio.',
-    icon: 'M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z',
+    desc: 'Desplegamos en entornos seguros, monitoreamos métricas en vivo y optimizamos post-lanzamiento.',
+    accent: 'var(--heading-light)',
   },
-];
-
-const accentColors = [
-  'var(--canary-yellow)',
-  'var(--canary-yellow)',
-  'var(--canary-yellow)',
-  'var(--canary-yellow)',
 ];
 ---
 
-<section class="process section" id="proceso">
-  <div class="container">
-    <!-- This whole pinned area includes header + deck -->
-    <div class="process__pinned">
-      <div class="process__header">
-        <span class="label process__label">Cómo trabajamos</span>
+<section class="process section--railed" id="proceso">
+  <div class="process__inner">
+    <!-- Header -->
+    <div class="process__header">
+      <div class="process__header-left">
+        <span class="label process__label">[ Metodología ]</span>
         <h2 class="process__title">
           <span class="process__title-line">Nuestro</span>
-          <span class="process__title-line"><em>proceso</em></span>
+          <span class="process__title-line"><em>proceso.</em></span>
         </h2>
       </div>
+      <p class="process__header-desc">
+        Un ciclo iterativo diseñado para reducir fricción, maximizar calidad y asegurar el impacto comercial.
+      </p>
+    </div>
 
-      <!-- Deck area — cards stacked in same spot -->
-      <div class="process__deck">
-        <div class="process__deck-inner">
-          {
-            steps.map((step, i) => (
-              <div
-                class="process__card"
-                data-card-index={i}
-                style={`--card-accent: ${accentColors[i]}; --card-index: ${i}; --total-cards: ${steps.length};`}
-              >
-                <div class="process__card-inner">
-                  <div class="process__card-top">
-                    <span class="process__card-num mono">{step.num}</span>
-                    <div class="process__card-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" width="28" height="28">
-                        <path stroke-linecap="round" stroke-linejoin="round" d={step.icon} />
-                      </svg>
-                    </div>
-                  </div>
-                  <div class="process__card-body">
-                    <h3 class="process__card-title">{step.title}</h3>
-                    <p class="process__card-desc">{step.desc}</p>
-                  </div>
-                  <div class="process__card-accent-line" aria-hidden="true" />
-                </div>
+    <!-- Background text -->
+    <div class="process__bg-text" aria-hidden="true">FLOW</div>
+
+    <!-- Timeline -->
+    <div class="process__timeline">
+      <svg class="process__path" aria-hidden="true">
+        <path class="process__path-line" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="6 5" />
+      </svg>
+
+      <div class="process__steps">
+        {
+          steps.map((step, i) => (
+            <div
+              class={`process__step ${i % 2 !== 0 ? 'process__step--offset' : ''}`}
+              data-step-index={i}
+              style={`--step-accent: ${step.accent};`}
+            >
+              <div class="process__node" aria-hidden="true">
+                <div class="process__node-dot"></div>
               </div>
-            ))
-          }
-        </div>
+              <div class="process__step-content">
+                <span class="process__step-num">{step.num}</span>
+                <h3 class="process__step-title">{step.title}</h3>
+                <p class="process__step-desc">{step.desc}</p>
+              </div>
+              <div class="process__step-line" aria-hidden="true"></div>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>
@@ -83,258 +80,352 @@ const accentColors = [
 <style>
   .process {
     position: relative;
-    padding-top: var(--space-2xl);
-    padding-bottom: 0;
+    padding-block: var(--space-2xl);
+    overflow: hidden;
   }
 
-  /* Pinned wrapper — full viewport, header + deck stacked */
-  .process__pinned {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    padding-top: clamp(5rem, 8vw, 6.5rem);
-    overflow: visible;
-  }
-
-  /* Header — stays at top when pinned */
-  .process__header {
-    flex-shrink: 0;
-    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  .process__inner {
+    padding-inline: var(--container-padding);
     position: relative;
-    z-index: 10;
+  }
+
+  /* Background decorative text */
+  .process__bg-text {
+    position: absolute;
+    right: -5%;
+    top: 0;
+    font-family: 'Syne Variable', sans-serif;
+    font-weight: 800;
+    font-size: clamp(8rem, 20vw, 18rem);
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.02);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Header */
+  .process__header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: clamp(4rem, 10vw, 8rem);
+    position: relative;
+    z-index: 2;
   }
 
   .process__label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: var(--space-md);
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  .process__label::before {
+    content: '';
     display: block;
-    margin-bottom: var(--space-sm);
+    width: 2rem;
+    height: 1px;
+    background: var(--berry-crush);
   }
 
   .process__title {
-    font-size: clamp(2.5rem, 7vw, 6rem);
-    line-height: 1;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 1.05;
     letter-spacing: -0.03em;
+    font-weight: 800;
   }
 
   .process__title-line {
     display: block;
+    opacity: 0;
+    transform: translateY(20px);
   }
 
   .process__title em {
     font-style: italic;
     color: var(--canary-yellow);
-    font-weight: 700;
+    font-weight: 400;
+    font-family: 'Outfit Variable', sans-serif;
   }
 
-  /* Deck — fills remaining space, cards centered within */
-  .process__deck {
+  .process__header-desc {
+    max-width: 340px;
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    line-height: 1.7;
+    color: var(--muted-teal);
+    font-weight: 350;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 1.5rem;
+    padding-block: 0.5rem;
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  /* Timeline container */
+  .process__timeline {
     position: relative;
-    flex: 1;
-    min-height: 0;
   }
 
-  .process__deck-inner {
-    position: relative;
-    width: 100%;
-    max-width: 640px;
-    margin-inline: auto;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  /* All cards stacked absolutely in the same position */
-  .process__card {
+  /* SVG path connecting dots */
+  .process__path {
     position: absolute;
+    top: 0;
     left: 0;
-    right: 0;
-    will-change: transform, opacity;
-    transform-origin: center center;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: visible;
   }
 
-  .process__card-inner {
+  /* Steps grid */
+  .process__steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.5rem, 3vw, 2rem);
+    padding-top: 2rem;
+  }
+
+  /* Each step */
+  .process__step {
     position: relative;
-    background: rgb(3, 42, 54);
-    border: 1px solid var(--glass-border);
-    border-radius: 20px;
-    padding: clamp(2rem, 4vw, 3rem);
-    overflow: hidden;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
-    transition:
-      border-color 0.5s ease,
-      box-shadow 0.5s ease;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(30px);
   }
 
-  .process__card:hover .process__card-inner {
-    border-color: rgba(255, 255, 255, 0.12);
-    box-shadow:
-      0 20px 60px rgba(0, 0, 0, 0.35),
-      0 0 0 1px rgba(255, 255, 255, 0.05);
+  .process__step--offset {
+    margin-top: 3rem;
   }
 
-  /* Top row: number + icon */
-  .process__card-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  /* Node dot on the horizon line */
+  .process__node {
+    position: absolute;
+    top: -2rem;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 3;
   }
 
-  .process__card-num {
-    font-size: clamp(3.5rem, 7vw, 5.5rem);
+  .process__node-dot {
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 50%;
+    background: var(--muted-teal);
+    border: 2px solid var(--dark-teal);
+    transition: background 0.3s ease,
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+  }
+
+  .process__step:hover .process__node-dot {
+    background: var(--canary-yellow);
+    transform: scale(1.3);
+    box-shadow: 0 0 20px rgba(237, 240, 96, 0.4);
+  }
+
+  /* Step content */
+  .process__step-content {
+    position: relative;
+  }
+
+  .process__step-num {
+    display: block;
+    font-family: 'Syne Variable', sans-serif;
     font-weight: 800;
+    font-size: clamp(3.5rem, 6vw, 4.5rem);
     line-height: 1;
-    color: var(--heading-light);
-    opacity: 0.06;
-    transition: opacity 0.6s ease, color 0.6s ease;
+    -webkit-text-stroke: 1.5px rgba(237, 240, 96, 0.25);
+    color: transparent;
+    margin-bottom: 1.5rem;
+    transition: -webkit-text-stroke 0.4s ease,
+                color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.5s ease;
   }
 
-  .process__card:hover .process__card-num {
-    opacity: 0.2;
-    color: var(--card-accent);
+  .process__step:hover .process__step-num {
+    -webkit-text-stroke: 0px transparent;
+    color: var(--canary-yellow);
+    transform: translateX(8px);
   }
 
-  .process__card-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    border: 1px solid var(--glass-border);
-    background: rgba(255, 255, 255, 0.03);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--card-accent);
-    opacity: 0.5;
-    transition: opacity 0.5s ease, border-color 0.5s ease, background 0.5s ease;
-  }
-
-  .process__card:hover .process__card-icon {
-    opacity: 1;
-    border-color: rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  /* Body */
-  .process__card-title {
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  .process__step-title {
+    font-size: clamp(1.3rem, 2vw, 1.75rem);
     font-weight: 700;
+    color: var(--heading-light);
     margin-bottom: 0.75rem;
     letter-spacing: -0.01em;
     transition: color 0.4s ease;
   }
 
-  .process__card:hover .process__card-title {
-    color: var(--card-accent);
+  .process__step:hover .process__step-title {
+    color: var(--canary-yellow);
   }
 
-  .process__card-desc {
-    font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+  .process__step-desc {
+    font-size: clamp(0.9rem, 1.1vw, 1rem);
     line-height: 1.7;
     color: var(--muted-teal);
     font-weight: 350;
-    max-width: 480px;
   }
 
-  /* Bottom accent line */
-  .process__card-accent-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--card-accent),
-      transparent
-    );
-    opacity: 0;
-    transform: scaleX(0);
-    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Mobile vertical line accent */
+  .process__step-line {
+    display: none;
   }
 
-  .process__card:hover .process__card-accent-line {
-    opacity: 0.5;
-    transform: scaleX(1);
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .process__title {
-      font-size: clamp(2rem, 10vw, 3.5rem);
+  /* Responsive: Tablet */
+  @media (max-width: 1024px) {
+    .process__steps {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem 2rem;
     }
 
-    .process__deck-inner {
+    .process__step--offset {
+      margin-top: 0;
+    }
+
+    .process__path {
+      display: none;
+    }
+
+    .process__node {
+      display: none;
+    }
+
+    .process__step-line {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -1px;
+      width: 2px;
+      height: 0;
+      background: var(--canary-yellow);
+      transition: height 0.7s ease-out;
+      z-index: 1;
+    }
+
+    .process__step {
+      padding-left: 1.5rem;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .process__step:hover .process__step-line {
+      height: 100%;
+    }
+  }
+
+  /* Responsive: Mobile */
+  @media (max-width: 768px) {
+    .process {
+      border: none;
+    }
+
+    .process__header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .process__header-desc {
+      border-left: none;
+      padding-left: 0;
       max-width: 100%;
     }
 
-    .process__card-inner {
-      border-radius: 16px;
-      padding: clamp(1.5rem, 4vw, 2rem);
+    .process__title {
+      font-size: clamp(2.2rem, 8.5vw, 3.5rem);
     }
 
-    .process__card-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+    .process__steps {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
     }
 
-    .process__card-icon svg {
-      width: 22px;
-      height: 22px;
-    }
-
-    .process__card-num {
-      font-size: 3rem;
+    .process__bg-text {
+      font-size: 6rem;
+      right: -10%;
     }
   }
 
   @media (max-width: 480px) {
-    .process__pinned {
-      padding-top: clamp(4rem, 6vw, 5rem);
+    .process__step-num {
+      font-size: 3rem;
     }
 
-    .process__card-inner {
-      padding: 1.25rem;
-      border-radius: 14px;
+    .process__step-title {
+      font-size: 1.2rem;
     }
 
-    .process__card-top {
-      margin-bottom: 1rem;
-    }
-
-    .process__card-num {
-      font-size: 2.5rem;
-    }
-
-    .process__card-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-    }
-
-    .process__card-icon svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    .process__card-title {
-      font-size: 1.25rem;
-    }
-
-    .process__card-desc {
+    .process__step-desc {
       font-size: 0.85rem;
-      line-height: 1.5;
-    }
-  }
-
-  @media (max-width: 360px) {
-    .process__card-title {
-      font-size: 1.1rem;
+      line-height: 1.6;
     }
 
-    .process__card-desc {
-      font-size: 0.8rem;
+    .process__bg-text {
+      display: none;
     }
   }
 </style>
+
+<script>
+  function drawProcessPath() {
+    const timeline = document.querySelector<HTMLElement>('.process__timeline');
+    const stepsContainer = document.querySelector<HTMLElement>('.process__steps');
+    const pathLine = document.querySelector('.process__path-line');
+    const steps = document.querySelectorAll<HTMLElement>('.process__step');
+
+    if (!timeline || !stepsContainer || !pathLine || steps.length < 2) return;
+    if (window.innerWidth <= 1024) return;
+
+    const timelineRect = timeline.getBoundingClientRect();
+    const points: { x: number; y: number }[] = [];
+
+    steps.forEach((step) => {
+      const dot = step.querySelector<HTMLElement>('.process__node-dot');
+      if (!dot) return;
+
+      // Use getBoundingClientRect for accurate visual positions,
+      // but compensate for GSAP transforms on the step
+      const matrix = new DOMMatrix(getComputedStyle(step).transform);
+      const dotRect = dot.getBoundingClientRect();
+
+      points.push({
+        x: dotRect.left + dotRect.width / 2 - timelineRect.left - matrix.e,
+        y: dotRect.top + dotRect.height / 2 - timelineRect.top - matrix.f,
+      });
+    });
+
+    if (points.length < 2) return;
+
+    // Add an extra point past the last dot, curving back to the Y of the first dot
+    const last = points[points.length - 1];
+    const first = points[0];
+    const extraX = timelineRect.width;
+    points.push({ x: extraX, y: first.y });
+
+    // Build a smooth cubic bezier path through all points
+    let d = `M ${points[0].x} ${points[0].y}`;
+    for (let i = 0; i < points.length - 1; i++) {
+      const curr = points[i];
+      const next = points[i + 1];
+      const midX = (curr.x + next.x) / 2;
+      d += ` C ${midX} ${curr.y}, ${midX} ${next.y}, ${next.x} ${next.y}`;
+    }
+
+    pathLine.setAttribute('d', d);
+  }
+
+  // Draw immediately and on resize
+  drawProcessPath();
+  window.addEventListener('load', drawProcessPath);
+  window.addEventListener('resize', drawProcessPath);
+
+  // Redraw when the timeline is observed to handle layout shifts
+  const timeline = document.querySelector('.process__timeline');
+  if (timeline) {
+    new ResizeObserver(drawProcessPath).observe(timeline);
+  }
+</script>

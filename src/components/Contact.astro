@@ -1,20 +1,21 @@
 ---
 ---
 
-<section class="contact section" id="contacto">
-  <div class="container">
-    <div class="contact__grid">
-      <div class="contact__content reveal">
-        <span class="label">Contacto</span>
-        <h2>¿Tienes un proyecto<br />en mente?</h2>
-        <p>
-          Cuéntanos tu idea y diseñamos juntos la solución perfecta.
-        </p>
-        <a href="mailto:hola@benbia.dev" class="btn-primary contact__cta">
-          Contactate
-          <span class="arrow">&rarr;</span>
-        </a>
-      </div>
+<section class="contact section--railed" id="contacto">
+  <div class="contact__inner">
+    <!-- Berry glow behind card -->
+    <div class="contact__glow" aria-hidden="true"></div>
+
+    <div class="contact__card reveal">
+      <span class="label contact__label">[ Contacto ]</span>
+      <h2>¿Tienes un proyecto<br />en mente?</h2>
+      <p>
+        Cuéntanos tu idea y diseñamos juntos la solución perfecta.
+      </p>
+      <a href="mailto:hola@benbia.dev" class="btn-primary contact__cta">
+        Contactate
+        <span class="arrow">&rarr;</span>
+      </a>
     </div>
   </div>
 </section>
@@ -22,69 +23,97 @@
 <style>
   .contact {
     position: relative;
+    padding-block: var(--space-2xl);
     overflow: hidden;
+    border-top: 1px solid var(--glass-border);
   }
 
-  /* Warm gradient overlay */
-  .contact::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, rgba(170, 68, 101, 0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .contact__grid {
+  .contact__inner {
+    position: relative;
+    padding-inline: var(--container-padding);
     display: flex;
     justify-content: center;
-    position: relative;
-    z-index: 1;
   }
 
-  .contact__content {
+  .contact__glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(80vw, 500px);
+    height: min(80vw, 500px);
+    border-radius: 50%;
+    background: var(--berry-crush);
+    opacity: 0.2;
+    filter: blur(100px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .contact__card {
+    position: relative;
+    z-index: 1;
     text-align: center;
-    max-width: 560px;
-    padding: var(--space-xl) var(--space-lg);
+    max-width: 640px;
+    width: 100%;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 4vw, 3.5rem);
     background: var(--glass-white);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 2.5rem;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
   }
 
-  .contact__content h2 {
-    margin-bottom: var(--space-md);
-    color: var(--heading-light);
-  }
-
-  .contact__content .label {
+  .contact__label {
     display: block;
     margin-bottom: var(--space-sm);
-    opacity: 0.6;
+    color: var(--canary-yellow);
   }
 
-  .contact__content p {
-    color: var(--muted-teal);
+  .contact__card h2 {
+    margin-bottom: var(--space-md);
+    color: var(--heading-light);
+    letter-spacing: -0.02em;
+  }
+
+  .contact__card p {
+    color: rgba(255, 255, 255, 0.6);
     margin-bottom: var(--space-lg);
     font-weight: 350;
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
   }
 
   .contact__cta {
     display: inline-flex;
     text-decoration: none;
+    font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+    padding: 1.15rem 2.5rem;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    .contact {
+      border-left: none;
+      border-right: none;
+    }
+
+    .contact__card h2 {
+      font-size: clamp(2.2rem, 8.5vw, 3.5rem);
+    }
   }
 
   @media (max-width: 480px) {
-    .contact__content {
-      padding: 1.5rem 1.25rem;
-      border-radius: 18px;
+    .contact__card {
+      padding: 2rem 1.5rem;
+      border-radius: 1.5rem;
     }
 
-    .contact__content h2 {
-      font-size: 1.4rem;
+    .contact__card h2 {
+      font-size: clamp(2rem, 8vw, 2.8rem);
     }
 
-    .contact__content p {
+    .contact__card p {
       font-size: 0.9rem;
       margin-bottom: 1.5rem;
     }
@@ -92,6 +121,7 @@
     .contact__cta {
       width: 100%;
       justify-content: center;
+      padding: 1rem 2rem;
     }
   }
 </style>

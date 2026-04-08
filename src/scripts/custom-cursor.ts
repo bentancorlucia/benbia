@@ -1,4 +1,3 @@
-// Skip cursor, rAF loop, and hero text splitting on touch devices
 const hasHover = window.matchMedia('(hover: hover)').matches;
 const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -19,7 +18,6 @@ if (hasHover && !prefersReduced) {
   });
 
   function animateCursor() {
-    // Smooth lerp
     currentX += (cursorX - currentX) * 0.15;
     currentY += (cursorY - currentY) * 0.15;
     cursor.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
@@ -27,7 +25,6 @@ if (hasHover && !prefersReduced) {
   }
   animateCursor();
 
-  // Scale up on interactive elements
   const interactiveSelectors = 'a, button, [role="button"], input, textarea, select';
   document.addEventListener('mouseover', (e) => {
     if ((e.target as Element).closest(interactiveSelectors)) {
@@ -40,7 +37,6 @@ if (hasHover && !prefersReduced) {
     }
   });
 
-  // Hide when mouse leaves window
   document.addEventListener('mouseleave', () => {
     cursor.style.opacity = '0';
   });
@@ -48,10 +44,9 @@ if (hasHover && !prefersReduced) {
     cursor.style.opacity = '1';
   });
 
-  // === Hero Letter Split & Fun Hover ===
+  // === Hero Letter Split & Hover ===
   function splitTextIntoChars(text: string): DocumentFragment {
     const fragment = document.createDocumentFragment();
-    // Split by spaces to preserve word boundaries
     const words = text.split(/( )/);
     words.forEach((word) => {
       if (word === ' ') {
@@ -59,7 +54,6 @@ if (hasHover && !prefersReduced) {
         space.innerHTML = '&nbsp;';
         fragment.appendChild(space);
       } else if (word.length > 0) {
-        // Wrap each word in a nowrap span so it doesn't break mid-word
         const wordWrap = document.createElement('span');
         wordWrap.style.whiteSpace = 'nowrap';
         wordWrap.style.display = 'inline';
@@ -90,7 +84,6 @@ if (hasHover && !prefersReduced) {
   const heroLines = document.querySelectorAll('.hero__line');
   heroLines.forEach((line) => splitTextNodes(line));
 
-  // Movement-only hover effects on hero chars
   const heroChars = document.querySelectorAll('.hero__char');
 
   heroChars.forEach((char) => {

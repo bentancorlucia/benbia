@@ -19,95 +19,133 @@ const projects = [
 ];
 ---
 
-<section class="portfolio section" id="trabajos">
-  <div class="container">
-    <div class="portfolio__header reveal">
-      <span class="label">Portfolio</span>
-      <h2>Trabajos realizados</h2>
-    </div>
+<section class="portfolio" id="trabajos">
+  <!-- Ambient glow -->
+  <div class="portfolio__glow portfolio__glow--1"></div>
+  <div class="portfolio__glow portfolio__glow--2"></div>
 
-    <div class="carousel" data-carousel>
-      <div class="carousel__viewport">
-        {projects.map((project, i) => (
-          <div class={`carousel__slide ${i === 0 ? 'is-active' : ''}`} data-slide={i}>
-            <div class="slide__inner">
-              <div class="slide__mockups">
-                <div class="mockup-desktop">
-                  <div class="mockup-desktop__bar">
-                    <span class="dot dot--red"></span>
-                    <span class="dot dot--yellow"></span>
-                    <span class="dot dot--green"></span>
-                    <span class="mockup-desktop__url mono">{project.url}</span>
-                  </div>
-                  <div class="mockup-desktop__screen">
-                    <img src={project.desktopImg} alt={`${project.name} desktop`} loading="lazy" />
-                  </div>
+  <div class="portfolio__header">
+    <div class="portfolio__header-left">
+      <div class="portfolio__label-row">
+        <span class="label">[ Portfolio ]</span>
+        <div class="portfolio__label-line"></div>
+      </div>
+      <h2>Trabajos<br><span class="portfolio__heading-muted">realizados<span class="portfolio__heading-dot">.</span></span></h2>
+    </div>
+    <div class="portfolio__nav" data-carousel-nav>
+      <button class="portfolio__arrow" data-prev aria-label="Anterior">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="portfolio__arrow" data-next aria-label="Siguiente">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="portfolio__track" data-carousel>
+    {projects.map((project, i) => (
+      <div class="portfolio__slide reveal" data-slide={i}>
+        <div class="portfolio__card glass-card">
+          <!-- Desktop mockup -->
+          <div class="portfolio__mockup">
+            <div class="portfolio__mockup-container">
+              <div class="mockup-desktop">
+                <div class="mockup-desktop__bar">
+                  <span class="dot dot--red"></span>
+                  <span class="dot dot--yellow"></span>
+                  <span class="dot dot--green"></span>
+                  <span class="mockup-desktop__url mono">{project.url}</span>
                 </div>
-                {project.icon && (
-                  <div class="mockup-icon">
-                    <img src={project.icon} alt={`${project.name} icon`} loading="lazy" />
-                  </div>
-                )}
-              </div>
-              <div class="slide__info">
-                <h3>{project.name}</h3>
-                <p>{project.description}</p>
-                <div class="slide__tags">
-                  {project.tags.map((tag) => (
-                    <span class="slide__tag mono">{tag}</span>
-                  ))}
+                <div class="mockup-desktop__screen">
+                  <img src={project.desktopImg} alt={`${project.name} desktop`} loading="lazy" />
+                  <div class="mockup-desktop__fade"></div>
                 </div>
               </div>
             </div>
           </div>
-        ))}
-      </div>
 
-      <div class="carousel__nav">
-        <button class="carousel__arrow" data-prev aria-label="Anterior">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <div class="carousel__indicators">
-          {projects.map((_, i) => (
-            <button class={`carousel__indicator ${i === 0 ? 'is-active' : ''}`} data-goto={i} aria-label={`Proyecto ${i + 1}`}></button>
-          ))}
+          <!-- Info -->
+          <div class="portfolio__info">
+            <div class="portfolio__info-inner">
+              <div class="portfolio__info-glow"></div>
+              <div class="portfolio__info-top">
+                {project.icon && (
+                  <img src={project.icon} alt={`${project.name} icon`} class="portfolio__icon" loading="lazy" />
+                )}
+                <div class="portfolio__info-title">
+                  <h3>{project.name}</h3>
+                  <span class="portfolio__subtitle mono">{project.url}</span>
+                </div>
+              </div>
+              <p>{project.description}</p>
+              <div class="portfolio__tags">
+                {project.tags.map((tag, ti) => (
+                  <span class={`portfolio__tag mono ${ti === 0 ? 'portfolio__tag--accent' : ''}`}>{tag}</span>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-        <button class="carousel__arrow" data-next aria-label="Siguiente">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
       </div>
-    </div>
+    ))}
+  </div>
+
+  <!-- Dots -->
+  <div class="portfolio__dots">
+    {projects.map((_, i) => (
+      <button
+        class={`portfolio__dot ${i === 0 ? 'is-active' : ''}`}
+        data-goto={i}
+        aria-label={`Proyecto ${i + 1}`}
+      />
+    ))}
   </div>
 </section>
 
 <script>
   function initCarousel() {
-    const carousel = document.querySelector('[data-carousel]');
-    if (!carousel) return;
+    const track = document.querySelector('[data-carousel]') as HTMLElement;
+    if (!track) return;
 
-    const slides = carousel.querySelectorAll('[data-slide]') as NodeListOf<HTMLElement>;
-    const indicators = carousel.querySelectorAll('[data-goto]') as NodeListOf<HTMLElement>;
-    const prevBtn = carousel.querySelector('[data-prev]') as HTMLElement;
-    const nextBtn = carousel.querySelector('[data-next]') as HTMLElement;
+    const slides = track.querySelectorAll('[data-slide]') as NodeListOf<HTMLElement>;
+    const dots = document.querySelectorAll('[data-goto]') as NodeListOf<HTMLElement>;
+    const prevBtn = document.querySelector('[data-prev]') as HTMLElement;
+    const nextBtn = document.querySelector('[data-next]') as HTMLElement;
     const total = slides.length;
     let current = 0;
 
     function goTo(i: number) {
       current = ((i % total) + total) % total;
-      slides.forEach((s, idx) => s.classList.toggle('is-active', idx === current));
-      indicators.forEach((d, idx) => d.classList.toggle('is-active', idx === current));
+      const slide = slides[current];
+      if (slide) {
+        slide.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+      dots.forEach((d, idx) => d.classList.toggle('is-active', idx === current));
     }
 
     prevBtn?.addEventListener('click', () => goTo(current - 1));
     nextBtn?.addEventListener('click', () => goTo(current + 1));
-    indicators.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+
+    // Update dots on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const idx = Number((entry.target as HTMLElement).dataset.slide);
+          current = idx;
+          dots.forEach((d, di) => d.classList.toggle('is-active', di === idx));
+        }
+      });
+    }, { root: track, threshold: 0.6 });
+
+    slides.forEach((s) => observer.observe(s));
 
     // Swipe
     let x0: number | null = null;
-    carousel.addEventListener('touchstart', (e: Event) => { x0 = (e as TouchEvent).touches[0].clientX; }, { passive: true });
-    carousel.addEventListener('touchend', (e: Event) => {
+    track.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', (e) => {
       if (x0 === null) return;
-      const dx = x0 - (e as TouchEvent).changedTouches[0].clientX;
+      const dx = x0 - e.changedTouches[0].clientX;
       if (Math.abs(dx) > 50) goTo(current + (dx > 0 ? 1 : -1));
       x0 = null;
     });
@@ -120,96 +158,213 @@ const projects = [
 <style>
   .portfolio {
     position: relative;
+    padding-block: var(--space-2xl);
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(2px);
+    overflow-x: clip;
+    overflow-y: visible;
   }
 
-  .portfolio::before {
-    content: '';
+  /* Ambient glows */
+  .portfolio__glow {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--glass-border), transparent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(120px);
+  }
+
+  .portfolio__glow--1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(170, 68, 101, 0.25) 0%, transparent 70%);
+    top: -15%;
+    right: -5%;
+  }
+
+  .portfolio__glow--2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(237, 240, 96, 0.1) 0%, transparent 70%);
+    bottom: -10%;
+    left: 5%;
   }
 
   .portfolio__header {
-    text-align: center;
+    position: relative;
+    z-index: 2;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-padding);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     margin-bottom: var(--space-lg);
   }
 
-  .portfolio__header .label {
-    display: block;
+  .portfolio__label-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: var(--space-sm);
   }
 
-  .portfolio__header h2 {
+  .portfolio__label-row .label {
+    color: var(--canary-yellow);
+    flex-shrink: 0;
+  }
+
+  .portfolio__label-line {
+    height: 1px;
+    flex-grow: 1;
+    background: linear-gradient(to right, rgba(237, 240, 96, 0.3), transparent);
+  }
+
+  .portfolio__header-left h2 {
     margin-bottom: 0;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
   }
 
-  /* Carousel */
-  .carousel__viewport {
-    position: relative;
-    min-height: 420px;
+  .portfolio__heading-muted {
+    color: var(--muted-teal);
   }
 
-  .carousel__slide {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(12px) scale(0.98);
-    transition:
-      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-      visibility 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  .portfolio__heading-dot {
+    color: var(--berry-crush);
   }
 
-  .carousel__slide.is-active {
-    position: relative;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
+  .portfolio__nav {
+    display: flex;
+    gap: 0.75rem;
   }
 
-  .slide__inner {
+  .portfolio__arrow {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--heading-light);
     display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
-    gap: var(--space-lg);
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .portfolio__arrow:hover {
+    background: var(--heading-light);
+    color: var(--dark-teal);
+    transform: scale(1.05);
+    border-color: transparent;
+  }
+
+  .portfolio__arrow:active {
+    transform: scale(0.95);
+    transition-duration: 0.1s;
+  }
+
+  /* Horizontal scroll track */
+  .portfolio__track {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-inline: max(var(--container-padding), calc((100vw - var(--container-max)) / 2 + var(--container-padding)));
+    padding-bottom: 4rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .portfolio__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .portfolio__slide {
+    scroll-snap-align: center;
+    flex-shrink: 0;
+    width: min(85vw, 960px);
+  }
+
+  .portfolio__card {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+      0 30px 60px -15px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    transition: box-shadow 0.6s ease;
+  }
+
+  .portfolio__card:hover {
+    box-shadow:
+      0 40px 80px -20px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  /* Desktop mockup — hero element */
+  .portfolio__mockup {
+    flex: 1.2;
+    position: relative;
+    background: rgba(0, 0, 0, 0.3);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+  }
+
+  .portfolio__mockup-container {
+    perspective: 2000px;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    height: 100%;
+    display: flex;
     align-items: center;
   }
 
-  /* Device Mockups */
-  .slide__mockups {
-    position: relative;
-  }
-
   .mockup-desktop {
-    background: rgba(11, 30, 38, 0.8);
-    border-radius: 12px;
+    background: #0a0a0a;
+    border-radius: 14px;
     overflow: hidden;
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 40px 80px -20px rgba(0, 0, 0, 0.6),
+      0 0 40px rgba(170, 68, 101, 0.1);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.7s ease;
+    transform-style: preserve-3d;
+    width: 100%;
   }
 
-  .slide__mockups:hover .mockup-desktop {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  .portfolio__mockup-container:hover .mockup-desktop {
+    transform: rotateY(-3deg) rotateX(1.5deg) translateY(-8px);
+    box-shadow:
+      0 50px 100px -20px rgba(0, 0, 0, 0.7),
+      0 0 50px rgba(237, 240, 96, 0.08);
   }
 
   .mockup-desktop__bar {
     display: flex;
     align-items: center;
     gap: 7px;
-    padding: 10px 14px;
-    background: rgba(14, 42, 54, 0.6);
+    padding: 10px 16px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    opacity: 0.7;
+    opacity: 0.75;
   }
   .dot--red { background: #ff5f57; }
   .dot--yellow { background: #ffbd2e; }
@@ -218,14 +373,15 @@ const projects = [
   .mockup-desktop__url {
     margin-left: 8px;
     font-size: 0.6rem;
-    color: var(--muted-teal);
-    opacity: 0.4;
-    background: rgba(107, 171, 144, 0.06);
+    color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.03);
     padding: 3px 12px;
     border-radius: 4px;
+    letter-spacing: 0.05em;
   }
 
   .mockup-desktop__screen {
+    position: relative;
     aspect-ratio: 16 / 10;
     background: rgba(6, 48, 64, 0.5);
     overflow: hidden;
@@ -236,170 +392,293 @@ const projects = [
     height: 100%;
     object-fit: cover;
     object-position: top;
+    opacity: 0.9;
+    transition: opacity 0.5s ease, transform 0.7s ease;
   }
 
-  /* App Icon */
-  .mockup-icon {
+  .portfolio__card:hover .mockup-desktop__screen img {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+
+  .mockup-desktop__fade {
     position: absolute;
-    right: -20px;
-    bottom: -24px;
-    width: 22%;
-    min-width: 90px;
-    max-width: 120px;
-    border-radius: 22px;
-    overflow: hidden;
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to top, #0a0a0a, transparent);
+    opacity: 0.5;
+    pointer-events: none;
   }
 
-  .mockup-icon img {
-    width: 100%;
+  /* Info panel */
+  .portfolio__info {
+    flex: 0.8;
+    display: flex;
+    align-items: center;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .portfolio__info-inner {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    display: block;
-    object-fit: cover;
+    justify-content: center;
   }
 
-  .slide__mockups:hover .mockup-icon {
-    transform: translateY(-4px);
+  .portfolio__info-glow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 150px;
+    height: 150px;
+    background: rgba(237, 240, 96, 0.06);
+    filter: blur(60px);
+    border-radius: 50%;
+    pointer-events: none;
   }
 
-  /* Info */
-  .slide__info h3 {
-    font-size: clamp(1.4rem, 2.5vw, 2rem);
+  .portfolio__info-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     margin-bottom: 0.5rem;
   }
 
-  .slide__info p {
-    opacity: 0.75;
-    line-height: 1.7;
-    margin-bottom: 1rem;
-    max-width: 380px;
-    font-weight: 350;
+  .portfolio__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    object-fit: cover;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   }
 
-  .slide__tags {
+  .portfolio__info-title {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .portfolio__info h3 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .portfolio__subtitle {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--berry-crush);
+    margin-top: 0.25rem;
+  }
+
+  .portfolio__info p {
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+    font-weight: 350;
+    font-size: 0.95rem;
+  }
+
+  .portfolio__tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-top: auto;
   }
 
-  .slide__tag {
+  .portfolio__tag {
     font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    padding: 4px 10px;
-    border-radius: 100px;
-    border: 1px solid var(--glass-border);
-    color: var(--muted-teal);
-    transition:
-      border-color 0.4s ease,
-      background-color 0.4s ease;
+    padding: 6px 14px;
+    border-radius: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.6);
+    transition: border-color 0.4s ease, background 0.4s ease;
   }
 
-  .slide__tag:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    background-color: var(--glass-white);
+  .portfolio__tag--accent {
+    color: var(--dark-teal);
+    background: var(--canary-yellow);
+    border-color: var(--canary-yellow);
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
   }
 
-  /* Nav */
-  .carousel__nav {
+  .portfolio__tag--accent::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    100% { left: 200%; }
+  }
+
+  .portfolio__tag:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  /* Dots */
+  .portfolio__dots {
+    position: relative;
+    z-index: 2;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 1.25rem;
-    margin-top: var(--space-lg);
-  }
-
-  .carousel__arrow {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid var(--glass-border);
-    background: var(--glass-white);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: var(--muted-teal);
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    transition:
-      border-color 0.4s ease,
-      color 0.4s ease,
-      transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-      background-color 0.4s ease;
-  }
-
-  .carousel__arrow:hover {
-    border-color: rgba(255, 255, 255, 0.15);
-    color: var(--heading-light);
-    background: var(--glass-white-10);
-    transform: scale(1.08);
-  }
-
-  .carousel__arrow:active {
-    transform: scale(0.95);
-    transition-duration: 0.1s;
-  }
-
-  .carousel__indicators {
-    display: flex;
     gap: 8px;
+    margin-top: var(--space-md);
   }
 
-  .carousel__indicator {
+  .portfolio__dot {
     width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1px solid var(--glass-border);
-    background: transparent;
+    height: 6px;
+    border-radius: 3px;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
     cursor: pointer;
     padding: 0;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .carousel__indicator:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    transform: scale(1.2);
+  .portfolio__dot:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scaleY(1.2);
   }
 
-  .carousel__indicator.is-active {
-    background: var(--muted-teal);
-    border-color: var(--muted-teal);
-    transform: scale(1.3);
-    box-shadow: 0 0 12px rgba(107, 171, 144, 0.25);
+  .portfolio__dot.is-active {
+    width: 28px;
+    background: var(--canary-yellow);
+    box-shadow: 0 0 12px rgba(237, 240, 96, 0.3);
   }
 
-  /* Responsive */
+  /* ========================= */
+  /* Responsive — Tablet       */
+  /* ========================= */
+  @media (max-width: 900px) {
+    .portfolio__card {
+      flex-direction: column;
+    }
+
+    .portfolio__mockup {
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .portfolio__slide {
+      width: 88vw;
+    }
+
+    .portfolio__info {
+      padding: 1.5rem;
+    }
+  }
+
+  /* ========================= */
+  /* Responsive — Mobile       */
+  /* ========================= */
   @media (max-width: 768px) {
-    .slide__inner {
-      grid-template-columns: 1fr;
+    .portfolio {
+      padding-block: var(--space-xl);
+    }
+
+    .portfolio__header-left h2 {
+      font-size: clamp(2.2rem, 8.5vw, 3.5rem);
+    }
+
+    .portfolio__glow--1 {
+      width: 300px;
+      height: 300px;
+      right: -80px;
+    }
+
+    .portfolio__glow--2 {
+      width: 250px;
+      height: 250px;
+    }
+
+    .portfolio__header {
+      flex-direction: column;
+      align-items: flex-start;
       gap: 1.5rem;
     }
 
-    .carousel__viewport {
-      min-height: auto;
+    .portfolio__label-line {
+      display: none;
     }
 
-    .mockup-icon {
-      right: 8px;
-      bottom: -12px;
-      min-width: 60px;
-      max-width: 80px;
+    .portfolio__slide {
+      width: 88vw;
     }
 
-    .slide__info p {
-      max-width: 100%;
+    .portfolio__card {
+      flex-direction: column;
+      border-radius: 20px;
+    }
+
+    .portfolio__mockup {
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .portfolio__mockup-container {
+      padding: 1.25rem;
+    }
+
+    .portfolio__mockup-container:hover .mockup-desktop {
+      transform: none;
+    }
+
+    .mockup-desktop {
+      border-radius: 10px;
+    }
+
+    .portfolio__info {
+      padding: 1.5rem;
+    }
+
+    .portfolio__info h3 {
+      font-size: 1.6rem;
+    }
+
+    .portfolio__info p {
       font-size: 0.9rem;
       line-height: 1.6;
     }
 
-    .slide__tags {
-      gap: 0.4rem;
+    .portfolio__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+    }
+
+    .portfolio__arrow {
+      width: 44px;
+      height: 44px;
     }
   }
 
   @media (max-width: 480px) {
+    .portfolio__card {
+      border-radius: 16px;
+    }
+
+    .portfolio__mockup-container {
+      padding: 1rem;
+    }
+
     .mockup-desktop {
       border-radius: 8px;
     }
@@ -418,46 +697,38 @@ const projects = [
       font-size: 0.5rem;
     }
 
-    .mockup-icon {
-      right: 4px;
-      bottom: -8px;
-      min-width: 50px;
-      max-width: 65px;
-      border-radius: 12px;
+    .portfolio__info {
+      padding: 1.25rem;
     }
 
-    .slide__info h3 {
-      font-size: 1.2rem;
+    .portfolio__icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
     }
 
-    .slide__info p {
+    .portfolio__info h3 {
+      font-size: 1.4rem;
+    }
+
+    .portfolio__info p {
       font-size: 0.85rem;
       line-height: 1.5;
     }
 
-    .slide__tag {
+    .portfolio__tag {
       font-size: 0.55rem;
-      padding: 3px 8px;
+      padding: 4px 10px;
     }
 
-    .carousel__nav {
-      margin-top: 1.5rem;
+    .portfolio__arrow {
+      width: 40px;
+      height: 40px;
     }
 
-    .carousel__arrow {
-      width: 36px;
-      height: 36px;
-    }
-
-    .carousel__arrow svg {
+    .portfolio__arrow svg {
       width: 14px;
       height: 14px;
-    }
-  }
-
-  @media (max-width: 360px) {
-    .mockup-icon {
-      display: none;
     }
   }
 </style>

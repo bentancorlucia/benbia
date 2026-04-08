@@ -25,6 +25,7 @@
     position: relative;
     height: 100vh;
     overflow: hidden;
+    background-color: var(--dark-teal);
   }
 
   /* Mesh gradient */
@@ -46,7 +47,7 @@
     top: -15%;
     left: -10%;
     background: radial-gradient(circle, var(--berry-crush) 0%, transparent 70%);
-    opacity: 0.5;
+    opacity: 0.3;
   }
 
   .manifesto__blob--2 {
@@ -55,7 +56,7 @@
     top: 10%;
     right: -5%;
     background: radial-gradient(circle, var(--dark-teal) 0%, transparent 70%);
-    opacity: 0.7;
+    opacity: 0.4;
   }
 
   .manifesto__blob--3 {
@@ -64,7 +65,7 @@
     bottom: -10%;
     left: 10%;
     background: radial-gradient(circle, var(--canary-yellow) 0%, transparent 70%);
-    opacity: 0.3;
+    opacity: 0.15;
   }
 
   .manifesto__blob--4 {
@@ -73,7 +74,7 @@
     bottom: 5%;
     right: -5%;
     background: radial-gradient(circle, var(--muted-teal) 0%, transparent 70%);
-    opacity: 0.35;
+    opacity: 0.2;
   }
 
   /* Noise overlay for texture */
@@ -92,21 +93,25 @@
     z-index: 1;
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
+    text-align: center;
   }
 
   .manifesto__text {
     font-family: 'Syne Variable', sans-serif;
-    font-weight: 400;
-    font-size: clamp(1.5rem, 3vw, 2.75rem);
-    line-height: 1.4;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 4rem);
+    line-height: 1.25;
     color: var(--heading-light);
-    max-width: 100%;
+    max-width: 1000px;
+    letter-spacing: -0.02em;
   }
 
   .manifesto__text em {
     font-style: italic;
-    font-weight: 500;
+    font-weight: 400;
+    font-family: 'Outfit Variable', sans-serif;
   }
 
   .manifesto__word {
@@ -119,41 +124,97 @@
     color: var(--canary-yellow);
   }
 
+  /* ── Tablet / Large mobile ── */
   @media (max-width: 768px) {
+    .manifesto {
+      height: 100svh;
+    }
+
+    .manifesto__inner {
+      padding-inline: 1.5rem;
+      /* Shift optical center slightly up */
+      align-items: center;
+      justify-content: center;
+    }
+
     .manifesto__text {
-      font-size: clamp(1.25rem, 4vw, 2rem);
+      font-size: clamp(1.8rem, 7.5vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      text-align: center;
+      max-width: 100%;
     }
 
+    .manifesto__text em {
+      /* Make the italic accent phrase pop on mobile */
+      font-size: 1.05em;
+    }
+
+    /* Blobs: scale up but reduce blur for performance */
     .manifesto__blob {
-      filter: blur(60px);
+      filter: blur(70px);
     }
 
-    .manifesto__blob--1,
+    .manifesto__blob--1 {
+      width: 90vw;
+      height: 90vw;
+      top: -10%;
+      left: -20%;
+      opacity: 0.35;
+    }
+
+    .manifesto__blob--2 {
+      width: 70vw;
+      height: 70vw;
+      top: 15%;
+      right: -15%;
+      opacity: 0.45;
+    }
+
     .manifesto__blob--3 {
-      width: 80%;
-      height: 80%;
+      width: 80vw;
+      height: 80vw;
+      bottom: -5%;
+      left: 0%;
+      opacity: 0.18;
     }
 
-    .manifesto__blob--2,
     .manifesto__blob--4 {
-      width: 70%;
-      height: 70%;
+      width: 70vw;
+      height: 70vw;
+      bottom: 10%;
+      right: -10%;
+      opacity: 0.22;
     }
   }
 
+  /* ── Small mobile ── */
   @media (max-width: 480px) {
+    .manifesto__inner {
+      padding-inline: 1.25rem;
+    }
+
     .manifesto__text {
-      font-size: clamp(1.1rem, 5.5vw, 1.5rem);
-      line-height: 1.5;
+      font-size: clamp(1.5rem, 7vw, 2.2rem);
+      line-height: 1.2;
+      letter-spacing: -0.025em;
     }
 
     .manifesto__blob {
-      filter: blur(40px);
+      filter: blur(50px);
     }
 
     .manifesto__blob--3,
     .manifesto__blob--4 {
       display: none;
+    }
+  }
+
+  /* ── Tiny screens ── */
+  @media (max-width: 360px) {
+    .manifesto__text {
+      font-size: 1.4rem;
+      line-height: 1.25;
     }
   }
 </style>

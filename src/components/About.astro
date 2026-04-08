@@ -1,21 +1,23 @@
 ---
 ---
 
-<section class="about section" id="nosotros">
-  <div class="container">
+<section class="about section--railed" id="nosotros">
+  <div class="about__inner">
     <div class="about__content reveal">
-      <span class="label">Quiénes somos</span>
-      <h2>Tecnología con propósito</h2>
-      <p>
-        Somos un equipo de desarrolladores, diseñadores y estrategas que
-        creen que el software debe resolver problemas reales. No seguimos
-        tendencias — construimos herramientas que generan impacto.
-      </p>
-      <p>
-        Cada proyecto es una colaboración cercana. Trabajamos como una
-        extensión de tu equipo, con transparencia total y compromiso con
-        la calidad.
-      </p>
+      <span class="label">[ Quiénes somos ]</span>
+      <h2>Tecnología con <span class="text-gradient">propósito</span></h2>
+      <div class="about__text">
+        <p>
+          Somos un equipo de desarrolladores, diseñadores y estrategas que
+          creen que el software debe resolver problemas reales. No seguimos
+          tendencias — construimos herramientas que generan impacto.
+        </p>
+        <p>
+          Cada proyecto es una colaboración cercana. Trabajamos como una
+          extensión de tu equipo, con transparencia total y compromiso con
+          la calidad.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -23,21 +25,17 @@
 <style>
   .about {
     position: relative;
+    padding-block: var(--space-2xl);
   }
 
-  .about::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      var(--glass-border),
-      transparent
-    );
+  .about__inner {
+    padding-inline: var(--container-padding);
+  }
+
+  .about__content {
+    max-width: 700px;
+    margin-inline: auto;
+    text-align: center;
   }
 
   .about__content .label {
@@ -46,16 +44,29 @@
   }
 
   .about__content h2 {
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .about__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
   }
 
   .about__content p {
-    margin-bottom: var(--space-sm);
-    max-width: 620px;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
     font-weight: 350;
   }
 
-  .about__content p:last-child {
-    margin-bottom: 0;
+  @media (max-width: 768px) {
+    .about {
+      border: none;
+    }
+
+    .about__content h2 {
+      font-size: clamp(2.2rem, 8.5vw, 3.5rem);
+    }
   }
 </style>
