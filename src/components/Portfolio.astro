@@ -80,7 +80,7 @@ const projects = [
               <p>{project.description}</p>
               <div class="portfolio__tags">
                 {project.tags.map((tag, ti) => (
-                  <span class={`portfolio__tag mono ${ti === 0 ? 'portfolio__tag--accent' : ''}`}>{tag}</span>
+                  <span class="portfolio__tag mono">{tag}</span>
                 ))}
               </div>
             </div>
@@ -275,7 +275,7 @@ const projects = [
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding-inline: max(var(--container-padding), calc((100vw - var(--container-max)) / 2 + var(--container-padding)));
-    padding-bottom: 4rem;
+    padding-bottom: 6rem;
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
@@ -503,31 +503,7 @@ const projects = [
     transition: border-color 0.4s ease, background 0.4s ease;
   }
 
-  .portfolio__tag--accent {
-    color: var(--dark-teal);
-    background: var(--canary-yellow);
-    border-color: var(--canary-yellow);
-    font-weight: 700;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .portfolio__tag--accent::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    animation: shimmer 3s infinite;
-  }
-
-  @keyframes shimmer {
-    100% { left: 200%; }
-  }
-
-  .portfolio__tag:hover {
+.portfolio__tag:hover {
     border-color: rgba(255, 255, 255, 0.25);
     background: rgba(255, 255, 255, 0.06);
   }
