@@ -51,11 +51,27 @@ const {
       <div class="aurora__blob aurora__blob--3"></div>
     </div>
 
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress" aria-hidden="true"></div>
+
     <slot />
   </body>
 </html>
 
 <style>
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: var(--canary-yellow);
+    z-index: 100;
+    pointer-events: none;
+    transform-origin: left;
+    will-change: width;
+  }
+
   .noise-layer {
     position: fixed;
     inset: 0;

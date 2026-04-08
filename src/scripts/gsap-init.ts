@@ -10,6 +10,19 @@ const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').mat
 
 const isMobile = window.innerWidth <= 768;
 
+// === Scroll progress bar (always active) ===
+const progressBar = document.querySelector('.scroll-progress') as HTMLElement;
+if (progressBar) {
+  ScrollTrigger.create({
+    trigger: document.documentElement,
+    start: 'top top',
+    end: 'bottom bottom',
+    onUpdate: (self) => {
+      progressBar.style.width = `${self.progress * 100}%`;
+    },
+  });
+}
+
 if (!prefersReduced) {
   // === Hero entrance timeline ===
   const heroTl = gsap.timeline({ defaults: { ease: 'power4.out' } });
@@ -81,7 +94,7 @@ if (!prefersReduced) {
     ScrollTrigger.create({
       trigger: '#manifiesto',
       start: 'top top',
-      end: isMobile ? '+=120%' : '+=200%',
+      end: isMobile ? '+=180%' : '+=200%',
       pin: true,
       pinSpacing: true,
       onUpdate: (self) => {
@@ -95,9 +108,13 @@ if (!prefersReduced) {
         // Entrance
         if (manifestoInner) {
           const enterT = Math.min(raw / 0.1, 1);
-          const exitT = raw > 0.85 ? (raw - 0.85) / 0.15 : 0;
-          const sectionOpacity = enterT * (1 - exitT * 0.7);
-          const sectionScale = 0.97 + 0.03 * enterT - 0.02 * exitT;
+          const exitStart = isMobile ? 0.75 : 0.85;
+          const exitRange = 1 - exitStart;
+          const exitT = raw > exitStart ? (raw - exitStart) / exitRange : 0;
+          // Smooth ease-in for exit so it doesn't feel abrupt
+          const exitEased = exitT * exitT;
+          const sectionOpacity = enterT * (1 - exitEased * 0.7);
+          const sectionScale = 0.97 + 0.03 * enterT - 0.02 * exitEased;
           gsap.set(manifestoInner, {
             opacity: sectionOpacity,
             scale: sectionScale,
