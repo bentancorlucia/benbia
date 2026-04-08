@@ -1,0 +1,90 @@
+---
+const phrases = [
+  "Innovación digital",
+  "Código limpio",
+  "Resultados reales",
+  "Diseño con propósito",
+  "Tecnología que transforma",
+  "Soluciones que escalan",
+];
+---
+
+<div class="marquee-band">
+  <div class="marquee-band__track">
+    <span class="marquee-band__content">
+      {phrases.map((phrase) => (
+        <><span class="marquee-band__text">{phrase}</span><span class="marquee-band__star">✦</span></>
+      ))}
+    </span>
+    <span class="marquee-band__content" aria-hidden="true">
+      {phrases.map((phrase) => (
+        <><span class="marquee-band__text">{phrase}</span><span class="marquee-band__star">✦</span></>
+      ))}
+    </span>
+  </div>
+</div>
+
+<style>
+  .marquee-band {
+    overflow: hidden;
+    white-space: nowrap;
+    padding-block: var(--space-xs);
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+    background: var(--dark-teal-deep);
+  }
+
+  .marquee-band__track {
+    display: inline-flex;
+    animation: marquee-scroll 45s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-band__content {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+  }
+
+  .marquee-band__text {
+    font-family: 'Syne Variable', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--heading-light);
+    text-stroke: 1.5px var(--heading-light);
+    transition: all 0.6s ease-in-out;
+  }
+
+  .marquee-band__text:hover {
+    -webkit-text-fill-color: var(--canary-yellow);
+    color: var(--canary-yellow);
+    -webkit-text-stroke-color: var(--canary-yellow);
+  }
+
+  .marquee-band__star {
+    color: var(--canary-yellow);
+    -webkit-text-fill-color: var(--canary-yellow);
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    -webkit-text-stroke: 0;
+    text-stroke: 0;
+    margin-inline: 0.6em;
+  }
+
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-band__track {
+      animation: none;
+    }
+  }
+</style>
