@@ -6,6 +6,8 @@ const projects = [
     description: 'Sitio web institucional en Next.js 15, Tailwind y Framer Motion, con backend en Supabase. Incluye páginas públicas (home, socios, beneficios y eventos), un panel administrativo para gestionar contenidos y un sistema de micrositios por evento con bloques editables (hero, costos, agenda). Diseño propio con paleta naranja/celeste, tipografías Unbounded y Geist, animaciones sutiles y enfoque mobile-first.',
     tags: ['Next.js 15', 'Tailwind', 'Framer Motion', 'Supabase', 'Mobile-first'],
     desktopImg: '/portfolio/atri-desktop.png',
+    mobileImg: '/portfolio/atri-mobile.png',
+    link: 'https://atri.com.uy',
   },
   {
     name: 'Nido',
@@ -54,7 +56,7 @@ const projects = [
       <div class="portfolio__slide reveal" data-slide={i}>
         <div class="portfolio__card glass-card">
           <!-- Desktop mockup -->
-          <div class="portfolio__mockup">
+          <div class={`portfolio__mockup ${project.mobileImg ? 'has-mobile' : ''}`}>
             <div class="portfolio__mockup-container">
               <div class="mockup-desktop">
                 <div class="mockup-desktop__bar">
@@ -65,9 +67,16 @@ const projects = [
                 </div>
                 <div class="mockup-desktop__screen">
                   <img src={project.desktopImg} alt={`${project.name} desktop`} loading="lazy" />
-                  <div class="mockup-desktop__fade"></div>
                 </div>
               </div>
+              {project.mobileImg && (
+                <div class="mockup-phone">
+                  <div class="mockup-phone__notch"></div>
+                  <div class="mockup-phone__screen">
+                    <img src={project.mobileImg} alt={`${project.name} mobile`} loading="lazy" />
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -81,7 +90,20 @@ const projects = [
                 )}
                 <div class="portfolio__info-title">
                   <h3>{project.name}</h3>
-                  <span class="portfolio__subtitle mono">{project.url}</span>
+                  {project.link ? (
+                    <a
+                      class="portfolio__subtitle portfolio__subtitle--link mono"
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Abrir ${project.url} en una nueva pestaña`}
+                    >
+                      {project.url}
+                      <svg class="portfolio__subtitle-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>
+                    </a>
+                  ) : (
+                    <span class="portfolio__subtitle mono">{project.url}</span>
+                  )}
                 </div>
               </div>
               <p>{project.description}</p>
@@ -390,33 +412,73 @@ const projects = [
   .mockup-desktop__screen {
     position: relative;
     aspect-ratio: 16 / 10;
-    background: rgba(6, 48, 64, 0.5);
+    background: #0a0a0a;
     overflow: hidden;
+    display: flex;
   }
 
   .mockup-desktop__screen img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: top;
-    opacity: 0.9;
-    transition: opacity 0.5s ease, transform 0.7s ease;
+    object-position: top center;
+    display: block;
   }
 
-  .portfolio__card:hover .mockup-desktop__screen img {
-    opacity: 1;
-    transform: scale(1.02);
+  /* Phone mockup — floats over desktop bottom-right */
+  .portfolio__mockup.has-mobile .portfolio__mockup-container {
+    position: relative;
   }
 
-  .mockup-desktop__fade {
+  .mockup-phone {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 40px;
-    background: linear-gradient(to top, #0a0a0a, transparent);
-    opacity: 0.5;
-    pointer-events: none;
+    right: clamp(1.25rem, 3vw, 2.25rem);
+    bottom: clamp(0.5rem, 2vw, 1.25rem);
+    width: clamp(90px, 22%, 150px);
+    aspect-ratio: 9 / 19;
+    background: #0a0a0a;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 6px;
+    box-shadow:
+      0 25px 50px -10px rgba(0, 0, 0, 0.7),
+      0 0 30px rgba(237, 240, 96, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 2;
+  }
+
+  .portfolio__mockup-container:hover .mockup-phone {
+    transform: translateY(-6px);
+  }
+
+  .mockup-phone__notch {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32%;
+    height: 5px;
+    background: #000;
+    border-radius: 3px;
+    z-index: 2;
+  }
+
+  .mockup-phone__screen {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .mockup-phone__screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
   }
 
   /* Info panel */
@@ -480,6 +542,37 @@ const projects = [
     letter-spacing: 0.15em;
     color: var(--berry-crush);
     margin-top: 0.25rem;
+  }
+
+  .portfolio__subtitle--link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    width: fit-content;
+    text-decoration: none;
+    padding-bottom: 1px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .portfolio__subtitle--link:hover,
+  .portfolio__subtitle--link:focus-visible {
+    color: var(--canary-yellow);
+    border-color: currentColor;
+  }
+
+  .portfolio__subtitle--link:focus-visible {
+    outline: none;
+  }
+
+  .portfolio__subtitle-icon {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .portfolio__subtitle--link:hover .portfolio__subtitle-icon,
+  .portfolio__subtitle--link:focus-visible .portfolio__subtitle-icon {
+    transform: translate(1px, -1px);
   }
 
   .portfolio__info p {
