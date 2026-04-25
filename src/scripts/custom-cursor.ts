@@ -9,21 +9,21 @@ if (hasHover && !prefersReduced) {
 
   let cursorX = -100;
   let cursorY = -100;
-  let currentX = -100;
-  let currentY = -100;
+  let pending = false;
+
+  function render() {
+    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%)`;
+    pending = false;
+  }
 
   document.addEventListener('mousemove', (e) => {
     cursorX = e.clientX;
     cursorY = e.clientY;
-  });
-
-  function animateCursor() {
-    currentX += (cursorX - currentX) * 0.15;
-    currentY += (cursorY - currentY) * 0.15;
-    cursor.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
+    if (!pending) {
+      pending = true;
+      requestAnimationFrame(render);
+    }
+  }, { passive: true });
 
   const interactiveSelectors = 'a, button, [role="button"], input, textarea, select';
   document.addEventListener('mouseover', (e) => {
