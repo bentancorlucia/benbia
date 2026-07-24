@@ -84,6 +84,17 @@ if (hasHover && !prefersReduced) {
   const heroLines = document.querySelectorAll('.hero__line');
   heroLines.forEach((line) => splitTextNodes(line));
 
+  // Colour the accent letters along the yellow→teal gradient with solid colours
+  // (no background-clip:text — that ghosts when a letter transforms on hover).
+  const accentChars = document.querySelectorAll<HTMLElement>('.hero__accent .hero__char');
+  const from = [237, 240, 96]; // --canary-yellow #edf060
+  const to = [107, 171, 144]; // --muted-teal   #6bab90
+  accentChars.forEach((char, i) => {
+    const t = accentChars.length > 1 ? i / (accentChars.length - 1) : 0;
+    const rgb = from.map((c, k) => Math.round(c + (to[k] - c) * t));
+    char.style.color = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+  });
+
   const heroChars = document.querySelectorAll('.hero__char');
 
   heroChars.forEach((char) => {
@@ -93,7 +104,6 @@ if (hasHover && !prefersReduced) {
       const randomRotation = (Math.random() - 0.5) * 30;
       const randomY = -5 - Math.random() * 15;
 
-      el.style.willChange = 'transform';
       el.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
       el.style.transform = `translateY(${randomY}px) rotate(${randomRotation}deg) scale(1.15)`;
 
@@ -105,10 +115,6 @@ if (hasHover && !prefersReduced) {
       el.style.transform = '';
 
       cursor.classList.remove('custom-cursor--text');
-    });
-
-    el.addEventListener('transitionend', () => {
-      if (!el.style.transform) el.style.willChange = 'auto';
     });
   });
 }

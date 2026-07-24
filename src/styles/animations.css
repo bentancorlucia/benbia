@@ -245,11 +245,14 @@
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.hero__accent .hero__char {
-  background: linear-gradient(90deg, var(--canary-yellow) 0%, var(--muted-teal) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Once the accent word is split into per-letter spans, each letter gets a solid
+   colour sampled along the yellow→teal gradient (assigned in JS). We deliberately
+   avoid background-clip:text on the letters: animating a gradient-clipped element
+   on hover leaves a ghost copy of the glyph on its compositing layer. Neutralize
+   the wrapper's own gradient box too so it can't leak behind the letters. */
+.hero__accent:has(.hero__char) {
+  background: none;
+  -webkit-text-fill-color: initial;
 }
 
 /* Disable hover effects on touch devices */
