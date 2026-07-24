@@ -93,6 +93,7 @@ if (hasHover && !prefersReduced) {
       const randomRotation = (Math.random() - 0.5) * 30;
       const randomY = -5 - Math.random() * 15;
 
+      el.style.willChange = 'transform';
       el.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
       el.style.transform = `translateY(${randomY}px) rotate(${randomRotation}deg) scale(1.15)`;
 
@@ -104,6 +105,10 @@ if (hasHover && !prefersReduced) {
       el.style.transform = '';
 
       cursor.classList.remove('custom-cursor--text');
+    });
+
+    el.addEventListener('transitionend', () => {
+      if (!el.style.transform) el.style.willChange = 'auto';
     });
   });
 }
