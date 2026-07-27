@@ -246,6 +246,12 @@
   /* Own stacking context per letter: without it, transforming one letter on
      hover paints a ghost of it at the word's origin (over the first letter). */
   isolation: isolate;
+  /* Transparent padding enlarges the hover hit-area (the negative margin keeps
+     the visual letter spacing unchanged) so the letter never rises out from
+     under the cursor — which would fire mouseleave and snap it back, making the
+     effect look dead. */
+  padding: 0.5em 0.15em;
+  margin: -0.5em -0.15em;
 }
 
 /* Once the accent word is split into per-letter spans, each letter gets a solid
