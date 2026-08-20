@@ -12,11 +12,11 @@ const faqs = [
   },
   {
     q: '¿Cuánto tarda?',
-    a: 'Aunque todo depende de la escla, un sitio suele llevar entre dos y seis semanas; una app entre seis y doce. Lo importante es que te mostramos avances cada semana, para que no haya sorpresas ni demoras injustificadas.',
+    a: 'Aunque todo depende de la escala, un sitio suele llevar entre dos y seis semanas; una app entre seis y doce. Lo importante es que te mostramos avances cada semana, para que no haya sorpresas ni demoras injustificadas.',
   },
   {
     q: '¿El código queda mío?',
-    a: 'Dependerá de lo acordado! En geenral ofrecemos nuestros servicios de mantenimiento y soporte, pero si querés que el código quede en tu poder, lo hacemos sin problemas.',
+    a: 'Dependerá de lo acordado! En genral ofrecemos nuestros servicios de mantenimiento y soporte, pero si querés que el código quede en tu poder, lo hacemos sin problemas.',
   },
   {
     q: 'Ya tengo un sitio, ¿lo pueden mejorar?',

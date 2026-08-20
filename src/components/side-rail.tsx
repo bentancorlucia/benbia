@@ -224,7 +224,7 @@ export function SideRail() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 24 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="flex w-full gap-1 rounded-full border border-ink/12 bg-ink/95 p-1 backdrop-blur"
+              className="flex w-full gap-1 rounded-full border border-paper/18 bg-ink/95 p-1 backdrop-blur"
             >
               {items.map((item) => (
                 <Link
