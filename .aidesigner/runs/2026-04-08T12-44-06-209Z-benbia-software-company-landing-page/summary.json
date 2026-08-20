@@ -1,0 +1,19 @@
+{
+  "id": "2026-04-08T12-44-06-209Z-benbia-software-company-landing-page",
+  "createdAt": "2026-04-08T12:44:06.211Z",
+  "prompt": "Benbia software company landing page redesign - aurora gradients, noise texture, glassmorphism, modern techy aesthetic",
+  "mode": null,
+  "url": null,
+  "viewport": "desktop",
+  "repoRoot": "/Users/lucia/Documents/Proyectos/benbia",
+  "cwd": "/Users/lucia/Documents/Proyectos/benbia",
+  "requestPath": "/Users/lucia/Documents/Proyectos/benbia/.aidesigner/runs/2026-04-08T12-44-06-209Z-benbia-software-company-landing-page/request.json",
+  "repoContextPath": "/Users/lucia/Documents/Proyectos/benbia/.aidesigner/runs/2026-04-08T12-44-06-209Z-benbia-software-company-landing-page/repo-context.json",
+  "designHtmlPath": "/Users/lucia/Documents/Proyectos/benbia/.aidesigner/runs/2026-04-08T12-44-06-209Z-benbia-software-company-landing-page/design.html",
+  "previewPath": null,
+  "previewError": "Preview rendering requires puppeteer. Install it in the repo or alongside @aidesigner/agent-skills.",
+  "parentRunId": null,
+  "usage": null,
+  "transport": "mcp",
+  "remoteRunId": "3c51417e-e1c9-4977-8e38-f2d970c38048"
+}

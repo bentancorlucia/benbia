@@ -1,0 +1,21 @@
+{
+  "repoRoot": "/Users/lucia/Documents/Proyectos/benbia",
+  "cwd": "/Users/lucia/Documents/Proyectos/benbia",
+  "stack": {
+    "frameworks": [],
+    "componentLibraries": [],
+    "styling": [],
+    "componentDirectories": [
+      "src/components"
+    ],
+    "packageFiles": [
+      "package.json"
+    ]
+  },
+  "routes": [],
+  "tokens": {
+    "sources": [],
+    "tokens": []
+  },
+  "summary": "Repo root: /Users/lucia/Documents/Proyectos/benbia\nWorking directory: /Users/lucia/Documents/Proyectos/benbia\nFrameworks: none detected\nStyling: none detected\nComponent libraries: none detected\nRoute roots: none detected\nRoute candidates: none detected\nComponent directories: src/components\nToken sources: none detected\nVisible design language hints: no strong hints detected"
+}

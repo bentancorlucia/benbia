@@ -1,0 +1,586 @@
+<!--
+  aesthetic_dna: High-End Technical Aurora / Tactile Glassmorphism
+  ui_paradigm: Scrollytelling Narrative Flow with Layered Z-Depth Architecture
+  palette: Deep Teal (#084c61Base), Luminous Aurora (#edf060 Yellow, #aa4465 Berry, #6bab90 Muted Teal)
+-->
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benbia | Estudio de Ingeniería Digital</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            base: '#084c61',
+                            baseDark: '#053140',
+                            yellow: '#edf060',
+                            berry: '#aa4465',
+                            teal: '#6bab90',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(237, 240, 96, 0.3)',
+                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.37)'
+                    },
+                    backgroundImage: {
+                        'glass-gradient': 'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #053140;
+            color: #f8fafc;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #053140;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(107, 171, 144, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(107, 171, 144, 0.6);
+        }
+
+        ::selection {
+            background: rgba(237, 240, 96, 0.3);
+            color: #edf060;
+        }
+
+        .noise-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.04;
+            mix-blend-mode: overlay;
+        }
+
+        .noise-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .aurora-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            background: #084c61;
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: drift 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50%;
+            mix-blend-mode: screen;
+        }
+
+        .blob-1 { top: -10%; left: -10%; width: 50vw; height: 50vw; background: #aa4465; animation-delay: 0s; }
+        .blob-2 { top: 40%; right: -20%; width: 60vw; height: 60vw; background: #6bab90; animation-delay: -5s; }
+        .blob-3 { bottom: -20%; left: 20%; width: 45vw; height: 45vw; background: #edf060; filter: blur(120px); opacity: 0.3; animation-delay: -10s; }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(5vw, 10vh) scale(1.1) rotate(10deg); }
+            100% { transform: translate(-10vw, -5vh) scale(0.9) rotate(-10deg); }
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.4);
+        }
+
+        .glass-card-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(237, 240, 96, 0.4);
+            box-shadow: 0 40px 80px -10px rgba(0,0,0,0.5), inset 0 0 40px rgba(237, 240, 96, 0.05);
+        }
+
+        .text-outline {
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .manifesto-track:hover .text-outline {
+            -webkit-text-stroke: 1px #edf060;
+            text-shadow: 0 0 20px rgba(237, 240, 96, 0.2);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
+
+        .clip-poly {
+            clip-path: polygon(0 0, 100% 0%, 95% 100%, 5% 100%);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-yellow/30 selection:text-brand-yellow">
+
+    <!-- Tactile Noise Layer -->
+    <div class="noise-layer">
+        <svg class="noise-svg">
+            <filter id="noiseFilter">
+                <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/>
+            </filter>
+            <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
+        </svg>
+    </div>
+
+    <!-- Fluid Aurora Background -->
+    <div class="aurora-container">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 px-6 py-4 transition-all duration-300">
+        <div class="glass-panel max-w-7xl mx-auto rounded-full px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 bg-brand-yellow rounded-full animate-pulse shadow-[0_0_10px_#edf060]"></div>
+                <span class="font-display font-bold text-xl tracking-wider text-white">BENBIA</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 font-mono text-sm text-gray-300 tracking-wide uppercase">
+                <a href="#experiencia" class="hover:text-brand-yellow transition-colors relative group">
+                    Servicios
+                    <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-yellow transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#proceso" class="hover:text-brand-yellow transition-colors relative group">
+                    Metodología
+                    <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-yellow transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#trabajo" class="hover:text-brand-yellow transition-colors relative group">
+                    Portafolio
+                    <span class="absolute -bottom-1 left-0 w-0 h-[1px] bg-brand-yellow transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+
+            <a href="#contacto" class="hidden md:flex items-center gap-2 bg-brand-yellow text-brand-baseDark px-5 py-2.5 rounded-full font-mono text-xs font-bold uppercase tracking-widest hover:bg-white transition-all shadow-neon hover:scale-105 active:scale-95">
+                Iniciar Proyecto <i class="ph ph-arrow-up-right text-base"></i>
+            </a>
+
+            <button class="md:hidden text-brand-yellow">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center pt-32 pb-20 px-6 z-10">
+        <div class="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-8 flex flex-col gap-6 relative">
+                <div class="font-mono text-brand-yellow/70 text-sm tracking-widest flex items-center gap-4 mb-2">
+                    <span>// SYS.INIT_SEQUENCE</span>
+                    <span class="h-[1px] w-12 bg-brand-yellow/30"></span>
+                </div>
+
+                <h1 class="font-display font-extrabold text-[12vw] lg:text-[7.5rem] leading-[0.9] tracking-tighter uppercase">
+                    <span class="block relative z-10 text-white drop-shadow-2xl">Esculpimos</span>
+                    <span class="block relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-brand-yellow to-brand-teal">Software.</span>
+                </h1>
+
+                <p class="font-sans text-lg lg:text-xl text-gray-300 max-w-2xl font-light leading-relaxed mt-4">
+                    Estudio de ingeniería digital operando en la intersección de la estética y el rendimiento brutal. No usamos plantillas. Escribimos código a medida para marcas audaces.
+                </p>
+
+                <div class="flex flex-wrap items-center gap-6 mt-8">
+                    <a href="#trabajo" class="glass-panel px-8 py-4 rounded-full font-mono text-sm uppercase tracking-widest hover:border-brand-yellow hover:text-brand-yellow transition-colors flex items-center gap-3 group">
+                        Ver Archivos
+                        <span class="w-8 h-[1px] bg-white group-hover:bg-brand-yellow transition-colors"></span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="lg:col-span-4 hidden lg:block relative h-full">
+                <div class="glass-panel rounded-3xl p-6 absolute right-0 top-1/2 -translate-y-1/2 w-80 transform rotate-2 hover:rotate-0 transition-transform duration-700">
+                    <div class="flex justify-between items-end border-b border-white/10 pb-4 mb-4">
+                        <span class="font-mono text-xs text-brand-teal uppercase tracking-widest">Rendimiento</span>
+                        <span class="font-display font-bold text-3xl text-brand-yellow">99.9%</span>
+                    </div>
+                    <div class="h-24 flex items-end gap-2 mt-4">
+                        <div class="w-1/6 bg-white/10 h-1/3 rounded-t-sm"></div>
+                        <div class="w-1/6 bg-white/10 h-2/3 rounded-t-sm"></div>
+                        <div class="w-1/6 bg-white/10 h-1/2 rounded-t-sm"></div>
+                        <div class="w-1/6 bg-white/20 h-4/5 rounded-t-sm"></div>
+                        <div class="w-1/6 bg-brand-berry/80 h-3/4 rounded-t-sm"></div>
+                        <div class="w-1/6 bg-brand-yellow h-full rounded-t-sm shadow-[0_0_15px_#edf060]"></div>
+                    </div>
+                    <div class="mt-6 flex flex-col gap-2 font-mono text-xs text-gray-400">
+                        <div class="flex justify-between"><span>LCT</span><span class="text-white">124ms</span></div>
+                        <div class="flex justify-between"><span>FID</span><span class="text-white">12ms</span></div>
+                        <div class="flex justify-between"><span>Arch</span><span class="text-white">Headless</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+            <span class="font-mono text-xs tracking-widest uppercase">Descender</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
+        </div>
+    </header>
+
+    <!-- Moving Manifesto Marquee -->
+    <section class="py-12 border-y border-white/5 bg-brand-baseDark/50 backdrop-blur-md relative z-20 flex overflow-hidden group manifesto-track cursor-default">
+        <div class="flex whitespace-nowrap animate-marquee items-center">
+            <div class="flex items-center gap-12 font-display text-[6vw] font-bold uppercase tracking-tighter">
+                <span class="text-outline">Sin Atajos</span>
+                <i class="ph-fill ph-star-four text-brand-yellow text-4xl"></i>
+                <span class="text-white">Artesanía Digital</span>
+                <i class="ph-fill ph-star-four text-brand-berry text-4xl"></i>
+                <span class="text-outline">Código Nativo</span>
+                <i class="ph-fill ph-star-four text-brand-teal text-4xl"></i>
+                <span class="text-white">Arquitectura Escalable</span>
+                <i class="ph-fill ph-star-four text-brand-yellow text-4xl"></i>
+                <span class="text-outline">Sin Atajos</span>
+                <i class="ph-fill ph-star-four text-brand-yellow text-4xl"></i>
+                <span class="text-white">Artesanía Digital</span>
+                <i class="ph-fill ph-star-four text-brand-berry text-4xl"></i>
+                <span class="text-outline">Código Nativo</span>
+                <i class="ph-fill ph-star-four text-brand-teal text-4xl"></i>
+                <span class="text-white">Arquitectura Escalable</span>
+                <i class="ph-fill ph-star-four text-brand-yellow text-4xl"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Bento Grid -->
+    <section id="experiencia" class="py-32 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                <div>
+                    <span class="font-mono text-brand-teal text-sm tracking-widest uppercase mb-4 block">[ _Capacidades ]</span>
+                    <h2 class="font-display text-5xl md:text-6xl font-bold uppercase tracking-tight">Ecosistemas<br>de <span class="text-brand-yellow">Alta Gama</span></h2>
+                </div>
+                <p class="font-sans text-gray-400 max-w-sm text-lg border-l border-white/10 pl-6">
+                    Dejamos atrás las soluciones genéricas para construir infraestructuras que dominan el mercado.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[300px]">
+
+                <div class="lg:col-span-8 glass-panel rounded-3xl p-10 flex flex-col justify-between glass-card-hover group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-brand-berry/20 rounded-full filter blur-[80px] -translate-y-1/2 translate-x-1/2 group-hover:bg-brand-yellow/20 transition-colors duration-700"></div>
+                    <div class="relative z-10 flex justify-between items-start">
+                        <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 text-white group-hover:text-brand-yellow transition-colors">
+                            <i class="ph ph-devices text-3xl"></i>
+                        </div>
+                        <span class="font-mono text-sm text-gray-500 group-hover:text-white transition-colors">01</span>
+                    </div>
+                    <div class="relative z-10 mt-12">
+                        <h3 class="font-display text-3xl font-bold mb-3 uppercase tracking-tight">Apps Web & Móviles</h3>
+                        <p class="font-sans text-gray-400 max-w-md">Interfaces inmersivas, reactivas y nativas que retienen usuarios y convierten. Usamos React, Vue y Swift a nivel maestro.</p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 lg:row-span-2 glass-panel rounded-3xl p-10 flex flex-col glass-card-hover group relative overflow-hidden">
+                    <div class="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-t from-brand-teal/20 to-transparent"></div>
+                    <div class="relative z-10 flex justify-between items-start mb-auto">
+                        <div class="w-14 h-14 rounded-full bg-white/5 flex items-center justify-center border border-white/10 text-white group-hover:text-brand-yellow transition-colors">
+                            <i class="ph ph-cloud-network text-3xl"></i>
+                        </div>
+                        <span class="font-mono text-sm text-gray-500 group-hover:text-white transition-colors">02</span>
+                    </div>
+                    <div class="relative z-10 mt-8">
+                        <h3 class="font-display text-3xl font-bold mb-3 uppercase tracking-tight">Arquitectura Cloud</h3>
+                        <p class="font-sans text-gray-400">Infraestructura AWS y GCP diseñada para escalar infinitamente desde el día cero. Servidores que nunca duermen.</p>
+
+                        <div class="mt-8 flex flex-col gap-3">
+                            <div class="h-[1px] w-full bg-white/10 relative">
+                                <div class="absolute top-1/2 -translate-y-1/2 left-0 w-2 h-2 rounded-full bg-brand-yellow shadow-neon transform translate-x-0 group-hover:translate-x-[200px] transition-transform duration-1000 ease-in-out"></div>
+                            </div>
+                            <div class="h-[1px] w-full bg-white/10 relative">
+                                <div class="absolute top-1/2 -translate-y-1/2 right-0 w-2 h-2 rounded-full bg-brand-teal transform -translate-x-0 group-hover:-translate-x-[200px] transition-transform duration-1000 ease-in-out delay-100"></div>
+                            </div>
+                            <div class="h-[1px] w-full bg-white/10 relative">
+                                <div class="absolute top-1/2 -translate-y-1/2 left-0 w-2 h-2 rounded-full bg-brand-berry transform translate-x-10 group-hover:translate-x-[250px] transition-transform duration-1000 ease-in-out delay-200"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 glass-panel rounded-3xl p-10 flex flex-col justify-between glass-card-hover group relative overflow-hidden">
+                    <div class="relative z-10 flex justify-between items-start">
+                        <div class="w-14 h-14 bg-white/5 flex items-center justify-center border border-white/10 text-white transform rotate-45 group-hover:rotate-0 transition-transform">
+                            <i class="ph ph-brain text-4xl -rotate-45 group-hover:rotate-0 transition-transform text-brand-berry"></i>
+                        </div>
+                        <span class="font-mono text-sm text-gray-500 group-hover:text-white transition-colors">03</span>
+                    </div>
+                    <div class="relative z-10 mt-8">
+                        <h3 class="font-display text-2xl font-bold mb-2 uppercase tracking-tight">Integraciones AI</h3>
+                        <p class="font-sans text-gray-400 text-sm">Automatización cognitiva e integración de LLMs para empresas.</p>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-4 glass-panel rounded-3xl p-10 flex flex-col justify-between glass-card-hover group relative overflow-hidden border-t-2 border-t-transparent hover:border-t-brand-teal">
+                    <div class="relative z-10 flex justify-between items-start">
+                        <div class="w-14 h-14 rounded-full border border-dashed border-white/30 flex items-center justify-center text-white group-hover:border-solid group-hover:border-brand-teal">
+                            <i class="ph ph-wrench text-2xl"></i>
+                        </div>
+                        <span class="font-mono text-sm text-gray-500 group-hover:text-white transition-colors">04</span>
+                    </div>
+                    <div class="relative z-10 mt-8">
+                        <h3 class="font-display text-2xl font-bold mb-2 uppercase tracking-tight">Ingeniería de Rescate</h3>
+                        <p class="font-sans text-gray-400 text-sm">Refactorización de código legado y salvamento de proyectos técnicos en crisis.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Stacking Process Section -->
+    <section id="proceso" class="relative z-10 mt-20">
+        <div class="relative px-6 max-w-4xl mx-auto pb-40" style="height: 350vh;">
+
+            <div class="sticky top-24 pt-10 pb-6 mb-10 text-center glass-panel rounded-3xl z-40 bg-brand-baseDark/80">
+                <span class="font-mono text-brand-berry text-sm tracking-widest uppercase mb-2 block">/* Lógica de Ejecución */</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold uppercase tracking-tight">El Método</h2>
+            </div>
+
+            <div class="sticky top-40 w-full mb-10 z-[1] transition-all duration-300">
+                <div class="glass-panel p-10 md:p-14 rounded-[40px] bg-[#0A1A22] border-t border-white/20 shadow-2xl overflow-hidden relative">
+                    <div class="absolute text-[15rem] font-display font-black text-white/5 -top-10 -right-10 leading-none pointer-events-none">1</div>
+                    <div class="flex flex-col md:flex-row gap-10 items-start md:items-center relative z-10">
+                        <div class="w-20 h-20 rounded-2xl bg-brand-teal/20 text-brand-teal flex items-center justify-center border border-brand-teal/30 shrink-0">
+                            <i class="ph ph-radar text-4xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-3xl font-bold uppercase mb-4 text-white">Telemetría <span class="font-light text-gray-500">&</span> Descubrimiento</h3>
+                            <p class="font-sans text-gray-400 text-lg">Mapeamos el terreno antes de escribir una sola línea de código. Analizamos tus cuellos de botella, definimos KPIs técnicos y establecemos la arquitectura base que soporte el producto a largo plazo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sticky top-[11.5rem] w-full mb-10 z-[2] transition-all duration-300">
+                <div class="glass-panel p-10 md:p-14 rounded-[40px] bg-[#0C222E] border-t border-white/20 shadow-2xl overflow-hidden relative">
+                    <div class="absolute text-[15rem] font-display font-black text-white/5 -top-10 -right-10 leading-none pointer-events-none">2</div>
+                    <div class="flex flex-col md:flex-row gap-10 items-start md:items-center relative z-10">
+                        <div class="w-20 h-20 rounded-2xl bg-brand-berry/20 text-brand-berry flex items-center justify-center border border-brand-berry/30 shrink-0">
+                            <i class="ph ph-blueprint text-4xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-3xl font-bold uppercase mb-4 text-white">Diseño <span class="font-light text-gray-500">&</span> Arquitectura</h3>
+                            <p class="font-sans text-gray-400 text-lg">Creamos interfaces modulares (Figma) y diseñamos el esquema de base de datos. Nada se deja al azar. Visualizamos la experiencia del usuario y las respuestas del servidor simultáneamente.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sticky top-[13rem] w-full mb-10 z-[3] transition-all duration-300">
+                <div class="glass-panel p-10 md:p-14 rounded-[40px] bg-[#0E2A3A] border-t border-white/20 shadow-2xl overflow-hidden relative">
+                    <div class="absolute text-[15rem] font-display font-black text-white/5 -top-10 -right-10 leading-none pointer-events-none">3</div>
+                    <div class="flex flex-col md:flex-row gap-10 items-start md:items-center relative z-10">
+                        <div class="w-20 h-20 rounded-2xl bg-brand-yellow/20 text-brand-yellow flex items-center justify-center border border-brand-yellow/30 shrink-0 shadow-neon">
+                            <i class="ph ph-code-block text-4xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-3xl font-bold uppercase mb-4 text-white">Ingeniería <span class="font-light text-gray-500">&</span> Sprint</h3>
+                            <p class="font-sans text-gray-400 text-lg">Comienza la construcción. Código limpio, tipado estático, pruebas unitarias. Iteramos rápido en entornos de staging aislados para que veas el progreso en tiempo real, sin fricción.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sticky top-[14.5rem] w-full z-[4] transition-all duration-300">
+                <div class="glass-panel p-10 md:p-14 rounded-[40px] bg-brand-base border-t border-brand-yellow/50 shadow-[0_-20px_40px_rgba(0,0,0,0.5)] overflow-hidden relative">
+                    <div class="absolute text-[15rem] font-display font-black text-white/5 -top-10 -right-10 leading-none pointer-events-none">4</div>
+                    <div class="flex flex-col md:flex-row gap-10 items-start md:items-center relative z-10">
+                        <div class="w-20 h-20 rounded-full bg-white text-brand-baseDark flex items-center justify-center shrink-0">
+                            <i class="ph-fill ph-rocket-launch text-4xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-display text-3xl font-bold uppercase mb-4 text-brand-yellow">Despliegue <span class="font-light text-white/50">&</span> Escala</h3>
+                            <p class="font-sans text-white/80 text-lg">Migración sin downtime. Configuración de pipelines CI/CD y monitoreo 24/7. El software cobra vida y está listo para recibir tráfico severo desde el primer milisegundo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent relative z-10 mt-20"></div>
+
+    <!-- Portfolio -->
+    <section id="trabajo" class="py-32 relative z-10">
+        <div class="px-6 max-w-[1400px] mx-auto text-center mb-24">
+            <span class="font-mono text-brand-yellow text-sm tracking-widest uppercase mb-4 block inline-flex items-center gap-2">
+                <span class="w-2 h-2 bg-brand-yellow rounded-full animate-ping"></span> Live Systems
+            </span>
+            <h2 class="font-display text-5xl md:text-7xl font-extrabold uppercase tracking-tighter">Archivos de <br/><span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Producción</span></h2>
+        </div>
+
+        <div class="flex flex-col gap-32">
+
+            <div class="px-6 max-w-[1400px] mx-auto w-full group">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    <div class="lg:col-span-7 order-2 lg:order-1 relative overflow-hidden rounded-[2rem] glass-panel aspect-[4/3] group-hover:shadow-neon transition-shadow duration-500 p-2">
+                        <div class="absolute inset-0 bg-brand-baseDark/40 z-10 transition-opacity duration-500 group-hover:opacity-0 rounded-[1.8rem]"></div>
+                        <img src="https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=1200" alt="Abstract render" class="w-full h-full object-cover rounded-[1.8rem] transform scale-105 group-hover:scale-100 transition-transform duration-700 ease-out filter grayscale group-hover:grayscale-0">
+                    </div>
+                    <div class="lg:col-span-5 order-1 lg:order-2 lg:pl-10">
+                        <ul class="flex gap-3 font-mono text-xs text-brand-teal uppercase mb-6">
+                            <li class="border border-brand-teal/30 px-3 py-1 rounded-full">FinTech</li>
+                            <li class="border border-brand-teal/30 px-3 py-1 rounded-full">React</li>
+                            <li class="border border-brand-teal/30 px-3 py-1 rounded-full">Node.js</li>
+                        </ul>
+                        <h3 class="font-display text-4xl lg:text-5xl font-bold uppercase tracking-tight mb-6">Nexus <br>Terminal</h3>
+                        <p class="font-sans text-gray-400 text-lg mb-8 leading-relaxed">
+                            Plataforma de trading institucional construida para manejar millones de transacciones con latencia sub-milisegundo. Interfaz densa de datos optimizada mediante WebGL.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-3 font-mono text-sm uppercase tracking-widest text-white hover:text-brand-yellow transition-colors relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-px after:bg-brand-yellow hover:after:w-full after:transition-all after:duration-300">
+                            Examinar Caso <i class="ph ph-arrow-right text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-6 max-w-[1400px] mx-auto w-full group">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    <div class="lg:col-span-5 lg:pr-10">
+                        <ul class="flex gap-3 font-mono text-xs text-brand-berry uppercase mb-6 flex-wrap">
+                            <li class="border border-brand-berry/30 px-3 py-1 rounded-full text-brand-berry">SaaS</li>
+                            <li class="border border-brand-berry/30 px-3 py-1 rounded-full text-brand-berry">Next.js</li>
+                            <li class="border border-brand-berry/30 px-3 py-1 rounded-full text-brand-berry">OpenAI API</li>
+                        </ul>
+                        <h3 class="font-display text-4xl lg:text-5xl font-bold uppercase tracking-tight mb-6">Aura <br>Workspace</h3>
+                        <p class="font-sans text-gray-400 text-lg mb-8 leading-relaxed">
+                            Una herramienta de gestión de conocimiento aumentada por IA. Migramos la aplicación monolítica a una arquitectura serverless, reduciendo costos operativos en un 70%.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-3 font-mono text-sm uppercase tracking-widest text-white hover:text-brand-berry transition-colors relative after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-0 after:h-px after:bg-brand-berry hover:after:w-full after:transition-all after:duration-300">
+                            Examinar Caso <i class="ph ph-arrow-right text-xl"></i>
+                        </a>
+                    </div>
+                    <div class="lg:col-span-7 relative overflow-hidden rounded-[2rem] glass-panel aspect-[4/3] group-hover:shadow-[0_0_30px_rgba(170,68,101,0.3)] transition-shadow duration-500 p-2">
+                        <div class="absolute inset-0 bg-brand-baseDark/40 z-10 transition-opacity duration-500 group-hover:opacity-0 rounded-[1.8rem]"></div>
+                        <img src="https://images.unsplash.com/photo-1618761714954-0b8cd0026356?auto=format&fit=crop&q=80&w=1200" alt="Clean minimal aesthetic" class="w-full h-full object-cover rounded-[1.8rem] transform scale-105 group-hover:scale-100 transition-transform duration-700 ease-out filter grayscale group-hover:grayscale-0">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-32">
+            <button class="glass-panel px-10 py-5 rounded-full font-mono text-sm uppercase tracking-widest hover:bg-white hover:text-brand-baseDark transition-all duration-300 shadow-glass">
+                Cargar Más Proyectos
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer CTA -->
+    <footer id="contacto" class="relative z-10 min-h-screen flex flex-col justify-end bg-transparent overflow-hidden">
+
+        <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-transparent to-[#021820]"></div>
+        <div class="absolute inset-0 bg-[#021820] -z-10 mt-64 border-t border-white/10"></div>
+
+        <div class="px-6 max-w-[1400px] mx-auto w-full pt-40 pb-20 relative z-10 flex-col flex h-full justify-between">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-end mb-32">
+                <div>
+                    <div class="w-16 h-1 bg-brand-yellow mb-8"></div>
+                    <h2 class="font-display text-5xl md:text-[5rem] leading-none font-black uppercase tracking-tighter text-white">
+                        Construyamos<br> <span class="text-transparent text-outline hover:text-white transition-colors duration-500">El Futuro</span>
+                    </h2>
+                </div>
+
+                <div class="md:text-right flex flex-col md:items-end gap-6">
+                    <p class="font-mono text-gray-400 text-sm max-w-sm">No pidas permiso. Pide presupuesto. Estamos listos para auditar tu arquitectura o diseñar desde cero.</p>
+                    <a href="mailto:hello@benbia.dev" class="inline-flex items-center gap-4 text-2xl md:text-3xl font-display font-bold border-b-2 border-brand-yellow pb-2 hover:text-brand-yellow transition-colors group">
+                        hello@benbia.dev
+                        <i class="ph ph-arrow-up-right transform group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pt-10 border-t border-white/10 font-mono text-xs uppercase tracking-widest text-gray-500">
+                <div class="flex flex-col gap-4">
+                    <span class="text-white font-bold inline-flex items-center gap-2">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        Capacidad: Disponible
+                    </span>
+                    <p>Ubicados en el metaverso.<br>Operando en UTC-3.</p>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <span class="text-white">Redes</span>
+                    <a href="#" class="hover:text-brand-yellow transition-colors">GitHub</a>
+                    <a href="#" class="hover:text-brand-yellow transition-colors">Twitter (X)</a>
+                    <a href="#" class="hover:text-brand-yellow transition-colors">LinkedIn</a>
+                </div>
+
+                <div class="flex flex-col gap-3">
+                    <span class="text-white">Legal</span>
+                    <a href="#" class="hover:text-brand-yellow transition-colors">Privacidad</a>
+                    <a href="#" class="hover:text-brand-yellow transition-colors">Términos</a>
+                    <a href="#" class="hover:text-brand-yellow transition-colors">Manifiesto</a>
+                </div>
+
+                <div class="flex flex-col justify-end md:items-end gap-2">
+                    <p class="text-white font-display text-2xl tracking-tighter font-bold">BENBIA.</p>
+                    <p>© 2024 Estudio Digital</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full overflow-hidden flex justify-center pointer-events-none pb-4 opacity-5">
+            <span class="font-display font-black text-[20vw] leading-[0.8] tracking-tighter whitespace-nowrap">ENGINEERING</span>
+        </div>
+    </footer>
+
+</body>
+</html>

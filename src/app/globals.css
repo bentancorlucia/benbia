@@ -1,0 +1,190 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #171412;
+  --color-pumpkin: #ff7722;
+  --color-mustard: #ffdd47;
+  --color-paper: #fbf9ef;
+  --color-berry: #922d50;
+  --color-klein: #3d2fa9;
+
+  --font-display: var(--font-cal-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-fustat), ui-sans-serif, system-ui, sans-serif;
+  --font-sticker: var(--font-instrument-serif), 'Times New Roman', serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* Curva para hover: sale parejo, sin el tirón inicial de expo */
+  --ease-hover: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+:root {
+  --rail: 4.75rem;
+}
+
+/* Va dentro de @layer base: si queda sin capa, le gana a las utilidades
+   border-* de Tailwind v4 y pinta de tinta hasta los bordes claros. */
+@layer base {
+  * {
+    border-color: color-mix(in oklab, var(--color-ink) 12%, transparent);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-synthesis-weight: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-pumpkin);
+  color: var(--color-paper);
+}
+
+/* Titulares: apretados, sin viudas raras */
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  word-spacing: 0.06em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* El rail lateral vive fijo sobre los bordes: el contenido se corre
+   para no quedar nunca por debajo. */
+@media (min-width: 1024px) {
+  main,
+  footer {
+    padding-inline: var(--rail);
+  }
+}
+
+/* ---------------------------------------------------------------
+   Estampitas: fondo de color, borde grueso y sombra dura.
+   El borde va con dos capas para que se lea sobre cualquier fondo.
+   --------------------------------------------------------------- */
+.sticker {
+  font-family: var(--font-sticker);
+  font-style: italic;
+  font-weight: 400;
+  display: inline-block;
+  background: var(--sticker-bg);
+  color: var(--sticker-fg);
+  padding: 0.35em 0.7em 0.42em;
+  border-radius: 0.9em;
+  line-height: 0.98;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow:
+    0 0 0 0.16em var(--sticker-edge, var(--color-paper)),
+    0 0 0 0.19em color-mix(in oklab, var(--color-ink) 22%, transparent),
+    0.22em 0.3em 0 -0.02em color-mix(in oklab, var(--color-ink) 18%, transparent);
+  transition: transform 0.45s var(--ease-hover);
+}
+
+/* Estampita de varios pisos.
+   Cada renglón es su propia cápsula, del ancho de su texto: así el contorno
+   sigue la forma de las letras en vez de encerrarlas en un rectángulo. Los
+   renglones se pisan un poco y el contenedor no dibuja nada; el borde lo
+   arma un stack de drop-shadow, que trabaja sobre la silueta ya unida de
+   todas las cápsulas y por eso queda un solo contorno continuo.
+   --------------------------------------------------------------- */
+.sticker--stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  filter:
+    drop-shadow(0.13em 0 0 var(--sticker-edge))
+    drop-shadow(-0.13em 0 0 var(--sticker-edge))
+    drop-shadow(0 0.13em 0 var(--sticker-edge))
+    drop-shadow(0 -0.13em 0 var(--sticker-edge))
+    drop-shadow(0.095em 0.095em 0 var(--sticker-edge))
+    drop-shadow(-0.095em 0.095em 0 var(--sticker-edge))
+    drop-shadow(0.095em -0.095em 0 var(--sticker-edge))
+    drop-shadow(-0.095em -0.095em 0 var(--sticker-edge))
+    drop-shadow(0 0 0.016em color-mix(in oklab, var(--color-ink) 45%, transparent))
+    drop-shadow(0.2em 0.26em 0 color-mix(in oklab, var(--color-ink) 18%, transparent));
+}
+
+.sticker__line {
+  display: block;
+  background: var(--sticker-bg);
+  color: var(--sticker-fg);
+  padding: 0.28em 0.62em 0.34em;
+  border-radius: 0.9em;
+  white-space: nowrap;
+}
+
+/* Se solapan apenas para que la silueta salga de una sola pieza */
+.sticker__line + .sticker__line {
+  margin-top: -0.14em;
+}
+
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  /* Capa propia: si no, el scroll suave repinta el viewport entero. */
+  transform: translateZ(0);
+  will-change: transform;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Subrayado que crece desde la izquierda */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.4s var(--ease-hover);
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
