@@ -93,12 +93,14 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false, address: false, email: false },
 };
 
+// Sin viewport-fit=cover a propósito. Con cover, iOS Safari estira el contenido
+// que scrollea hasta el borde físico pero deja los elementos fijos anclados más
+// abajo, así que por la franja del status bar se veía pasar la página y el
+// header no llegaba a taparla (medido en un iPhone 17 Pro: env(safe-area-inset-top)
+// devuelve 0 y los fijos se recortan al viewport). Sin cover esa franja la pinta
+// Safari muestreando el color de arriba de la página, que es el theme-color.
 export const viewport: Viewport = {
   themeColor: '#fbf9ef',
-  // La página llega hasta los bordes físicos: así la nav pinta también la
-  // franja del status bar en vez de dejarla al navegador. Lo que queda debajo
-  // del notch se aparta con --safe-* (globals.css).
-  viewportFit: 'cover',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

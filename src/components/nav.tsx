@@ -19,14 +19,11 @@ export function Nav() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-      /* El -mt/+pt de 100px no es decorativo: en iOS Safari la página se pinta
-         por detrás del status bar pero el viewport de layout empieza más abajo,
-         así que `top: 0` no llega al borde real y por esa franja se veía pasar
-         el contenido. env(safe-area-inset-top) ahí devuelve 0, medido en un
-         iPhone 17 Pro, así que no hay inset con el cual compensar: se estira la
-         caja hacia arriba y el padding devuelve el contenido a su lugar.
-         Opaca y sin blur para que ese fondo estirado sea un color plano. */
-      className={`fixed inset-x-0 top-0 z-50 -mt-[100px] pt-[calc(100px+var(--safe-top))] pr-[var(--safe-right)] pl-[var(--safe-left)] transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      /* Pegada va opaca y sin blur a propósito: iOS Safari pinta la franja del
+         status bar muestreando el color de arriba de la página. Con un fondo
+         semitransparente ese color cambiaba según la sección de atrás y quedaba
+         una costura; con paper sólido siempre da el mismo #fbf9ef. */
+      className={`fixed inset-x-0 top-0 z-50 pt-[var(--safe-top)] pr-[var(--safe-right)] pl-[var(--safe-left)] transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         tucked ? 'bg-paper' : ''
       }`}
     >
