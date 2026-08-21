@@ -35,7 +35,7 @@ export const projects: Project[] = [
     hook: 'Rediseño completo.',
     summary:
       'Rediseño completo del sitio de viandas a domicilio del Hotel del Prado: desde la homepage hasta el armado del pedido paso a paso, más de 200 combinaciones filtradas por dieta, cuenta de usuario, planes para empresas y pago en línea.',
-    tags: ['Gastronomía', 'Rediseño web'],
+    tags: ['Gastronomía', 'Rediseño Web'],
     tone: 'mustard',
     image: '/portfolio/vhp-desktop.webp',
     sticker: 'Armá tu pedido',

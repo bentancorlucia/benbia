@@ -20,6 +20,11 @@
 
 :root {
   --rail: 4.75rem;
+
+  /* Filo y sombra de las estampitas. Van acá porque el logo del nav usa el
+     mismo tratamiento pero conservando su propia tipografía. */
+  --sticker-line: color-mix(in oklab, var(--color-ink) 22%, transparent);
+  --sticker-drop: color-mix(in oklab, var(--color-ink) 18%, transparent);
 }
 
 /* Va dentro de @layer base: si queda sin capa, le gana a las utilidades
@@ -105,8 +110,8 @@ body {
   white-space: nowrap;
   box-shadow:
     0 0 0 0.16em var(--sticker-edge, var(--color-paper)),
-    0 0 0 0.19em color-mix(in oklab, var(--color-ink) 22%, transparent),
-    0.22em 0.3em 0 -0.02em color-mix(in oklab, var(--color-ink) 18%, transparent);
+    0 0 0 0.19em var(--sticker-line),
+    0.22em 0.3em 0 -0.02em var(--sticker-drop);
   transition: transform 0.45s var(--ease-hover);
 }
 
