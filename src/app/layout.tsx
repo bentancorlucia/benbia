@@ -5,6 +5,7 @@ import { JsonLd } from '@/components/json-ld';
 import { SmoothScroll } from '@/components/smooth-scroll';
 import { SideRail } from '@/components/side-rail';
 import { Nav } from '@/components/nav';
+import { SafeAreaDebug } from '@/components/safe-area-debug';
 import { Footer } from '@/components/footer';
 import { graph, organizationSchema, websiteSchema } from '@/lib/schema';
 import { site } from '@/lib/site';
@@ -115,6 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Saltar al contenido
         </a>
         <Nav />
+        <SafeAreaDebug />
         <SideRail />
         <main id="main">{children}</main>
         <Footer />
