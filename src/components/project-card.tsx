@@ -57,7 +57,16 @@ export function ProjectCard({
 
   return (
     <Wrapper
-      {...(project.href ? { href: project.href, target: '_blank', rel: 'noreferrer' } : {})}
+      {...(project.href
+        ? {
+            href: project.href,
+            target: '_blank',
+            // `noopener` protege la pestaña; `noreferrer` de más cortaba el
+            // referrer que le dice a Analytics que la visita vino de acá.
+            rel: 'noopener',
+            'aria-label': `${project.name} — ${project.kind}. Visitar ${project.label}`,
+          }
+        : {})}
       className="group block"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -68,7 +77,7 @@ export function ProjectCard({
         >
           <Image
             src={project.image}
-            alt={`${project.name} — ${project.kind}`}
+            alt={`${project.name}: captura del ${project.kind.toLowerCase()} desarrollado por BENBIA`}
             fill
             priority={priority}
             sizes="(max-width: 768px) 100vw, 50vw"

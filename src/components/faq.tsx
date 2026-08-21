@@ -4,43 +4,17 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 import { Reveal } from '@/components/reveal';
-
-const faqs = [
-  {
-    q: '¿Cuánto sale un proyecto?',
-    a: 'Todo se cotiza después de una reunión de relevamiento.',
-  },
-  {
-    q: '¿Cuánto tarda?',
-    a: 'Aunque todo depende de la escala, un sitio suele llevar entre dos y seis semanas; una app entre seis y doce. Lo importante es que te mostramos avances cada semana, para que no haya sorpresas ni demoras injustificadas.',
-  },
-  {
-    q: '¿El código queda mío?',
-    a: 'Dependerá de lo acordado! En genral ofrecemos nuestros servicios de mantenimiento y soporte, pero si querés que el código quede en tu poder, lo hacemos sin problemas.',
-  },
-  {
-    q: 'Ya tengo un sitio, ¿lo pueden mejorar?',
-    a: 'Sí. Empezamos con una auditoría corta: qué se puede rescatar, qué conviene rehacer y qué está frenando el negocio. A veces la respuesta es un rediseño y a veces es pensarlo desde cero.',
-  },
-  {
-    q: '¿Puedo editar el contenido después?',
-    a: 'Esa es la idea. Salvo que pidas lo contrario, todo proyecto sale con un panel personalizado para que puedas tener un contenido dinámico y actualizado sin depender de nadie.',
-  },
-  {
-    q: '¿Trabajan con gente de afuera de Uruguay?',
-    a: 'Sí, todo el proceso funciona en remoto: reuniones por videollamada, entregas semanales y comunicación asincrónica. La zona horaria no es problema.',
-  },
-];
+import { faqs } from '@/lib/faqs';
 
 export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="scroll-mt-24 px-4 py-24 sm:px-6 sm:py-32">
+    <section aria-labelledby="faq-titulo" id="faq" className="scroll-mt-24 px-4 py-24 sm:px-6 sm:py-32">
       <div className="mx-auto grid max-w-[84rem] gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
         <Reveal>
           <p className="eyebrow mb-4 text-ink/40">Preguntas</p>
-          <h2 className="display max-w-[12ch] text-[clamp(2.2rem,5vw,4.2rem)]">
+          <h2 id="faq-titulo" className="display max-w-[12ch] text-[clamp(2.2rem,5vw,4.2rem)]">
             Lo que todos<span className="text-pumpkin"> preguntan</span>
           </h2>
           <p className="mt-6 max-w-[36ch] text-ink/60">

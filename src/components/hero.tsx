@@ -68,7 +68,6 @@ const heroStickers: HeroSticker[] = [
   },
 ];
 
-
 const rise = {
   hidden: { opacity: 0, y: 26 },
   show: (i: number) => ({
@@ -168,7 +167,9 @@ export function Hero() {
           animate="show"
           className="display text-[clamp(1.9rem,5.1vw,4.1rem)]"
         >
-          <span className="block">Pensamos, diseñamos y construimos</span>
+          {/* El espacio explícito no se ve (los dos span son block) pero evita
+              que un extractor de texto plano lea "construimosel software". */}
+          <span className="block">Pensamos, diseñamos y construimos</span>{' '}
           <span className="relative block">
             <motion.span
               className="relative inline-block align-baseline"
@@ -200,20 +201,24 @@ export function Hero() {
               <br className="hidden sm:inline" />{' '}
               necesita para crecer.
             </span>
-            {/* Regla invisible: sólo existe para medir cada frase */}
-            <span
-              ref={measureRef}
-              aria-hidden
-              className="pointer-events-none absolute top-0 left-0 flex h-0 overflow-hidden opacity-0"
-            >
-              {necesidades.map((item) => (
-                <span key={item} className="whitespace-nowrap">
-                  {item}
-                </span>
-              ))}
-            </span>
           </span>
         </motion.h1>
+
+        {/* Regla invisible: mide cada frase en la tipografía real del titular.
+            Vive fuera del <h1> a propósito: adentro, su texto se sumaba al del
+            titular y el H1 que leían Google y los modelos terminaba en
+            "...para crecer.el softwarela webla appla automatización". */}
+        <span
+          ref={measureRef}
+          aria-hidden
+          className="display pointer-events-none absolute top-0 left-0 flex h-0 overflow-hidden text-[clamp(1.9rem,5.1vw,4.1rem)] opacity-0"
+        >
+          {necesidades.map((item) => (
+            <span key={item} className="whitespace-nowrap">
+              {item}
+            </span>
+          ))}
+        </span>
 
         <motion.p
           custom={2}

@@ -130,11 +130,11 @@ export function Contact() {
   };
 
   return (
-    <section id="contacto" className="scroll-mt-24 bg-klein px-4 py-24 text-paper sm:px-6 sm:py-32">
+    <section aria-labelledby="contacto-titulo" id="contacto" className="scroll-mt-24 bg-klein px-4 py-24 text-paper sm:px-6 sm:py-32">
       <div className="mx-auto grid max-w-[84rem] gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
         <Reveal>
           <p className="eyebrow mb-4 text-paper/50">Contacto</p>
-          <h2 className="display max-w-[13ch] text-[clamp(2.2rem,5.4vw,4.6rem)]">
+          <h2 id="contacto-titulo" className="display max-w-[13ch] text-[clamp(2.2rem,5.4vw,4.6rem)]">
             Contanos tu<span className="text-mustard"> idea</span>
           </h2>
           <p className="mt-6 max-w-[38ch] text-paper/70">

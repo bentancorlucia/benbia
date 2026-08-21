@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { site } from '@/lib/site';
+import { site, socialProfiles } from '@/lib/site';
 
 export function Footer() {
   return (
@@ -36,7 +36,7 @@ export function Footer() {
             <Link href="/trabajos" className="text-paper/70 transition-colors duration-300 ease-hover hover:text-pumpkin">
               Trabajos
             </Link>
-            {site.social.map((item) => (
+            {socialProfiles.map((item) => (
               <a
                 key={item.label}
                 href={item.href}

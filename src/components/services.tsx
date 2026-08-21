@@ -5,53 +5,19 @@ import { useState } from 'react';
 
 import { Reveal } from '@/components/reveal';
 import { Sticker } from '@/components/sticker';
+import { services } from '@/lib/services';
 import { stickers } from '@/lib/stickers';
-
-const services = [
-  {
-    n: '01',
-    title: 'Sitios web',
-    lead: 'La cara de tu negocio, hecha a medida y rápida de verdad.',
-    body: 'Diseño e implementación completa: identidad digital, arquitectura de contenido, SEO y GEO técnico y un panel para que edites sin llamarnos.',
-    deliverables: ['Diseño UI', 'Desarrollo', 'CMS / panel', 'SEO técnico'],
-    tone: 'bg-pumpkin text-ink',
-  },
-  {
-    n: '02',
-    title: 'Aplicaciones',
-    lead: 'Web o escritorio, para tu equipo o para tus clientes.',
-    body: 'Del prototipo al producto: definimos el alcance real, lo construimos por partes y te mostramos algo funcionando cada semana.',
-    deliverables: ['Web app', 'IOS', 'Android', 'Escritorio', 'Integraciones'],
-    tone: 'bg-klein text-paper',
-  },
-  {
-    n: '03',
-    title: 'Sistemas a medida',
-    lead: 'Ese proceso que hoy vive en diez planillas.',
-    body: 'Relevamos cómo trabajás, modelamos los datos y armamos el sistema que sustituye el Excel: usuarios, permisos, reportes y exportaciones.',
-    deliverables: ['Relevamiento', 'Modelo de datos', 'Backoffice', 'Reportes'],
-    tone: 'bg-berry text-mustard',
-  },
-  {
-    n: '04',
-    title: 'Datos y automatización',
-    lead: 'Que los números lleguen solos y las tareas repetidas dejen de existir.',
-    body: 'Conectamos tus fuentes de datos, armamos el tablero que mira tu equipo todos los días y automatizamos lo que hoy alguien hace a mano: reportes, alertas, cargas y sincronizaciones entre sistemas.',
-    deliverables: ['Dashboards', 'Automatizaciones', 'Pipelines de datos', 'Modelos predictivos'],
-    tone: 'bg-mustard text-ink',
-  },
-];
 
 export function Services() {
   const [open, setOpen] = useState<string | null>('01');
 
   return (
-    <section id="servicios" className="scroll-mt-24 px-4 py-24 sm:px-6 sm:py-32">
+    <section aria-labelledby="servicios-titulo" id="servicios" className="scroll-mt-24 px-4 py-24 sm:px-6 sm:py-32">
       <div className="mx-auto max-w-[84rem]">
         <Reveal className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="eyebrow mb-4 text-ink/40">Servicios</p>
-            <h2 className="display max-w-[14ch] text-[clamp(2.2rem,5.4vw,4.6rem)]">
+            <h2 id="servicios-titulo" className="display max-w-[14ch] text-[clamp(2.2rem,5.4vw,4.6rem)]">
               Cuatro formas de<span className="text-pumpkin"> empezar</span>
             </h2>
           </div>

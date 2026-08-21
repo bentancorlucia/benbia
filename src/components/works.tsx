@@ -6,12 +6,12 @@ import { projects } from '@/lib/projects';
 
 export function Works() {
   return (
-    <section id="trabajos" className="scroll-mt-24 bg-ink px-4 py-24 text-paper sm:px-6 sm:py-32">
+    <section aria-labelledby="trabajos-titulo" id="trabajos" className="scroll-mt-24 bg-ink px-4 py-24 text-paper sm:px-6 sm:py-32">
       <div className="mx-auto max-w-[84rem]">
         <Reveal className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="eyebrow mb-4 text-paper/40">Trabajos recientes</p>
-            <h2 className="display max-w-[16ch] text-[clamp(2.2rem,5.4vw,4.6rem)]">
+            <h2 id="trabajos-titulo" className="display max-w-[16ch] text-[clamp(2.2rem,5.4vw,4.6rem)]">
               Ideas que ya salieron<span className="text-pumpkin"> a la cancha</span>
             </h2>
           </div>
