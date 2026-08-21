@@ -19,11 +19,13 @@ export function Nav() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-      /* Pegada va opaca y sin blur a propósito: iOS Safari pinta la franja del
-         status bar muestreando el color de arriba de la página. Con un fondo
-         semitransparente ese color cambiaba según la sección de atrás y quedaba
-         una costura; con paper sólido siempre da el mismo #fbf9ef. */
-      className={`fixed inset-x-0 top-0 z-50 pt-[var(--safe-top)] pr-[var(--safe-right)] pl-[var(--safe-left)] transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      /* Pegada va opaca a propósito. En iOS el contenido pasa por detrás del
+         status bar y ahí no llega ningún elemento fijo, así que la barra es lo
+         primero que se lee entero: con el fondo al 75% se teñía con la sección
+         de atrás y el borde superior quedaba sucio. Sólida siempre corta parejo.
+         Sin backdrop-blur porque sobre un fondo opaco no hace nada y cuesta una
+         capa de compositing en mobile. */
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         tucked ? 'bg-paper' : ''
       }`}
     >

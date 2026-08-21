@@ -5,7 +5,6 @@ import { JsonLd } from '@/components/json-ld';
 import { SmoothScroll } from '@/components/smooth-scroll';
 import { SideRail } from '@/components/side-rail';
 import { Nav } from '@/components/nav';
-import { SafeAreaDebug } from '@/components/safe-area-debug';
 import { Footer } from '@/components/footer';
 import { graph, organizationSchema, websiteSchema } from '@/lib/schema';
 import { site } from '@/lib/site';
@@ -93,12 +92,9 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false, address: false, email: false },
 };
 
-// Sin viewport-fit=cover a propósito. Con cover, iOS Safari estira el contenido
-// que scrollea hasta el borde físico pero deja los elementos fijos anclados más
-// abajo, así que por la franja del status bar se veía pasar la página y el
-// header no llegaba a taparla (medido en un iPhone 17 Pro: env(safe-area-inset-top)
-// devuelve 0 y los fijos se recortan al viewport). Sin cover esa franja la pinta
-// Safari muestreando el color de arriba de la página, que es el theme-color.
+// Sin viewport-fit=cover a propósito: en iOS Safari no cambia nada arriba.
+// Medido en un iPhone 17 Pro, env(safe-area-inset-top) devuelve 0 y los
+// elementos fijos se anclan igual bajo el status bar, con cover o sin cover.
 export const viewport: Viewport = {
   themeColor: '#fbf9ef',
 };
@@ -118,7 +114,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Saltar al contenido
         </a>
         <Nav />
-        <SafeAreaDebug />
         <SideRail />
         <main id="main">{children}</main>
         <Footer />
