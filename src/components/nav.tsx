@@ -19,8 +19,12 @@ export function Nav() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+      // Pegada va opaca y no translúcida a propósito: iOS Safari en vertical se
+      // reserva la franja del status bar y la pinta con el color de la página.
+      // Con un fondo semitransparente ese color nunca coincide con la barra y
+      // queda una costura; con paper sólido es el mismo #fbf9ef del theme-color.
       className={`fixed inset-x-0 top-0 z-50 pt-[var(--safe-top)] pr-[var(--safe-right)] pl-[var(--safe-left)] transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        tucked ? 'bg-paper/75 backdrop-blur-md' : ''
+        tucked ? 'bg-paper' : ''
       }`}
     >
       <div
