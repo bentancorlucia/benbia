@@ -51,6 +51,10 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: '#fbf9ef',
+  // La página llega hasta los bordes físicos: así la nav pinta también la
+  // franja del status bar en vez de dejarla al navegador. Lo que queda debajo
+  // del notch se aparta con --safe-* (globals.css).
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

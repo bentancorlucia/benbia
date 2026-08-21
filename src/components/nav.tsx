@@ -19,13 +19,13 @@ export function Nav() {
       initial={{ y: -24, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+      className={`fixed inset-x-0 top-0 z-50 pt-[var(--safe-top)] pr-[var(--safe-right)] pl-[var(--safe-left)] transition-colors duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
         tucked ? 'bg-paper/75 backdrop-blur-md' : ''
       }`}
     >
       <div
         className={`mx-auto flex items-center justify-between gap-4 px-4 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:px-6 ${
-          tucked ? 'py-3' : 'py-5'
+          tucked ? 'py-2 sm:py-3' : 'py-2.5 sm:py-5'
         }`}
       >
         <Link

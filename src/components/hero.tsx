@@ -115,7 +115,7 @@ export function Hero() {
   const medido = widths.length === necesidades.length;
 
   return (
-    <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pt-24 pb-16 text-center sm:px-6">
+    <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 pt-[calc(6rem+var(--safe-top))] pb-16 text-center sm:px-6">
       {/* Estampitas alrededor del título */}
       <div className="pointer-events-none absolute inset-0 hidden select-none sm:block">
         {heroStickers.map((item, i) => (

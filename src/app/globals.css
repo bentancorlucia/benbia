@@ -20,6 +20,15 @@
 
 :root {
   --rail: 4.75rem;
+
+  /* Con viewport-fit=cover la página llega hasta los bordes físicos de la
+     pantalla (debajo del notch y del home indicator). Estos insets son los
+     que usan los elementos fijos para no quedar tapados; fuera de iOS valen 0.
+     Van como variable y no como env() suelto para poder simularlos en tests. */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
 }
 
 /* Va dentro de @layer base: si queda sin capa, le gana a las utilidades
@@ -78,12 +87,18 @@ body {
   font-weight: 500;
 }
 
+/* En apaisado el notch se come el borde izquierdo: el contenido se aparta. */
+main,
+footer {
+  padding-inline: var(--safe-left) var(--safe-right);
+}
+
 /* El rail lateral vive fijo sobre los bordes: el contenido se corre
    para no quedar nunca por debajo. */
 @media (min-width: 1024px) {
   main,
   footer {
-    padding-inline: var(--rail);
+    padding-inline: max(var(--rail), var(--safe-left)) max(var(--rail), var(--safe-right));
   }
 }
 

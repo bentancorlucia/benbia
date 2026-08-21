@@ -209,14 +209,14 @@ export function SideRail() {
   return (
     <>
       {/* Rail de iconos, pegado al borde izquierdo */}
-      <div className="pointer-events-none fixed left-3 top-1/2 z-50 hidden -translate-y-1/2 flex-col gap-2.5 lg:flex">
+      <div className="pointer-events-none fixed top-1/2 left-[calc(0.75rem+var(--safe-left))] z-50 hidden -translate-y-1/2 flex-col gap-2.5 lg:flex">
         <AnimatePresence>
           {visible && items.map((item, i) => <RailButton key={item.label} item={item} index={i} />)}
         </AnimatePresence>
       </div>
 
       {/* En mobile el rail se vuelve una barra abajo */}
-      <div className="fixed inset-x-3 bottom-3 z-50 flex gap-2 lg:hidden">
+      <div className="fixed right-[calc(0.75rem+var(--safe-right))] bottom-[calc(0.75rem+var(--safe-bottom))] left-[calc(0.75rem+var(--safe-left))] z-50 flex gap-2 lg:hidden">
         <AnimatePresence>
           {visible && (
             <motion.nav
