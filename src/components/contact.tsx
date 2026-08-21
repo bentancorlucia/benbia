@@ -198,7 +198,7 @@ export function Contact() {
                             key={option}
                             type="button"
                             onClick={() => pick(option)}
-                            className={`cursor-pointer rounded-full border px-5 py-3 text-sm transform-gpu transition-[color,background-color,border-color,transform] duration-300 ease-hover hover:-translate-y-0.5 ${
+                            className={`cursor-pointer rounded-full border px-5 py-3 text-sm transform-gpu transition-[color,background-color,border-color,translate] duration-300 ease-hover hover:-translate-y-0.5 ${
                               selected
                                 ? 'border-ink bg-ink text-paper'
                                 : 'border-ink/20 hover:border-ink/50'
@@ -263,7 +263,7 @@ export function Contact() {
                     <button
                       type="submit"
                       disabled={sending}
-                      className="group mt-7 w-full cursor-pointer rounded-full bg-pumpkin px-7 py-4 text-sm font-medium text-ink transform-gpu transition-[color,background-color,transform,box-shadow] duration-300 ease-hover hover:-translate-y-0.5 hover:bg-ink hover:text-paper hover:shadow-[0_0.5rem_1.2rem_rgba(23,20,18,0.16)] disabled:cursor-wait disabled:opacity-60"
+                      className="group mt-7 w-full cursor-pointer rounded-full bg-pumpkin px-7 py-4 text-sm font-medium text-ink transform-gpu transition-[color,background-color,translate,box-shadow] duration-300 ease-hover hover:-translate-y-0.5 hover:bg-ink hover:text-paper hover:shadow-[0_0.5rem_1.2rem_rgba(23,20,18,0.16)] disabled:cursor-wait disabled:opacity-60"
                     >
                       {sending ? 'Un segundo…' : 'Elegir horario y enviar'}
                       <span className="ml-2 inline-block transition-transform duration-300 ease-hover group-hover:translate-x-1">

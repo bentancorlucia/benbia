@@ -133,7 +133,10 @@ export function Hero() {
               animate={reduced ? undefined : { y: [0, -7, 0] }}
               transition={{ duration: 5 + i * 0.6, repeat: Infinity, ease: 'easeInOut' }}
               /* La estampita lleva un filtro caro: la promovemos a capa propia
-                 para que el filtro se rasterice una vez y no en cada frame. */
+                 para que el filtro se rasterice una vez y no en cada frame.
+                 pointer-events vuelve acá porque el contenedor las apaga para
+                 no comerse el texto del título, y sin eso no hay hover. */
+              className="pointer-events-auto"
               style={{ willChange: 'transform', transform: 'translateZ(0)' }}
             >
               <Sticker
@@ -239,7 +242,7 @@ export function Hero() {
         >
           <a
             href="#contacto"
-            className="group transform-gpu rounded-full bg-ink px-7 py-3.5 text-sm font-medium text-paper transition-[color,background-color,transform,box-shadow] duration-300 ease-hover hover:-translate-y-0.5 hover:bg-pumpkin hover:text-ink hover:shadow-[0_0.5rem_1.2rem_rgba(23,20,18,0.14)]"
+            className="group transform-gpu rounded-full bg-ink px-7 py-3.5 text-sm font-medium text-paper transition-[color,background-color,translate,box-shadow] duration-300 ease-hover hover:-translate-y-0.5 hover:bg-pumpkin hover:text-ink hover:shadow-[0_0.5rem_1.2rem_rgba(23,20,18,0.14)]"
           >
             Contanos tu idea
             <span className="ml-2 inline-block transition-transform duration-300 ease-hover group-hover:translate-x-1">
@@ -248,7 +251,7 @@ export function Hero() {
           </a>
           <a
             href="#trabajos"
-            className="transform-gpu rounded-full border border-ink/20 px-7 py-3.5 text-sm font-medium transition-[border-color,background-color,transform] duration-300 ease-hover hover:-translate-y-0.5 hover:border-ink hover:bg-ink/5"
+            className="transform-gpu rounded-full border border-ink/20 px-7 py-3.5 text-sm font-medium transition-[border-color,background-color,translate] duration-300 ease-hover hover:-translate-y-0.5 hover:border-ink hover:bg-ink/5"
           >
             Ver trabajos
           </a>

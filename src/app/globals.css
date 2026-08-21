@@ -108,11 +108,33 @@ body {
   line-height: 0.98;
   text-transform: uppercase;
   white-space: nowrap;
+  transform: rotate(var(--sticker-tilt, 0deg));
   box-shadow:
     0 0 0 0.16em var(--sticker-edge, var(--color-paper)),
     0 0 0 0.19em var(--sticker-line),
     0.22em 0.3em 0 -0.02em var(--sticker-drop);
-  transition: transform 0.45s var(--ease-hover);
+  transition:
+    transform 0.45s var(--ease-hover),
+    box-shadow 0.45s var(--ease-hover);
+}
+
+/* Despegue al hover, solo con mouse: la estampita se endereza, sube y crece,
+   y la sombra dura se alarga como si se levantara del papel. En touch no va:
+   ahí el :hover se queda pegado después del tap. */
+@media (hover: hover) and (pointer: fine) {
+  .sticker--lift:hover {
+    transform: rotate(0deg) translateY(-0.16em) scale(1.06);
+    box-shadow:
+      0 0 0 0.16em var(--sticker-edge, var(--color-paper)),
+      0 0 0 0.19em var(--sticker-line),
+      0.42em 0.56em 0 -0.02em var(--sticker-drop);
+  }
+
+  /* La de varios pisos dibuja su sombra con filter y animarla cuesta caro:
+     se queda con el movimiento y deja el contorno quieto. */
+  .sticker--stack.sticker--lift:hover {
+    box-shadow: none;
+  }
 }
 
 /* Estampita de varios pisos.

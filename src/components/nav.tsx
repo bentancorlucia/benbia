@@ -1,11 +1,28 @@
 'use client';
 
 import Link from 'next/link';
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll, type Variants } from 'framer-motion';
 import { useState } from 'react';
 
 import { Sticker } from '@/components/sticker';
 import { site } from '@/lib/site';
+
+/* La estampita se despega al hover: se endereza (el +4 cancela el -4 de base),
+   sube apenas y crece. Al click se aplasta contra el papel. Con springs el
+   movimiento arranca y frena solo, y sobrevive a la regla de reduced-motion
+   que mata las transiciones CSS. */
+const ctaSpring = { type: 'spring', stiffness: 320, damping: 22, mass: 0.8 } as const;
+
+const ctaVariants: Variants = {
+  rest: { y: 0, rotate: 0, scale: 1, transition: ctaSpring },
+  hover: { y: -3, rotate: 4, scale: 1.06, transition: ctaSpring },
+  tap: {
+    y: 1,
+    rotate: 0,
+    scale: 0.94,
+    transition: { type: 'spring' as const, stiffness: 600, damping: 32 },
+  },
+};
 
 export function Nav() {
   const { scrollY } = useScroll();
@@ -47,34 +64,31 @@ export function Nav() {
         </Link>
 
         {/* Mobile: estampita naranja, de la misma familia que las del hero */}
-        <a
+        <motion.a
           href="/#contacto"
-          className="inline-block transform-gpu transition-transform duration-250 ease-hover active:scale-[0.96] sm:hidden"
+          variants={ctaVariants}
+          initial="rest"
+          animate="rest"
+          whileHover="hover"
+          whileFocus="hover"
+          whileTap="tap"
+          className="inline-block transform-gpu outline-none sm:hidden"
         >
           <Sticker tone="pumpkin" tilt={-4} className="text-[0.95rem]">
             Empecemos
           </Sticker>
-        </a>
+        </motion.a>
 
-        {/* Desktop: el par de siempre dentro de su cápsula */}
-        <div
-          className={`hidden items-center gap-1 rounded-full border px-1 py-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] sm:flex ${
-            tucked ? 'border-ink/10' : 'border-transparent'
-          }`}
+        {/* Desktop: solo el CTA. Trabajos vive en el footer y en el home. */}
+        <a
+          href="/#contacto"
+          /* transition-[...,translate]: en Tailwind v4 el lift sale por la
+             propiedad translate, no por transform. Listando transform la
+             subida pegaba un salto seco. */
+          className="hidden transform-gpu rounded-full bg-ink px-4 py-2 text-[0.7rem] font-medium tracking-[0.16em] text-paper uppercase transition-[color,background-color,translate,box-shadow] duration-300 ease-hover hover:-translate-y-0.5 hover:bg-pumpkin hover:text-ink hover:shadow-[0_0.4rem_0.9rem_rgba(23,20,18,0.16)] sm:inline-block"
         >
-          <Link
-            href="/trabajos"
-            className="rounded-full px-4 py-2 text-[0.7rem] font-medium tracking-[0.16em] uppercase transition-colors duration-250 ease-hover hover:bg-ink/6"
-          >
-            Trabajos
-          </Link>
-          <a
-            href="/#contacto"
-            className="rounded-full bg-ink px-4 py-2 text-[0.7rem] font-medium tracking-[0.16em] text-paper uppercase transition-[color,background-color,transform] duration-250 ease-hover hover:-translate-y-px hover:bg-pumpkin hover:text-ink"
-          >
-            Empecemos
-          </a>
-        </div>
+          Empecemos
+        </a>
       </div>
     </motion.header>
   );

@@ -17,7 +17,7 @@ export function Works() {
           </div>
           <Link
             href="/trabajos"
-            className="group flex w-fit transform-gpu items-center gap-3 rounded-full border border-paper/25 px-6 py-3 text-sm transition-[color,background-color,border-color,transform] duration-300 ease-hover hover:-translate-y-0.5 hover:border-pumpkin hover:bg-pumpkin hover:text-ink"
+            className="group flex w-fit transform-gpu items-center gap-3 rounded-full border border-paper/25 px-6 py-3 text-sm transition-[color,background-color,border-color,translate] duration-300 ease-hover hover:-translate-y-0.5 hover:border-pumpkin hover:bg-pumpkin hover:text-ink"
           >
             Ver todos
             <span className="transition-transform duration-300 ease-hover group-hover:translate-x-1">

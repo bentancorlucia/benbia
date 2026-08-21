@@ -37,10 +37,11 @@ const sticker = Instrument_Serif({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    // El título de marca sola ("benbia.") no dice nada en un resultado de
-    // búsqueda: el default nombra el rubro y el país.
-    default: `${site.name} — Estudio de software en Uruguay | Webs, apps y sistemas a medida`,
-    template: `%s · ${site.name}`,
+    // En la pestaña del navegador el título largo se corta a la mitad: dejamos
+    // sólo la marca, en minúscula como el logo. El rubro y el país siguen en la
+    // description y el JSON-LD.
+    default: 'benbia.',
+    template: '%s · benbia.',
   },
   description: site.description,
   applicationName: site.name,

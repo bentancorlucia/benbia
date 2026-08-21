@@ -19,6 +19,9 @@ export type StickerProps = {
   tilt?: number;
   /** Color del borde exterior: el del fondo sobre el que se pega */
   edge?: string;
+  /** Despegue al hover en desktop. Se apaga donde el contenedor ya anima la
+      estampita por su cuenta (la ficha de proyecto, por ejemplo). */
+  lift?: boolean;
   className?: string;
   style?: CSSProperties;
 };
@@ -29,6 +32,7 @@ export function Sticker({
   tone = 'pumpkin',
   tilt = -4,
   edge,
+  lift = true,
   className = '',
   style,
 }: StickerProps) {
@@ -37,13 +41,16 @@ export function Sticker({
 
   return (
     <span
-      className={`sticker ${stacked ? 'sticker--stack' : ''} ${className}`}
+      className={`sticker ${stacked ? 'sticker--stack' : ''} ${lift ? 'sticker--lift' : ''} ${className}`}
       style={
         {
           '--sticker-bg': bg,
           '--sticker-fg': fg,
           '--sticker-edge': edge ?? 'var(--color-paper)',
-          transform: `rotate(${tilt}deg)`,
+          /* La inclinación viaja como variable, no como transform inline: así
+             el hover de CSS puede recomponer el transform entero sin pelearse
+             con el estilo del elemento. */
+          '--sticker-tilt': `${tilt}deg`,
           ...style,
         } as CSSProperties
       }

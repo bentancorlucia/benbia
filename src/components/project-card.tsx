@@ -123,6 +123,7 @@ export function ProjectCard({
             <Sticker
               tone={toneToSticker[project.tone]}
               tilt={0}
+              lift={false}
               edge={dark ? 'var(--color-ink)' : 'var(--color-paper)'}
             >
               {project.sticker}
