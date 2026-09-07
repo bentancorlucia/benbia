@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Analytics } from '@vercel/analytics/next';
 import { Cal_Sans, Fustat, Instrument_Serif } from 'next/font/google';
 
 import { JsonLd } from '@/components/json-ld';
@@ -118,6 +119,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SideRail />
         <main id="main">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
